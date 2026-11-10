@@ -26,10 +26,17 @@ header p{margin:0;color:var(--muted)}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
 .panel h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px;font-weight:600}
-.inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
-.inputs label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:14px}
-.inputs input{width:92px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;text-align:right}
+.inputs{display:flex;flex-direction:column;gap:6px}
+.in-head,.in-row{display:grid;grid-template-columns:1fr 1fr 32px;gap:8px;align-items:center}
+.in-head{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.inputs input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px}
+.inputs input.wt{text-align:right}
 .inputs input:focus{outline:2px solid var(--accent);outline-offset:0}
+.inputs input.bad{border-color:var(--fail);background:var(--fail-bg)}
+.del{padding:0;width:32px;height:32px;font-size:16px;line-height:1;color:var(--muted)}
+.addrow{margin-top:8px;width:100%;border-style:dashed;color:var(--accent)}
+.warn{font-size:12.5px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:6px 8px;margin-top:8px;display:none}
+.empty{color:var(--muted);text-align:center;padding:40px 20px}
 .opts{margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
 .opts label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
 .opts input{margin-top:3px}
@@ -94,16 +101,22 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
 <div class="grid">
   <aside class="panel">
     <h2>Measured composition (wt%)</h2>
-    <div class="inputs" id="inputs"></div>
+    <div class="inputs">
+      <div class="in-head"><span>Element</span><span style="text-align:right">wt%</span><span></span></div>
+      <div id="inputs" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+    <button class="addrow" id="addRow">+ Add element</button>
+    <datalist id="elList"></datalist>
+    <div class="warn" id="inWarn"></div>
     <div class="opts">
       <label><input type="checkbox" id="optResid" checked> Check unspecified elements against residual limits (Ni ≤0.25, Cr ≤0.20, Mo ≤0.06, Cu ≤0.35, V ≤0.05)</label>
       <label><input type="checkbox" id="optTol"> Allow product (check) analysis tolerances (approx. ASTM A29)</label>
     </div>
     <div class="btns">
       <button class="primary" id="run">Run match</button>
-      <button id="reset">Reset to Lab 086-146</button>
+      <button id="reset">Clear all</button>
     </div>
-    <div class="hint">Values like <code>&lt;0.01</code> are accepted. Leave a field blank to skip that element. Fe is the remainder and is not checked.</div>
+    <div class="hint">Type an element symbol (e.g. <code>Cr</code>, <code>B</code>, <code>N</code>) and its wt%. Values like <code>&lt;0.01</code> are accepted. Rows with a blank wt% are skipped. Fe is the remainder and is not checked. An element no grade specifies is shown as “not specified” and doesn’t count against a match.</div>
   </aside>
 
   <main>
@@ -245,29 +258,54 @@ const $ = s => document.querySelector(s);
 const fmt = (x,d=3)=> x==null?'—':(+x).toFixed(d).replace(/0+$/,'').replace(/\.$/,'');
 function rangeText(r){ if(!r) return '—'; const [a,b]=r; if(a!=null&&b!=null) return `${fmt(a)} – ${fmt(b)}`; if(b!=null) return `≤ ${fmt(b)}`; return `≥ ${fmt(a)}`; }
 
+const PERIODIC = ['H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr','Rb','Sr','Y','Zr','Nb','Mo','Tc','Ru','Rh','Pd','Ag','Cd','In','Sn','Sb','Te','I','Xe','Cs','Ba','La','Ce','Pr','Nd','Pm','Sm','Eu','Gd','Tb','Dy','Ho','Er','Tm','Yb','Lu','Hf','Ta','W','Re','Os','Ir','Pt','Au','Hg','Tl','Pb','Bi'];
+const SYM = {}; PERIODIC.forEach(s=>SYM[s.toLowerCase()]=s);
+function normSym(t){ return SYM[(t||'').trim().toLowerCase()] || null; }
+
+function addRow(el='', wt='', focus=false){
+  const row=document.createElement('div'); row.className='in-row';
+  row.innerHTML=`<input class="el" list="elList" placeholder="e.g. Cr" value="${el}" autocomplete="off" spellcheck="false"><input class="wt" inputmode="decimal" placeholder="wt%" value="${wt}"><button class="del" title="Remove row" aria-label="Remove row">×</button>`;
+  row.querySelector('.del').onclick=()=>{ row.remove(); if(!$('#inputs').children.length) addRow(); };
+  row.querySelector('.wt').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); const rows=[...$('#inputs').children]; if(rows[rows.length-1]===row) addRow('','',true); else run(); }});
+  $('#inputs').appendChild(row);
+  if(focus) row.querySelector('.el').focus();
+}
+function loadRows(obj){
+  $('#inputs').innerHTML='';
+  const keys=Object.keys(obj);
+  if(!keys.length){ for(let i=0;i<6;i++) addRow(); return; }
+  keys.forEach(k=>addRow(k,obj[k]));
+}
 function buildInputs(){
-  const box = $('#inputs'); box.innerHTML='';
-  ELEMENTS.forEach(e=>{
-    const l=document.createElement('label');
-    l.innerHTML=`<span>${e}</span><input id="in_${e}" inputmode="decimal" value="${LAB[e]??''}">`;
-    box.appendChild(l);
-  });
+  $('#elList').innerHTML = ELEMENTS.concat(PERIODIC.filter(s=>!ELEMENTS.includes(s))).map(s=>`<option value="${s}">`).join('');
+  loadRows(LAB);
 }
 function readInputs(){
-  const m={};
-  ELEMENTS.forEach(e=>{
-    const raw=$('#in_'+e).value.trim();
+  const m={}, warns=[], seen={};
+  [...$('#inputs').children].forEach(row=>{
+    const elIn=row.querySelector('.el'), wtIn=row.querySelector('.wt');
+    elIn.classList.remove('bad'); wtIn.classList.remove('bad');
+    const t=elIn.value.trim(), raw=wtIn.value.trim();
+    if(!t && !raw) return;
+    const e=normSym(t);
+    if(!e){ elIn.classList.add('bad'); warns.push(`“${t||'(blank)'}” isn’t an element symbol`); return; }
+    if(e==='Fe'){ return; }
+    elIn.value=e;
     if(!raw) return;
-    const lt = raw.startsWith('<');
-    const v = parseFloat(raw.replace(/[<≤]/g,''));
-    if(!isNaN(v)) m[e]={v, lt, raw};
+    const lt = /^[<≤]/.test(raw);
+    const v = parseFloat(raw.replace(/[<≤%\s]/g,''));
+    if(isNaN(v) || v<0){ wtIn.classList.add('bad'); warns.push(`${e}: “${raw}” isn’t a number`); return; }
+    if(seen[e]) warns.push(`${e} entered more than once — using the last value`);
+    seen[e]=true;
+    delete m[e]; m[e]={v, lt, raw};
   });
+  const w=$('#inWarn'); w.style.display=warns.length?'block':'none'; w.innerHTML=warns.join('<br>');
   return m;
 }
 
 function evaluate(alloy, meas, opt){
   const rows=[]; let fails=0, dev=0, checked=0;
-  ELEMENTS.forEach(e=>{
+  Object.keys(meas).forEach(e=>{
     if(!meas[e]) return;
     let r = alloy.L[e], basis='spec';
     if(!r && opt.resid && RESID[e]!=null){ r=[N,RESID[e]]; basis='residual'; }
@@ -320,6 +358,12 @@ function run(){
   const meas = readInputs();
   const opt = {resid:$('#optResid').checked, tol:$('#optTol').checked};
   const ranked = rankAll(meas,opt);
+  if(!ranked.some(r=>r.checked>0)){
+    $('#results').innerHTML = `<div class="card empty">${Object.keys(meas).length
+      ? 'None of the entered elements are specified (or residual-limited) by any grade in the database, so there is nothing to match on. Add the main alloying elements (C, Mn, Si, Cr, Ni, Mo, V…).'
+      : 'Enter at least one element and its wt%, then press <b>Run match</b>.'}</div>`;
+    $('#altSection').innerHTML=''; $('#rankAll').innerHTML=''; altState=null; return;
+  }
   lastRank = ranked;
   const best = ranked[0]; lastBest = best;
   const next = ranked.slice(1,4);
@@ -494,7 +538,8 @@ $('#modalBg').addEventListener('click',e=>{ if(e.target.id==='modalBg') closeCal
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCalc(); });
 
 $('#run').onclick=run;
-$('#reset').onclick=()=>{ buildInputs(); run(); };
+$('#reset').onclick=()=>{ loadRows({}); run(); $('#inputs .el').focus(); };
+$('#addRow').onclick=()=>addRow('','',true);
 $('#optResid').onchange=run; $('#optTol').onchange=run;
 buildInputs(); run();
 </script>
