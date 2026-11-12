@@ -35,6 +35,9 @@ header p{margin:0;color:var(--muted)}
 .inputs input.bad{border-color:var(--fail);background:var(--fail-bg)}
 .del{padding:0;width:32px;height:32px;font-size:16px;line-height:1;color:var(--muted)}
 .addrow{margin-top:8px;width:100%;border-style:dashed;color:var(--accent)}
+.remopt{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13.5px;cursor:pointer}
+.in-row.rem input.wt{background:var(--accent-soft);color:var(--accent);font-weight:600;cursor:default;font-size:12.5px}
+.in-row.rem input.el{border-color:var(--accent)}
 .warn{font-size:12.5px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:6px 8px;margin-top:8px;display:none}
 .empty{color:var(--muted);text-align:center;padding:40px 20px}
 .opts{margin-top:14px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--muted)}
@@ -106,6 +109,7 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
       <div id="inputs" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
     <button class="addrow" id="addRow">+ Add element</button>
+    <label class="remopt"><input type="checkbox" id="remToggle"> Final element is the remainder (balance)</label>
     <datalist id="elList"></datalist>
     <div class="warn" id="inWarn"></div>
     <div class="opts">
@@ -116,7 +120,7 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
       <button class="primary" id="run">Run match</button>
       <button id="reset">Clear all</button>
     </div>
-    <div class="hint">Type an element symbol (e.g. <code>Cr</code>, <code>B</code>, <code>N</code>) and its wt%. Values like <code>&lt;0.01</code> are accepted. Rows with a blank wt% are skipped. Fe is the remainder and is not checked. An element no grade specifies is shown as “not specified” and doesn’t count against a match.</div>
+    <div class="hint">Type an element symbol (e.g. <code>Cr</code>, <code>B</code>, <code>N</code>) and its wt%. Values like <code>&lt;0.01</code> are accepted. Rows with a blank wt% are skipped. Tick <b>Final element is the remainder</b> (or type <code>rem</code> / <code>bal</code> in a wt% box) to make the last row the balance; its value is computed as 100 − the rest, and it must match the grade’s base metal. An element no grade specifies is shown as “not specified” and doesn’t count against a match.</div>
   </aside>
 
   <main>
@@ -151,6 +155,8 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
 <script>
 const ELEMENTS = ['C','Si','Mn','P','S','Cr','Ni','Mo','V','Cu','Al','Nb','Ti','Co','W'];
 const LAB = {C:'0.31',S:'0.002',P:'0.007',Si:'0.25',Cr:'3.04',Ni:'0.18',Mn:'0.58',Cu:'0.03',Mo:'0.47',Nb:'0.01',Ti:'<0.01',Al:'0.03',V:'0.01',Co:'0.01',W:'0.01'};
+const LAB_REM = 'Fe';   // balance element for the lab data
+const REM_RE = /^(rem|remainder|bal|balance)\.?$/i;
 const RESID = {Ni:0.25, Cr:0.20, Mo:0.06, Cu:0.35, V:0.05};
 const N = null;
 const SAE_PS = {P:[N,.035],S:[N,.040]};
@@ -262,36 +268,76 @@ const PERIODIC = ['H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si
 const SYM = {}; PERIODIC.forEach(s=>SYM[s.toLowerCase()]=s);
 function normSym(t){ return SYM[(t||'').trim().toLowerCase()] || null; }
 
+const remRow = ()=> $('#inputs .in-row.rem');
 function addRow(el='', wt='', focus=false){
   const row=document.createElement('div'); row.className='in-row';
   row.innerHTML=`<input class="el" list="elList" placeholder="e.g. Cr" value="${el}" autocomplete="off" spellcheck="false"><input class="wt" inputmode="decimal" placeholder="wt%" value="${wt}"><button class="del" title="Remove row" aria-label="Remove row">×</button>`;
-  row.querySelector('.del').onclick=()=>{ row.remove(); if(!$('#inputs').children.length) addRow(); };
-  row.querySelector('.wt').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); const rows=[...$('#inputs').children]; if(rows[rows.length-1]===row) addRow('','',true); else run(); }});
-  $('#inputs').appendChild(row);
+  row.querySelector('.del').onclick=()=>{
+    const wasRem=row.classList.contains('rem'); row.remove();
+    if(wasRem) $('#remToggle').checked=false;
+    if(!$('#inputs').children.length) addRow();
+  };
+  const wtBox=row.querySelector('.wt');
+  wtBox.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault();
+    const rows=[...$('#inputs').children].filter(r=>!r.classList.contains('rem'));
+    if(rows[rows.length-1]===row) addRow('','',true); else run(); }});
+  // typing "rem" / "bal" in a wt% box makes that row the remainder
+  wtBox.addEventListener('input',()=>{ if(REM_RE.test(wtBox.value.trim())) setRemainder(row); });
+  // new rows always go above the remainder row so it stays last
+  const rr=remRow(); rr ? $('#inputs').insertBefore(row,rr) : $('#inputs').appendChild(row);
   if(focus) row.querySelector('.el').focus();
+  return row;
 }
-function loadRows(obj){
-  $('#inputs').innerHTML='';
+function setRemainder(row){
+  const old=remRow(); if(old && old!==row) clearRemainder(old);
+  row.classList.add('rem');
+  const wt=row.querySelector('.wt'); wt.readOnly=true; wt.value='Remainder'; wt.tabIndex=-1;
+  if(!row.querySelector('.el').value.trim()) row.querySelector('.el').value='Fe';
+  $('#inputs').appendChild(row);           // move to the end
+  $('#remToggle').checked=true;
+}
+function clearRemainder(row){
+  row.classList.remove('rem');
+  const wt=row.querySelector('.wt'); wt.readOnly=false; wt.value=''; wt.tabIndex=0;
+}
+function toggleRemainder(){
+  if($('#remToggle').checked){
+    const rows=[...$('#inputs').children];
+    // use the last row that has an element but no number; otherwise add a new Fe row
+    let target=[...rows].reverse().find(r=>r.querySelector('.el').value.trim() && !r.querySelector('.wt').value.trim());
+    if(!target) target = rows.find(r=>!r.querySelector('.el').value.trim() && !r.querySelector('.wt').value.trim()) || addRow();
+    setRemainder(target);
+  } else {
+    const r=remRow(); if(r) clearRemainder(r);
+  }
+  run();
+}
+function loadRows(obj, rem){
+  $('#inputs').innerHTML=''; $('#remToggle').checked=false;
   const keys=Object.keys(obj);
-  if(!keys.length){ for(let i=0;i<6;i++) addRow(); return; }
+  if(!keys.length && !rem){ for(let i=0;i<6;i++) addRow(); return; }
   keys.forEach(k=>addRow(k,obj[k]));
+  if(rem) setRemainder(addRow(rem));
 }
 function buildInputs(){
   $('#elList').innerHTML = ELEMENTS.concat(PERIODIC.filter(s=>!ELEMENTS.includes(s))).map(s=>`<option value="${s}">`).join('');
-  loadRows(LAB);
+  loadRows(LAB, LAB_REM);
 }
 function readInputs(){
   const m={}, warns=[], seen={};
+  let remEl=null, remRowEl=null;
   [...$('#inputs').children].forEach(row=>{
     const elIn=row.querySelector('.el'), wtIn=row.querySelector('.wt');
     elIn.classList.remove('bad'); wtIn.classList.remove('bad');
     const t=elIn.value.trim(), raw=wtIn.value.trim();
-    if(!t && !raw) return;
+    const isRem=row.classList.contains('rem');
+    if(!t && !raw && !isRem) return;
     const e=normSym(t);
     if(!e){ elIn.classList.add('bad'); warns.push(`“${t||'(blank)'}” isn’t an element symbol`); return; }
-    if(e==='Fe'){ return; }
     elIn.value=e;
+    if(isRem){ remEl=e; remRowEl=row; return; }
     if(!raw) return;
+    if(e==='Fe' && !REM_RE.test(raw)){ return; }   // a numeric Fe value is informational only
     const lt = /^[<≤]/.test(raw);
     const v = parseFloat(raw.replace(/[<≤%\s]/g,''));
     if(isNaN(v) || v<0){ wtIn.classList.add('bad'); warns.push(`${e}: “${raw}” isn’t a number`); return; }
@@ -299,6 +345,15 @@ function readInputs(){
     seen[e]=true;
     delete m[e]; m[e]={v, lt, raw};
   });
+  if(remEl){
+    if(m[remEl]){ warns.push(`${remEl} is the remainder and also has a value — using the remainder`); delete m[remEl]; }
+    const sum = Object.values(m).reduce((s,x)=>s+x.v,0);
+    let rv = 100 - sum;
+    if(rv<0){ warns.push(`Entered elements add up to ${sum.toFixed(3)} %, more than 100 % — remainder set to 0`); rv=0; }
+    const txt = `Rem. ≈ ${rv.toFixed(2)}`;
+    remRowEl.querySelector('.wt').value = txt;
+    m[remEl] = {v:rv, lt:false, raw:`Remainder (≈ ${rv.toFixed(2)})`, rem:true};
+  }
   const w=$('#inWarn'); w.style.display=warns.length?'block':'none'; w.innerHTML=warns.join('<br>');
   return m;
 }
@@ -307,6 +362,13 @@ function evaluate(alloy, meas, opt){
   const rows=[]; let fails=0, dev=0, checked=0;
   Object.keys(meas).forEach(e=>{
     if(!meas[e]) return;
+    if(meas[e].rem){
+      const base = alloy.base || 'Fe';
+      if(e===base){ checked++; rows.push({e, m:meas[e], r:null, rtext:`Balance (${base} base)`, status:'pass', basis:'balance'}); return; }
+      if(!alloy.L[e]){ checked++; fails++; dev+=5;
+        rows.push({e, m:meas[e], r:null, rtext:`Balance is ${base}`, status:'fail', basis:'balance', nd:5}); return; }
+      // otherwise fall through and check the computed remainder against the grade's range
+    }
     let r = alloy.L[e], basis='spec';
     if(!r && opt.resid && RESID[e]!=null){ r=[N,RESID[e]]; basis='residual'; }
     if(!r){ rows.push({e, m:meas[e], r:null, status:'skip', basis:'n/s'}); return; }
@@ -337,7 +399,8 @@ function checklistTable(res, animate){
   const rows = res.rows.map((r,i)=>{
     const st = r.status==='pass'?'✓ within':r.status==='fail'?'✗ outside':'– not specified';
     const basis = r.basis==='residual'?' <span class="pill">residual</span>':'';
-    return `<tr class="row-${r.status} ${animate?'check-row':''}" data-i="${i}"><td>${r.e}</td><td>${r.m.raw}</td><td>${rangeText(r.r)}${basis}</td><td class="st">${st}</td></tr>`;
+    const st2 = r.basis==='balance' ? (r.status==='pass'?'✓ balance matches':'✗ wrong base metal') : st;
+    return `<tr class="row-${r.status} ${animate?'check-row':''}" data-i="${i}"><td>${r.e}</td><td>${r.m.raw}</td><td>${r.rtext||rangeText(r.r)}${basis}</td><td class="st">${st2}</td></tr>`;
   }).join('');
   return `<table><thead><tr><th>Element</th><th>Measured</th><th>Allowed range</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
@@ -350,7 +413,7 @@ function verdictBadge(res){
 function failList(res){
   const f = res.rows.filter(r=>r.status==='fail');
   if(!f.length) return 'Every checked element falls inside this grade’s range.';
-  return 'Fails on ' + f.map(r=>`<b>${r.e}</b> (${r.m.raw} vs ${rangeText(r.r)})`).join(', ') + '.';
+  return 'Fails on ' + f.map(r=>`<b>${r.e}</b> (${r.m.raw} vs ${r.rtext||rangeText(r.r)})`).join(', ') + '.';
 }
 
 let lastRank=null, lastBest=null;
@@ -540,6 +603,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCalc(); });
 $('#run').onclick=run;
 $('#reset').onclick=()=>{ loadRows({}); run(); $('#inputs .el').focus(); };
 $('#addRow').onclick=()=>addRow('','',true);
+$('#remToggle').onchange=toggleRemainder;
 $('#optResid').onchange=run; $('#optTol').onchange=run;
 buildInputs(); run();
 </script>
