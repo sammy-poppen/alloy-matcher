@@ -78,3 +78,46 @@ if '--inject' in sys.argv:
     html = html[:start] + json.dumps(alloys, separators=(',', ':')) + html[end:]
     open(page, 'w', encoding='utf-8').write(html)
     print('injected into', page)
+
+# ---------------- mechanical-property database ----------------
+props, proxy = [], {}
+ids_all = {a['id'] for a in alloys}
+pp = os.path.join(os.path.dirname(__file__), 'props_src.txt')
+for ln, line in enumerate(open(pp, encoding='utf-8'), 1):
+    line = line.strip()
+    if not line or line.startswith('#'): continue
+    try:
+        if line.startswith('@proxy'):
+            _, f, u = line.split(); proxy[f] = u
+            if f not in ids_all or u not in ids_all: raise ValueError('unknown id in proxy')
+            continue
+        f = [x.strip() for x in line.split('|')]
+        if f[0] not in ids_all: raise ValueError(f'unknown alloy id {f[0]!r}')
+        e = {'id': f[0], 'cond': f[1]}
+        if f[2].startswith('curve'):
+            pts = []
+            for tok in f[2][5:].split(','):
+                t, v = tok.strip().split(':'); u, y, el, hb = map(float, v.split('/'))
+                if y > u: raise ValueError(f'YS>UTS at {t}')
+                pts.append([float(t), u, y, el, hb])
+            pts.sort(); e['curve'] = pts
+            e['cost'], e['avail'], e['src'] = float(f[3]), f[4], f[5]
+        else:
+            u, y, el, hb = map(float, f[2:6])
+            if y > u: raise ValueError('YS>UTS')
+            e.update(uts=u, ys=y, el=el, hb=hb, cost=float(f[6]), avail=f[7], src=f[8])
+        if e['avail'] not in ('stock', 'specialty', 'import'): raise ValueError('bad avail')
+        props.append(e)
+    except Exception as ex:
+        sys.exit(f'props_src.txt:{ln}: {ex}\n  {line}')
+json.dump({'props': props, 'proxy': proxy}, open(os.path.join(os.path.dirname(__file__), 'props.json'), 'w'), separators=(',', ':'))
+print(len(props), 'property records,', len({p["id"] for p in props}), 'grades,', sum(1 for p in props if 'curve' in p), 'tempering curves,', len(proxy), 'proxies')
+if '--inject' in sys.argv:
+    page = sys.argv[sys.argv.index('--inject') + 1]
+    html = open(page, encoding='utf-8').read()
+    for name, val in (('PROPDB', props), ('PROXY', proxy)):
+        start = html.index(f'const {name} = ') + len(f'const {name} = ')
+        end = html.index(f'; // end {name}', start)
+        html = html[:start] + json.dumps(val, separators=(',', ':')) + html[end:]
+    open(page, 'w', encoding='utf-8').write(html)
+    print('injected properties into', page)
