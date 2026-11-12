@@ -1,0 +1,105 @@
+# SAE/AISI alloy steels — SAE J404 / ASTM A29 (heat analysis)
+@family Alloy steel
+@base Fe
+@defaults Si .15-.35; P -.035; S -.040
+1330|AISI 1330|SAE J404 · UNS G13300||US|Mn steel|C .28-.33; Mn 1.60-1.90
+1335|AISI 1335|SAE J404 · UNS G13350||US|Mn steel|C .33-.38; Mn 1.60-1.90
+1340|AISI 1340|SAE J404 · UNS G13400||US|Mn steel|C .38-.43; Mn 1.60-1.90
+1345|AISI 1345|SAE J404 · UNS G13450||US|Mn steel|C .43-.48; Mn 1.60-1.90
+4023|AISI 4023|SAE J404 · UNS G40230||US|Mo carburizing|C .20-.25; Mn .70-.90; Mo .20-.30
+4024|AISI 4024|SAE J404 · UNS G40240||US|Mo carburizing|C .20-.25; Mn .70-.90; Mo .20-.30; S .035-.050
+4027|AISI 4027|SAE J404 · UNS G40270||US|Mo steel|C .25-.30; Mn .70-.90; Mo .20-.30
+4037|AISI 4037|SAE J404 · UNS G40370||US|Mo steel|C .35-.40; Mn .70-.90; Mo .20-.30
+4047|AISI 4047|SAE J404 · UNS G40470||US|Mo steel|C .45-.50; Mn .70-.90; Mo .20-.30
+4118|AISI 4118|SAE J404 · UNS G41180||US|Cr-Mo carburizing|C .18-.23; Mn .70-.90; Cr .40-.60; Mo .08-.15
+4120|AISI 4120|SAE J404 · UNS G41200||US|Cr-Mo carburizing|C .18-.23; Mn .90-1.20; Cr .40-.60; Mo .13-.20
+4121|AISI 4121|SAE J404 · UNS G41210||US|Cr-Mo carburizing|C .18-.23; Mn .75-1.00; Cr .45-.65; Mo .20-.30
+4130|AISI 4130|SAE J404 / ASTM A29 · UNS G41300|≈ 25CrMo4, SCM430, 25CD4|US|Q&T structural, aircraft tube|C .28-.33; Mn .40-.60; Cr .80-1.10; Mo .15-.25
+4135|AISI 4135|SAE J404 · UNS G41350||US|Q&T|C .33-.38; Mn .70-.90; Cr .80-1.10; Mo .15-.25
+4137|AISI 4137|SAE J404 · UNS G41370||US|Q&T|C .35-.40; Mn .70-.90; Cr .80-1.10; Mo .15-.25
+4140|AISI 4140|SAE J404 / ASTM A29 · UNS G41400|≈ 42CrMo4, SCM440|US|Q&T general purpose|C .38-.43; Mn .75-1.00; Cr .80-1.10; Mo .15-.25
+4142|AISI 4142|SAE J404 · UNS G41420||US|Q&T|C .40-.45; Mn .75-1.00; Cr .80-1.10; Mo .15-.25
+4145|AISI 4145|SAE J404 · UNS G41450||US|Q&T|C .43-.48; Mn .75-1.00; Cr .80-1.10; Mo .15-.25
+4147|AISI 4147|SAE J404 · UNS G41470||US|Q&T|C .45-.50; Mn .75-1.00; Cr .80-1.10; Mo .15-.25
+4150|AISI 4150|SAE J404 · UNS G41500||US|Q&T|C .48-.53; Mn .75-1.00; Cr .80-1.10; Mo .15-.25
+4161|AISI 4161|SAE J404 · UNS G41610||US|Spring/Q&T|C .56-.64; Mn .75-1.00; Cr .70-.90; Mo .25-.35
+4320|AISI 4320|SAE J404 · UNS G43200||US|Ni-Cr-Mo carburizing|C .17-.22; Mn .45-.65; Ni 1.65-2.00; Cr .40-.60; Mo .20-.30
+4340|AISI 4340|SAE J404 / ASTM A29 · UNS G43400|≈ 817M40/EN24 (approx.), SNCM439|US|High-strength Q&T|C .38-.43; Mn .60-.80; Ni 1.65-2.00; Cr .70-.90; Mo .20-.30
+E4340|AISI E4340 (aircraft quality)|AMS 6414/6415 · UNS G43406||US|Aircraft-quality 4340|C .38-.43; Mn .65-.85; Ni 1.65-2.00; Cr .70-.90; Mo .20-.30; P -.025; S -.025
+4419|AISI 4419|SAE J404 · UNS G44190||US|Mo carburizing|C .18-.23; Mn .45-.65; Mo .45-.60
+4422|AISI 4422|SAE J404 · UNS G44220||US|Mo carburizing|C .20-.25; Mn .70-.90; Mo .35-.45
+4427|AISI 4427|SAE J404 · UNS G44270||US|Mo steel|C .24-.29; Mn .70-.90; Mo .35-.45
+4615|AISI 4615|SAE J404 · UNS G46150||US|Ni-Mo carburizing|C .13-.18; Mn .45-.65; Ni 1.65-2.00; Mo .20-.30
+4620|AISI 4620|SAE J404 · UNS G46200||US|Ni-Mo carburizing|C .17-.22; Mn .45-.65; Ni 1.65-2.00; Mo .20-.30
+4621|AISI 4621|SAE J404 · UNS G46210||US|Ni-Mo carburizing|C .18-.23; Mn .70-.90; Ni 1.65-2.00; Mo .20-.30
+4626|AISI 4626|SAE J404 · UNS G46260||US|Ni-Mo|C .24-.29; Mn .45-.65; Ni .70-1.00; Mo .15-.25
+4718|AISI 4718|SAE J404 · UNS G47180||US|Ni-Cr-Mo carburizing|C .16-.21; Mn .70-.90; Ni .90-1.20; Cr .35-.55; Mo .30-.40
+4720|AISI 4720|SAE J404 · UNS G47200||US|Ni-Cr-Mo carburizing|C .17-.22; Mn .50-.70; Ni .90-1.20; Cr .35-.55; Mo .15-.25
+4815|AISI 4815|SAE J404 · UNS G48150||US|3.5% Ni-Mo carburizing|C .13-.18; Mn .40-.60; Ni 3.25-3.75; Mo .20-.30
+4817|AISI 4817|SAE J404 · UNS G48170||US|3.5% Ni-Mo carburizing|C .15-.20; Mn .40-.60; Ni 3.25-3.75; Mo .20-.30
+4820|AISI 4820|SAE J404 · UNS G48200||US|3.5% Ni-Mo carburizing|C .18-.23; Mn .50-.70; Ni 3.25-3.75; Mo .20-.30
+5015|AISI 5015|SAE J404 · UNS G50150||US|Cr steel|C .12-.17; Mn .30-.50; Cr .30-.50
+5046|AISI 5046|SAE J404 · UNS G50460||US|Cr steel|C .43-.48; Mn .75-1.00; Cr .20-.35
+5120|AISI 5120|SAE J404 · UNS G51200||US|Cr carburizing|C .17-.22; Mn .70-.90; Cr .70-.90
+5130|AISI 5130|SAE J404 · UNS G51300||US|Cr steel|C .28-.33; Mn .70-.90; Cr .80-1.10
+5132|AISI 5132|SAE J404 · UNS G51320||US|Cr steel|C .30-.35; Mn .60-.80; Cr .75-1.00
+5135|AISI 5135|SAE J404 · UNS G51350||US|Cr steel|C .33-.38; Mn .60-.80; Cr .80-1.05
+5140|AISI 5140|SAE J404 · UNS G51400|≈ 41Cr4, SCr440|US|Cr steel|C .38-.43; Mn .70-.90; Cr .70-.90
+5145|AISI 5145|SAE J404 · UNS G51450||US|Cr steel|C .43-.48; Mn .70-.90; Cr .70-.90
+5147|AISI 5147|SAE J404 · UNS G51470||US|Cr steel|C .46-.51; Mn .70-.95; Cr .85-1.15
+5150|AISI 5150|SAE J404 · UNS G51500||US|Cr steel|C .48-.53; Mn .70-.90; Cr .70-.90
+5155|AISI 5155|SAE J404 · UNS G51550||US|Cr spring steel|C .51-.59; Mn .70-.90; Cr .70-.90
+5160|AISI 5160|SAE J404 · UNS G51600||US|Cr spring steel|C .56-.64; Mn .75-1.00; Cr .70-.90
+50100|AISI 50100|SAE J404 · UNS G50986||US|Bearing steel|C .98-1.10; Mn .25-.45; Cr .40-.60; P -.025; S -.025
+51100|AISI 51100|SAE J404 · UNS G51986||US|Bearing steel|C .98-1.10; Mn .25-.45; Cr .90-1.15; P -.025; S -.025
+52100|AISI 52100|ASTM A295 · UNS G52986|≈ 100Cr6, SUJ2, GCr15, ShKh15|US|Bearing steel|C .98-1.10; Mn .25-.45; Cr 1.30-1.60; P -.025; S -.025
+6118|AISI 6118|SAE J404 · UNS G61180||US|Cr-V carburizing|C .16-.21; Mn .50-.70; Cr .50-.70; V .10-.15
+6150|AISI 6150|SAE J404 · UNS G61500|≈ 51CrV4|US|Cr-V springs|C .48-.53; Mn .70-.90; Cr .80-1.10; V .15-
+8615|AISI 8615|SAE J404 · UNS G86150||US|Ni-Cr-Mo carburizing|C .13-.18; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8617|AISI 8617|SAE J404 · UNS G86170||US|Ni-Cr-Mo carburizing|C .15-.20; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8620|AISI 8620|SAE J404 · UNS G86200|≈ 20NiCrMo2-2, SNCM220|US|Ni-Cr-Mo carburizing gears|C .18-.23; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8622|AISI 8622|SAE J404 · UNS G86220||US|Ni-Cr-Mo carburizing|C .20-.25; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8625|AISI 8625|SAE J404 · UNS G86250||US|Ni-Cr-Mo|C .23-.28; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8627|AISI 8627|SAE J404 · UNS G86270||US|Ni-Cr-Mo|C .25-.30; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8630|AISI 8630|SAE J404 · UNS G86300||US|Ni-Cr-Mo Q&T|C .28-.33; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8637|AISI 8637|SAE J404 · UNS G86370||US|Ni-Cr-Mo Q&T|C .35-.40; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8640|AISI 8640|SAE J404 · UNS G86400||US|Ni-Cr-Mo Q&T|C .38-.43; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8642|AISI 8642|SAE J404 · UNS G86420||US|Ni-Cr-Mo Q&T|C .40-.45; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8645|AISI 8645|SAE J404 · UNS G86450||US|Ni-Cr-Mo Q&T|C .43-.48; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8655|AISI 8655|SAE J404 · UNS G86550||US|Ni-Cr-Mo|C .51-.59; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8660|AISI 8660|SAE J404 · UNS G86600||US|Ni-Cr-Mo springs|C .56-.64; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .15-.25
+8720|AISI 8720|SAE J404 · UNS G87200||US|Ni-Cr-Mo carburizing|C .18-.23; Mn .70-.90; Ni .40-.70; Cr .40-.60; Mo .20-.30
+8740|AISI 8740|SAE J404 · UNS G87400||US|Ni-Cr-Mo Q&T, fasteners|C .38-.43; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .20-.30
+8822|AISI 8822|SAE J404 · UNS G88220||US|Ni-Cr-Mo carburizing|C .20-.25; Mn .75-1.00; Ni .40-.70; Cr .40-.60; Mo .30-.40
+9254|AISI 9254|SAE J404 · UNS G92540||US|Si-Cr springs|C .51-.59; Mn .60-.80; Si 1.20-1.60; Cr .60-.80
+9255|AISI 9255|SAE J404 · UNS G92550||US|Si springs|C .51-.59; Mn .70-.95; Si 1.80-2.20
+9260|AISI 9260|SAE J404 · UNS G92600||US|Si springs|C .56-.64; Mn .75-1.00; Si 1.80-2.20
+9310|AISI 9310|AMS 6265 · UNS G93106||US|Aircraft carburized gears|C .08-.13; Mn .45-.65; Ni 3.00-3.50; Cr 1.00-1.40; Mo .08-.15; P -.025; S -.025
+94B17|AISI 94B17|SAE J404 · UNS G94171||US|Boron carburizing|C .15-.20; Mn .75-1.00; Ni .30-.60; Cr .30-.50; Mo .08-.15; B .0005-.003
+94B30|AISI 94B30|SAE J404 · UNS G94301||US|Boron Q&T|C .28-.33; Mn .75-1.00; Ni .30-.60; Cr .30-.50; Mo .08-.15; B .0005-.003
+# aerospace / high-strength / special
+@conf typical
+4330V|4330V (4330 mod)|AMS 6411 (typical)||US|Oil-tool / aerospace|C .28-.33; Mn .75-1.00; Ni 1.65-2.00; Cr .75-1.00; Mo .35-.50; V .05-.10
+@conf published
+300M|300M (4340 mod)|AMS 6419 · UNS K44220||US|Landing gear|C .40-.45; Mn .65-.90; Si 1.45-1.80; Ni 1.65-2.00; Cr .70-.95; Mo .30-.45; V .05-.10; P -.010; S -.010
+D6AC|D6AC|AMS 6431 · UNS K24728||US|Rocket cases, aircraft structure|C .42-.48; Mn .60-.90; Si .15-.30; Ni .40-.70; Cr .90-1.20; Mo .90-1.10; V .05-.10; P -.015; S -.015
+HP9-4-30|HP 9-4-30|AMS 6526||US|High-toughness aerospace|C .29-.34; Mn .10-.35; Si -.20; Ni 7.0-8.0; Co 4.25-4.75; Cr .90-1.10; Mo .90-1.10; V .06-.12; P -.010; S -.010
+AerMet100|AerMet 100|AMS 6532 · UNS K92580||US|Landing gear, armor|C .21-.25; Mn -.10; Si -.10; Ni 11.0-12.0; Co 13.0-14.0; Cr 2.90-3.30; Mo 1.10-1.30; P -.008; S -.005
+HY80|HY-80|MIL-S-16216 · UNS K31820||US|Naval hull plate|C -.18; Mn .10-.40; Si .15-.38; Ni 2.00-3.25; Cr 1.00-1.80; Mo .20-.60; P -.025; S -.025
+HY100|HY-100|MIL-S-16216 · UNS K32045||US|Naval hull plate|C -.20; Mn .10-.40; Si .15-.38; Ni 2.25-3.50; Cr 1.00-1.80; Mo .20-.60; P -.025; S -.025
+Mar250|Maraging 250 (C-250)|AMS 6512 · UNS K92890||US|Ultra-high-strength|C -.03; Mn -.10; Si -.10; Ni 17.0-19.0; Co 7.0-8.5; Mo 4.6-5.2; Ti .30-.50; Al .05-.15; P -.010; S -.010
+Mar300|Maraging 300 (C-300)|AMS 6514 · UNS K93120||US|Ultra-high-strength|C -.03; Mn -.10; Si -.10; Ni 18.0-19.0; Co 8.5-9.5; Mo 4.6-5.2; Ti .50-.80; Al .05-.15; P -.010; S -.010
+Mar350|Maraging 350 (C-350)|AMS 6515 · UNS K93160||US|Ultra-high-strength|C -.03; Mn -.10; Si -.10; Ni 17.5-18.5; Co 11.5-12.5; Mo 4.6-5.2; Ti 1.30-1.60; Al .05-.15; P -.010; S -.010
+N135M|Nitralloy 135M|AMS 6470 · UNS K24065||US|Nitriding steel|C .38-.43; Mn .50-.70; Cr 1.40-1.80; Mo .30-.40; Al .95-1.30; P -.025; S -.025
+NitrN|Nitralloy N|AMS 6475||US|Nitriding steel|C .20-.27; Mn .40-.70; Ni 3.25-3.75; Cr 1.00-1.25; Mo .20-.30; Al 1.10-1.40; P -.025; S -.025
+B7|ASTM A193 B7|ASTM A193 / A320 L7||US|High-temp / low-temp bolting (4140/4142 type)|C .37-.49; Mn .65-1.10; Cr .75-1.20; Mo .15-.25
+B16|ASTM A193 B16|ASTM A193||US|High-temp bolting (Cr-Mo-V)|C .36-.47; Mn .45-.70; Cr .80-1.15; Mo .50-.65; V .25-.35; Al -.015
+# Cr-Mo pressure / heat-resistant
+@defaults P -.040; S -.040
+F11|ASTM A182 F11 Cl.2|1¼Cr-½Mo||US|Pressure forgings|C .10-.20; Mn .30-.80; Si .50-1.00; Cr 1.00-1.50; Mo .44-.65
+F12|ASTM A182 F12 Cl.2|1Cr-½Mo||US|Pressure forgings|C .10-.20; Mn .30-.80; Si .10-.60; Cr .80-1.25; Mo .44-.65
+F21|ASTM A182 F21|3Cr-1Mo||US|Pressure forgings|C .05-.15; Mn .30-.60; Si -.50; Cr 2.70-3.30; Mo .80-1.06
+F22|ASTM A182 F22|2¼Cr-1Mo||US|Pressure forgings|C .05-.15; Mn .30-.60; Si -.50; Cr 2.00-2.50; Mo .87-1.13
+F5|ASTM A182 F5|5Cr-½Mo||US|Pressure forgings|C -.15; Mn .30-.60; Si -.50; Ni -.50; Cr 4.0-6.0; Mo .44-.65; P -.030; S -.030
+F9|ASTM A182 F9|9Cr-1Mo||US|Pressure forgings|C -.15; Mn .30-.60; Si .50-1.00; Cr 8.0-10.0; Mo .90-1.10; P -.030; S -.030
+F91|ASTM A182 F91|9Cr-1Mo-V||US|Power-plant forgings|C .08-.12; Mn .30-.60; Si .20-.50; Ni -.40; Cr 8.0-9.5; Mo .85-1.05; V .18-.25; Nb .06-.10; N .03-.07; Al -.02; P -.020; S -.010

@@ -74,7 +74,14 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
 .alt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 @media (max-width:900px){.alt-grid{grid-template-columns:1fr}}
 .alt{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
-.alt .score{font-family:var(--mono);font-size:28px;font-weight:600;color:var(--accent)}
+.alt .score{font-family:var(--mono);font-size:46px;font-weight:700;color:var(--accent);line-height:1.05}
+.alt .score small{display:block;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:2px}
+.alt .alt-name{font-size:26px;font-weight:800;margin:2px 0;letter-spacing:-.01em}
+.alt-title{font-size:22px;font-weight:800;margin:26px 0 4px}
+.partbar{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.partbar label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
+.partbar input{flex:1;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:18px;font-weight:600}
+.partbar input:focus{outline:2px solid var(--accent);outline-offset:0}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:13px}
 .kv span:nth-child(odd){color:var(--muted)} .kv span:nth-child(even){font-family:var(--mono);text-align:right}
 .alt-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -93,7 +100,30 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
 .sources{font-size:13px;color:var(--muted)}
 .sources a{color:var(--accent)}
 .pill{font-size:11px;font-family:var(--mono);padding:2px 6px;border-radius:4px;background:var(--skip-bg);color:var(--muted)}
+/* export panel */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:900px){.exp-grid{grid-template-columns:1fr 1fr}}
+.exp-grid label{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted)}
+.exp-grid input,.exp-grid textarea{padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}
+.exp-grid .wide{grid-column:1/-1}
+.exp-status{font-size:13px;color:var(--muted);margin-top:10px;min-height:18px}
+/* off-screen report, always light for print */
+#report{position:fixed;left:-20000px;top:0;width:760px;background:#fff;
+  --bg:#f6f7f5;--panel:#fff;--ink:#111;--muted:#555;--line:#d4d8d4;--accent:#1f5c4a;--accent-soft:#e3efe9;
+  --pass:#17663a;--pass-bg:#e7f5ec;--fail:#a3221b;--fail-bg:#fbeae8;--skip:#777;--skip-bg:#f1f2f0;--warn:#7a5000;--warn-bg:#fff4dc;
+  color:#111;font-family:var(--sans);font-size:12.5px;line-height:1.45}
+#report .rblock{padding:14px 28px;background:#fff}
+#report h1{font-size:21px;margin:0 0 2px} #report h2{font-size:15px;margin:0 0 6px;color:#1f5c4a}
+#report h3{font-size:14px;margin:0 0 4px} #report h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:#555;margin:12px 0 5px}
+#report table{font-size:11.5px} #report td,#report th{padding:4px 6px}
+#report .formula{font-size:11px;background:#f6f7f5}
+#report .note{font-size:11px}
+#report .meta td{font-family:var(--sans)} #report .meta td:first-child{color:#555;width:150px}
+#report .disc{border:1px solid #c9a227;background:#fff8e1;border-radius:6px;padding:10px 12px;font-size:11.5px}
+#report .rhead{border-bottom:3px solid #1f5c4a;padding-bottom:10px}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -128,6 +158,7 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
   </aside>
 
   <main>
+    <div class="partbar"><label for="rp_part">Part #</label><input id="rp_part" placeholder="Enter part number" autocomplete="off" spellcheck="false"></div>
     <div id="results"></div>
   </main>
 </div>
@@ -141,6 +172,22 @@ details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:13.
   </div>
   <div style="overflow-x:auto"><table class="rankall" id="rankAll"></table></div>
 </div>
+
+<div class="card" id="exportCard" style="margin-top:26px">
+  <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px">Export report</h2>
+  <div class="exp-grid">
+    <label>Lab / report no.<input id="rp_lab" placeholder="e.g. 086-146"></label>
+    <label>Prepared by<input id="rp_by" value="Volynt Aero" placeholder="Volynt Aero"></label>
+    <label>Organization<input id="rp_org" placeholder="Optional"></label>
+    <label class="wide">Notes (printed on the report)<textarea id="rp_notes" rows="2" placeholder="Optional — test method, specimen location, chemistry source…"></textarea></label>
+  </div>
+  <div class="btns" style="flex-wrap:wrap">
+    <button class="primary" id="expPdf">Export PDF</button>
+    <button id="expPng">Export PNG image</button>
+  </div>
+  <div class="exp-status" id="expStatus">Exports the current results: inputs, identified alloy and checklist, the next 3 closest grades, the US alternatives with full calculations, and data notes. Always printed in a light, print-ready layout.</div>
+</div>
+<div id="report" aria-hidden="true"></div>
 
 <div class="card sources">
   <strong style="color:var(--ink)">Data notes &amp; sources.</strong>
@@ -175,15 +222,12 @@ const STEEL_FAMS = new Set(['Carbon steel','Alloy steel']);
 const MAJOR_UNSPEC = 0.5;   // an element no limit covers, above this wt%, counts as out of range
 
 // Typical Q&T mechanical properties (tempered ~540 °C) and procurement data
-const PROPS = {
- '31CrMo12': {uts:1130, ys:940, el:11, hb:340, cond:'Q&T (typical)', src:'MakeItFrom EN 1.8515'},
- '30NCD16': {uts:1000, ys:900, el:19, hb:295, cond:'Q&T, tempered 625 °C (HB converted from UTS)', src:'Aubert & Duval FDMA / AIR 9160 typical'},
- '4140': {uts:1080, ys:990, el:16, hb:310, cond:'Oil Q&T (typical)', src:'MakeItFrom Q&T 4140', cost:1.00, avail:'Very high — stocked by essentially every US metals distributor, also as pre-hardened 4140 HT', nom:{C:.405,Mn:.875,Si:.25,Cr:.95,Ni:0,Mo:.20}},
- '4130': {uts:1040, ys:979, el:18.1, hb:302, cond:'Water Q + T 540 °C', src:'ASM data (WQ 855 °C, T 540 °C)', cost:1.05, avail:'Very high — bar, plate and tube (AMS 6348/6370)', nom:{C:.305,Mn:.50,Si:.25,Cr:.95,Ni:0,Mo:.20}},
- '4340': {uts:1207, ys:1145, el:14.2, hb:352, cond:'Oil Q + T 540 °C', src:'ASM data (OQ 800 °C, T 540 °C)', cost:1.50, avail:'High — stocked as bar (AMS 6414/6415, ASTM A322)', nom:{C:.405,Mn:.70,Si:.25,Cr:.80,Ni:1.825,Mo:.25}},
-};
-const US_CANDIDATES = ['4140','4130','4340'];
+const PROPDB = [{"id":"1040","cond":"Oil quenched & tempered","curve":[[205.0,896.0,662.0,16.0,262.0],[315.0,889.0,648.0,18.0,255.0],[425.0,862.0,634.0,21.0,248.0],[540.0,758.0,551.0,26.0,223.0],[650.0,669.0,434.0,30.0,201.0]],"cost":0.8,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"1060","cond":"Oil quenched & tempered","curve":[[205.0,1103.0,779.0,13.0,321.0],[315.0,1103.0,779.0,13.0,321.0],[425.0,1076.0,765.0,14.0,311.0],[540.0,965.0,669.0,17.0,277.0],[650.0,800.0,524.0,23.0,229.0]],"cost":0.85,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"1080","cond":"Oil quenched & tempered","curve":[[205.0,1310.0,979.0,12.0,388.0],[315.0,1303.0,979.0,12.0,388.0],[425.0,1289.0,951.0,13.0,375.0],[540.0,1131.0,807.0,16.0,321.0],[650.0,889.0,600.0,21.0,255.0]],"cost":0.9,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"1137","cond":"Water quenched & tempered","curve":[[205.0,1496.0,1165.0,5.0,415.0],[315.0,1372.0,1124.0,9.0,375.0],[425.0,1103.0,986.0,14.0,311.0],[540.0,827.0,710.0,19.0,262.0],[650.0,669.0,524.0,25.0,197.0]],"cost":0.85,"avail":"stock","src":"ASM Handbook typical (WQ)"},{"id":"1141","cond":"Oil quenched & tempered","curve":[[205.0,1634.0,1213.0,6.0,461.0],[315.0,1462.0,1282.0,9.0,415.0],[425.0,1165.0,1034.0,12.0,331.0],[540.0,896.0,765.0,18.0,262.0],[650.0,710.0,593.0,23.0,217.0]],"cost":0.85,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"1144","cond":"Oil quenched & tempered","curve":[[205.0,876.0,627.0,17.0,277.0],[315.0,869.0,621.0,17.0,262.0],[425.0,848.0,607.0,18.0,248.0],[540.0,807.0,600.0,20.0,235.0],[650.0,724.0,538.0,22.0,217.0]],"cost":0.9,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"4130","cond":"Water quenched & tempered","curve":[[205.0,1627.0,1462.0,10.0,467.0],[315.0,1496.0,1379.0,11.0,435.0],[425.0,1282.0,1193.0,13.0,380.0],[540.0,1040.0,979.0,18.0,302.0],[650.0,814.0,703.0,22.0,245.0]],"cost":1.05,"avail":"stock","src":"ASM Handbook typical (WQ 855 \u00b0C)"},{"id":"4140","cond":"Oil quenched & tempered","curve":[[205.0,1772.0,1641.0,8.0,510.0],[315.0,1551.0,1434.0,9.0,445.0],[425.0,1250.0,1140.0,13.0,370.0],[540.0,1075.0,986.0,15.0,311.0],[650.0,758.0,655.0,21.0,230.0]],"cost":1.0,"avail":"stock","src":"ASM Handbook typical (OQ 845 \u00b0C)"},{"id":"4150","cond":"Oil quenched & tempered","curve":[[205.0,1931.0,1724.0,10.0,530.0],[315.0,1765.0,1593.0,10.0,495.0],[425.0,1517.0,1379.0,12.0,440.0],[540.0,1207.0,1103.0,15.0,370.0],[650.0,958.0,841.0,19.0,290.0]],"cost":1.1,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"4340","cond":"Oil quenched & tempered","curve":[[205.0,1875.0,1675.0,10.0,520.0],[315.0,1724.0,1586.0,10.0,486.0],[425.0,1469.0,1365.0,10.0,430.0],[540.0,1207.0,1145.0,14.0,352.0],[650.0,965.0,855.0,19.0,280.0]],"cost":1.5,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"5140","cond":"Oil quenched & tempered","curve":[[205.0,1793.0,1641.0,9.0,490.0],[315.0,1585.0,1427.0,10.0,440.0],[425.0,1275.0,1158.0,13.0,375.0],[540.0,965.0,834.0,18.0,280.0],[650.0,758.0,655.0,26.0,235.0]],"cost":0.95,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"5150","cond":"Oil quenched & tempered","curve":[[205.0,1944.0,1731.0,5.0,525.0],[315.0,1731.0,1586.0,6.0,475.0],[425.0,1434.0,1324.0,9.0,440.0],[540.0,1144.0,1034.0,15.0,340.0],[650.0,806.0,731.0,20.0,245.0]],"cost":1.0,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"5160","cond":"Oil quenched & tempered","curve":[[205.0,2220.0,1793.0,4.0,627.0],[315.0,1999.0,1793.0,9.0,555.0],[425.0,1585.0,1448.0,10.0,461.0],[540.0,1207.0,1089.0,12.0,341.0],[650.0,931.0,807.0,20.0,269.0]],"cost":0.95,"avail":"stock","src":"ASM Handbook typical (OQ)"},{"id":"6150","cond":"Oil quenched & tempered","curve":[[205.0,1931.0,1689.0,8.0,538.0],[315.0,1724.0,1572.0,8.0,483.0],[425.0,1434.0,1331.0,9.0,420.0],[540.0,1158.0,1069.0,13.0,338.0],[650.0,945.0,841.0,17.0,282.0]],"cost":1.2,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"8630","cond":"Water quenched & tempered","curve":[[205.0,1641.0,1503.0,9.0,465.0],[315.0,1482.0,1392.0,10.0,430.0],[425.0,1276.0,1172.0,13.0,375.0],[540.0,1034.0,896.0,17.0,310.0],[650.0,793.0,689.0,23.0,240.0]],"cost":1.1,"avail":"specialty","src":"ASM Handbook typical (WQ)"},{"id":"8640","cond":"Oil quenched & tempered","curve":[[205.0,1862.0,1669.0,10.0,505.0],[315.0,1641.0,1503.0,10.0,460.0],[425.0,1365.0,1248.0,12.0,400.0],[540.0,1053.0,924.0,17.0,315.0],[650.0,834.0,703.0,22.0,250.0]],"cost":1.15,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"8740","cond":"Oil quenched & tempered","curve":[[205.0,1999.0,1655.0,10.0,578.0],[315.0,1717.0,1551.0,11.0,495.0],[425.0,1434.0,1358.0,13.0,415.0],[540.0,1207.0,1138.0,15.0,363.0],[650.0,986.0,903.0,20.0,302.0]],"cost":1.2,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"9255","cond":"Oil quenched & tempered","curve":[[205.0,2103.0,2048.0,1.0,601.0],[315.0,1937.0,1793.0,4.0,578.0],[425.0,1606.0,1489.0,8.0,477.0],[540.0,1255.0,1103.0,15.0,352.0],[650.0,993.0,814.0,20.0,285.0]],"cost":1.0,"avail":"specialty","src":"ASM Handbook typical (OQ)"},{"id":"4330V","cond":"Q&T to 150 ksi class (typical)","uts":1034.0,"ys":931.0,"el":18.0,"hb":311.0,"cost":2.5,"avail":"specialty","src":"Producer typical"},{"id":"300M","cond":"Q&T, tempered ~300 \u00b0C (280 ksi class)","uts":1965.0,"ys":1655.0,"el":9.0,"hb":540.0,"cost":4.0,"avail":"specialty","src":"AMS 6419 typical"},{"id":"D6AC","cond":"Q&T (220 ksi class)","uts":1585.0,"ys":1450.0,"el":12.0,"hb":460.0,"cost":4.0,"avail":"specialty","src":"AMS 6431 typical"},{"id":"HP9-4-30","cond":"Q&T (220 ksi class)","uts":1550.0,"ys":1380.0,"el":16.0,"hb":440.0,"cost":15.0,"avail":"specialty","src":"Producer typical"},{"id":"AerMet100","cond":"Solution treated + aged 482 \u00b0C","uts":1965.0,"ys":1724.0,"el":14.0,"hb":540.0,"cost":20.0,"avail":"specialty","src":"Producer typical"},{"id":"Mar250","cond":"Aged 480 \u00b0C","uts":1800.0,"ys":1725.0,"el":10.0,"hb":480.0,"cost":10.0,"avail":"specialty","src":"AMS 6512 typical"},{"id":"Mar300","cond":"Aged 480 \u00b0C","uts":2050.0,"ys":2000.0,"el":8.0,"hb":520.0,"cost":11.0,"avail":"specialty","src":"AMS 6514 typical"},{"id":"N135M","cond":"Q&T, tempered 650 \u00b0C (core)","uts":965.0,"ys":758.0,"el":18.0,"hb":285.0,"cost":1.6,"avail":"specialty","src":"Producer typical"},{"id":"H11","cond":"Hardened & tempered to ~45 HRC (aircraft structural)","uts":1517.0,"ys":1310.0,"el":10.0,"hb":421.0,"cost":3.0,"avail":"specialty","src":"Producer typical"},{"id":"304","cond":"Annealed","uts":586.0,"ys":290.0,"el":55.0,"hb":170.0,"cost":2.5,"avail":"stock","src":"ASM typical"},{"id":"316","cond":"Annealed","uts":579.0,"ys":290.0,"el":50.0,"hb":170.0,"cost":3.2,"avail":"stock","src":"ASM typical"},{"id":"2205","cond":"Annealed","uts":760.0,"ys":515.0,"el":30.0,"hb":240.0,"cost":4.0,"avail":"stock","src":"Producer typical"},{"id":"2507","cond":"Annealed","uts":850.0,"ys":600.0,"el":28.0,"hb":270.0,"cost":5.5,"avail":"specialty","src":"Producer typical"},{"id":"XM19","cond":"Annealed (Nitronic 50)","uts":827.0,"ys":414.0,"el":45.0,"hb":210.0,"cost":6.0,"avail":"specialty","src":"Producer typical"},{"id":"410","cond":"Hardened, tempered 315 \u00b0C","uts":1310.0,"ys":1000.0,"el":15.0,"hb":380.0,"cost":2.0,"avail":"stock","src":"ASM typical"},{"id":"410","cond":"Hardened, tempered 595 \u00b0C","uts":793.0,"ys":586.0,"el":20.0,"hb":240.0,"cost":2.0,"avail":"stock","src":"ASM typical"},{"id":"420","cond":"Hardened, tempered 205 \u00b0C","uts":1720.0,"ys":1480.0,"el":8.0,"hb":500.0,"cost":2.5,"avail":"stock","src":"ASM typical"},{"id":"431","cond":"Hardened, tempered 260 \u00b0C","uts":1360.0,"ys":1030.0,"el":16.0,"hb":400.0,"cost":3.0,"avail":"specialty","src":"ASM typical"},{"id":"431","cond":"Hardened, tempered 595 \u00b0C","uts":862.0,"ys":655.0,"el":20.0,"hb":260.0,"cost":3.0,"avail":"specialty","src":"ASM typical"},{"id":"440C","cond":"Hardened, tempered 315 \u00b0C","uts":1970.0,"ys":1900.0,"el":2.0,"hb":555.0,"cost":3.5,"avail":"stock","src":"ASM typical"},{"id":"17-4PH","cond":"Condition H900","uts":1379.0,"ys":1241.0,"el":10.0,"hb":420.0,"cost":4.0,"avail":"stock","src":"ASTM A564 typical"},{"id":"17-4PH","cond":"Condition H1025","uts":1069.0,"ys":1000.0,"el":12.0,"hb":331.0,"cost":4.0,"avail":"stock","src":"ASTM A564 typical"},{"id":"17-4PH","cond":"Condition H1075","uts":1000.0,"ys":862.0,"el":13.0,"hb":311.0,"cost":4.0,"avail":"stock","src":"ASTM A564 typical"},{"id":"17-4PH","cond":"Condition H1150","uts":931.0,"ys":724.0,"el":16.0,"hb":277.0,"cost":4.0,"avail":"stock","src":"ASTM A564 typical"},{"id":"15-5PH","cond":"Condition H1025","uts":1069.0,"ys":1000.0,"el":14.0,"hb":331.0,"cost":5.0,"avail":"specialty","src":"AMS 5659 typical"},{"id":"15-5PH","cond":"Condition H900","uts":1379.0,"ys":1241.0,"el":11.0,"hb":420.0,"cost":5.0,"avail":"specialty","src":"AMS 5659 typical"},{"id":"13-8Mo","cond":"Condition H1000","uts":1517.0,"ys":1413.0,"el":10.0,"hb":444.0,"cost":9.0,"avail":"specialty","src":"AMS 5629 typical"},{"id":"13-8Mo","cond":"Condition H1050","uts":1310.0,"ys":1207.0,"el":12.0,"hb":400.0,"cost":9.0,"avail":"specialty","src":"AMS 5629 typical"},{"id":"C465","cond":"Condition H950","uts":1758.0,"ys":1620.0,"el":11.0,"hb":480.0,"cost":12.0,"avail":"specialty","src":"Producer typical"},{"id":"A286","cond":"Solution treated + aged","uts":1069.0,"ys":758.0,"el":24.0,"hb":300.0,"cost":8.0,"avail":"specialty","src":"AMS 5737 typical"},{"id":"In718","cond":"Solution treated + aged (AMS 5662/5663)","uts":1380.0,"ys":1170.0,"el":21.0,"hb":400.0,"cost":25.0,"avail":"specialty","src":"Producer typical"},{"id":"In625","cond":"Annealed","uts":930.0,"ys":460.0,"el":50.0,"hb":200.0,"cost":22.0,"avail":"specialty","src":"Producer typical"},{"id":"InX750","cond":"Solution treated + aged","uts":1270.0,"ys":850.0,"el":24.0,"hb":330.0,"cost":25.0,"avail":"specialty","src":"Producer typical"},{"id":"In600","cond":"Annealed","uts":655.0,"ys":310.0,"el":40.0,"hb":150.0,"cost":18.0,"avail":"specialty","src":"Producer typical"},{"id":"MonelK500","cond":"Cold drawn + aged","uts":1100.0,"ys":790.0,"el":20.0,"hb":300.0,"cost":18.0,"avail":"specialty","src":"Producer typical"},{"id":"Monel400","cond":"Annealed","uts":550.0,"ys":240.0,"el":45.0,"hb":130.0,"cost":14.0,"avail":"specialty","src":"Producer typical"},{"id":"Waspaloy","cond":"Solution treated + aged","uts":1280.0,"ys":795.0,"el":25.0,"hb":360.0,"cost":30.0,"avail":"specialty","src":"Producer typical"},{"id":"HastC276","cond":"Annealed","uts":790.0,"ys":355.0,"el":60.0,"hb":194.0,"cost":25.0,"avail":"specialty","src":"Producer typical"},{"id":"MP35N","cond":"Work-hardened + aged","uts":2000.0,"ys":1900.0,"el":9.0,"hb":520.0,"cost":40.0,"avail":"specialty","src":"Producer typical"},{"id":"L605","cond":"Annealed","uts":1015.0,"ys":485.0,"el":55.0,"hb":250.0,"cost":35.0,"avail":"specialty","src":"Producer typical"},{"id":"TiGr2","cond":"Annealed","uts":485.0,"ys":345.0,"el":24.0,"hb":200.0,"cost":15.0,"avail":"stock","src":"ASTM B348 typical"},{"id":"TiGr4","cond":"Annealed","uts":662.0,"ys":586.0,"el":20.0,"hb":265.0,"cost":17.0,"avail":"specialty","src":"ASTM B348 typical"},{"id":"TiGr5","cond":"Annealed","uts":950.0,"ys":880.0,"el":14.0,"hb":334.0,"cost":20.0,"avail":"stock","src":"AMS 4928 typical"},{"id":"TiGr5","cond":"Solution treated + aged","uts":1170.0,"ys":1100.0,"el":10.0,"hb":379.0,"cost":21.0,"avail":"specialty","src":"AMS 4965 typical"},{"id":"TiGr9","cond":"Annealed","uts":690.0,"ys":586.0,"el":15.0,"hb":256.0,"cost":22.0,"avail":"specialty","src":"ASTM B348 typical"},{"id":"Ti6242","cond":"Duplex annealed","uts":1000.0,"ys":930.0,"el":15.0,"hb":330.0,"cost":30.0,"avail":"specialty","src":"AMS 4919 typical"},{"id":"Ti1023","cond":"Solution treated + aged","uts":1240.0,"ys":1170.0,"el":8.0,"hb":380.0,"cost":35.0,"avail":"specialty","src":"AMS 4984 typical"},{"id":"Ti5553","cond":"Solution treated + aged","uts":1300.0,"ys":1220.0,"el":7.0,"hb":390.0,"cost":35.0,"avail":"specialty","src":"Producer typical"},{"id":"TiBetaC","cond":"Solution treated + aged","uts":1240.0,"ys":1170.0,"el":12.0,"hb":380.0,"cost":35.0,"avail":"specialty","src":"AMS 4957 typical"},{"id":"AA1100","cond":"H14","uts":125.0,"ys":115.0,"el":9.0,"hb":32.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA3003","cond":"H14","uts":150.0,"ys":145.0,"el":8.0,"hb":40.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA5052","cond":"H32","uts":228.0,"ys":193.0,"el":12.0,"hb":60.0,"cost":3.2,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA5083","cond":"H116","uts":317.0,"ys":228.0,"el":16.0,"hb":75.0,"cost":3.5,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA5086","cond":"H116","uts":290.0,"ys":207.0,"el":12.0,"hb":72.0,"cost":3.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA6061","cond":"T6","uts":310.0,"ys":276.0,"el":12.0,"hb":95.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA6061","cond":"T4","uts":241.0,"ys":145.0,"el":22.0,"hb":65.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA6063","cond":"T6","uts":241.0,"ys":214.0,"el":12.0,"hb":73.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA6082","cond":"T6","uts":310.0,"ys":260.0,"el":10.0,"hb":95.0,"cost":3.2,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2011","cond":"T3","uts":379.0,"ys":296.0,"el":15.0,"hb":95.0,"cost":4.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA2014","cond":"T6","uts":483.0,"ys":414.0,"el":13.0,"hb":135.0,"cost":4.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2017","cond":"T4","uts":427.0,"ys":276.0,"el":22.0,"hb":105.0,"cost":4.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2024","cond":"T3","uts":483.0,"ys":345.0,"el":18.0,"hb":120.0,"cost":4.5,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA2024","cond":"T351","uts":469.0,"ys":324.0,"el":19.0,"hb":120.0,"cost":4.5,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA2219","cond":"T87","uts":476.0,"ys":393.0,"el":10.0,"hb":130.0,"cost":6.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2618","cond":"T61","uts":440.0,"ys":370.0,"el":10.0,"hb":115.0,"cost":6.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA7005","cond":"T53","uts":393.0,"ys":345.0,"el":15.0,"hb":110.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"AA7050","cond":"T7451","uts":524.0,"ys":469.0,"el":11.0,"hb":140.0,"cost":6.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA7075","cond":"T6","uts":572.0,"ys":503.0,"el":11.0,"hb":150.0,"cost":5.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA7075","cond":"T73 / T7351","uts":505.0,"ys":435.0,"el":13.0,"hb":135.0,"cost":5.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA7175","cond":"T74","uts":524.0,"ys":455.0,"el":11.0,"hb":145.0,"cost":6.5,"avail":"specialty","src":"Producer typical"},{"id":"AA7475","cond":"T7351","uts":490.0,"ys":414.0,"el":12.0,"hb":135.0,"cost":7.0,"avail":"specialty","src":"Producer typical"},{"id":"AA7178","cond":"T6","uts":607.0,"ys":538.0,"el":10.0,"hb":160.0,"cost":6.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA356.0","cond":"T6 (sand cast)","uts":228.0,"ys":165.0,"el":4.0,"hb":70.0,"cost":3.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AAA356.0","cond":"T6 (permanent mold)","uts":262.0,"ys":186.0,"el":5.0,"hb":80.0,"cost":3.8,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AAA357.0","cond":"T6","uts":345.0,"ys":276.0,"el":5.0,"hb":100.0,"cost":4.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA380.0","cond":"As die cast (F)","uts":324.0,"ys":159.0,"el":4.0,"hb":80.0,"cost":3.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA535.0","cond":"As cast (F)","uts":275.0,"ys":140.0,"el":13.0,"hb":70.0,"cost":4.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA201.0","cond":"T7","uts":469.0,"ys":414.0,"el":6.0,"hb":130.0,"cost":7.0,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AZ31B","cond":"H24","uts":290.0,"ys":221.0,"el":15.0,"hb":73.0,"cost":6.0,"avail":"specialty","src":"ASTM B90 typical"},{"id":"AZ80A","cond":"T5","uts":380.0,"ys":275.0,"el":7.0,"hb":82.0,"cost":7.0,"avail":"specialty","src":"Producer typical"},{"id":"ZK60A","cond":"T5","uts":365.0,"ys":305.0,"el":11.0,"hb":88.0,"cost":8.0,"avail":"specialty","src":"Producer typical"},{"id":"AZ91D","cond":"As die cast (F)","uts":230.0,"ys":160.0,"el":3.0,"hb":63.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"WE43","cond":"T6 (cast)","uts":250.0,"ys":165.0,"el":2.0,"hb":85.0,"cost":15.0,"avail":"specialty","src":"Producer typical"},{"id":"C17200","cond":"TF00 (solution treated + aged)","uts":1200.0,"ys":1030.0,"el":6.0,"hb":360.0,"cost":20.0,"avail":"stock","src":"Producer typical"},{"id":"C17200","cond":"TH04 (hard + aged)","uts":1310.0,"ys":1140.0,"el":3.0,"hb":380.0,"cost":20.0,"avail":"stock","src":"Producer typical"},{"id":"C63000","cond":"HR50 rod","uts":760.0,"ys":415.0,"el":15.0,"hb":195.0,"cost":9.0,"avail":"stock","src":"CDA typical"},{"id":"C95400","cond":"As cast","uts":586.0,"ys":241.0,"el":18.0,"hb":170.0,"cost":7.0,"avail":"stock","src":"CDA typical"},{"id":"C95400","cond":"TQ50 (heat treated)","uts":760.0,"ys":415.0,"el":10.0,"hb":190.0,"cost":7.5,"avail":"specialty","src":"CDA typical"},{"id":"C95500","cond":"As cast","uts":703.0,"ys":303.0,"el":12.0,"hb":192.0,"cost":8.0,"avail":"stock","src":"CDA typical"},{"id":"C95500","cond":"TQ50 (heat treated)","uts":862.0,"ys":586.0,"el":10.0,"hb":230.0,"cost":8.5,"avail":"specialty","src":"CDA typical"},{"id":"C93200","cond":"As cast","uts":241.0,"ys":124.0,"el":20.0,"hb":65.0,"cost":7.0,"avail":"stock","src":"CDA typical"},{"id":"C36000","cond":"H02 half-hard rod","uts":400.0,"ys":310.0,"el":25.0,"hb":110.0,"cost":5.0,"avail":"stock","src":"CDA typical"},{"id":"C26000","cond":"H02 half hard","uts":427.0,"ys":359.0,"el":25.0,"hb":125.0,"cost":5.0,"avail":"stock","src":"CDA typical"},{"id":"C51000","cond":"H04 hard","uts":552.0,"ys":517.0,"el":10.0,"hb":160.0,"cost":7.0,"avail":"stock","src":"CDA typical"},{"id":"Zamak3","cond":"As die cast","uts":283.0,"ys":221.0,"el":10.0,"hb":82.0,"cost":2.5,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"Zamak5","cond":"As die cast","uts":331.0,"ys":228.0,"el":7.0,"hb":91.0,"cost":2.6,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"ZA27","cond":"As die cast","uts":421.0,"ys":371.0,"el":3.0,"hb":119.0,"cost":2.8,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"303","cond":"Annealed","uts":620.0,"ys":240.0,"el":50.0,"hb":160.0,"cost":3.0,"avail":"stock","src":"ASM typical"},{"id":"304L","cond":"Annealed","uts":564.0,"ys":210.0,"el":58.0,"hb":150.0,"cost":2.6,"avail":"stock","src":"ASM typical"},{"id":"316L","cond":"Annealed","uts":558.0,"ys":290.0,"el":50.0,"hb":150.0,"cost":3.3,"avail":"stock","src":"ASM typical"},{"id":"321","cond":"Annealed","uts":621.0,"ys":241.0,"el":60.0,"hb":160.0,"cost":3.5,"avail":"stock","src":"ASM typical"},{"id":"347","cond":"Annealed","uts":655.0,"ys":276.0,"el":45.0,"hb":160.0,"cost":4.0,"avail":"specialty","src":"ASM typical"},{"id":"410","cond":"Annealed","uts":517.0,"ys":276.0,"el":30.0,"hb":155.0,"cost":2.0,"avail":"stock","src":"ASM typical"},{"id":"416","cond":"Annealed","uts":517.0,"ys":276.0,"el":30.0,"hb":155.0,"cost":2.2,"avail":"stock","src":"ASM typical"},{"id":"430","cond":"Annealed","uts":517.0,"ys":310.0,"el":30.0,"hb":155.0,"cost":2.0,"avail":"stock","src":"ASM typical"},{"id":"2304","cond":"Annealed","uts":700.0,"ys":450.0,"el":30.0,"hb":230.0,"cost":3.5,"avail":"specialty","src":"Producer typical"},{"id":"S21800","cond":"Annealed (Nitronic 60)","uts":703.0,"ys":414.0,"el":64.0,"hb":205.0,"cost":6.0,"avail":"specialty","src":"Producer typical"},{"id":"17-7PH","cond":"Condition TH1050","uts":1379.0,"ys":1276.0,"el":9.0,"hb":400.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"17-7PH","cond":"Condition RH950","uts":1586.0,"ys":1448.0,"el":6.0,"hb":450.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"15-5PH","cond":"Condition H1150","uts":1000.0,"ys":862.0,"el":16.0,"hb":300.0,"cost":5.0,"avail":"specialty","src":"AMS 5659 typical"},{"id":"C450","cond":"Condition H900","uts":1365.0,"ys":1290.0,"el":14.0,"hb":420.0,"cost":7.0,"avail":"specialty","src":"Producer typical"},{"id":"CA6NM","cond":"Normalized + tempered (cast)","uts":795.0,"ys":620.0,"el":15.0,"hb":250.0,"cost":4.0,"avail":"specialty","src":"ASTM A743 typical"},{"id":"CF8M","cond":"As cast, solution annealed","uts":485.0,"ys":205.0,"el":30.0,"hb":160.0,"cost":3.5,"avail":"specialty","src":"ASTM A743 typical"},{"id":"In825","cond":"Annealed","uts":690.0,"ys":310.0,"el":45.0,"hb":150.0,"cost":16.0,"avail":"specialty","src":"Producer typical"},{"id":"In800","cond":"Annealed","uts":600.0,"ys":295.0,"el":45.0,"hb":140.0,"cost":12.0,"avail":"specialty","src":"Producer typical"},{"id":"HastX","cond":"Annealed","uts":785.0,"ys":360.0,"el":43.0,"hb":190.0,"cost":25.0,"avail":"specialty","src":"Producer typical"},{"id":"Nim80A","cond":"Solution treated + aged","uts":1250.0,"ys":780.0,"el":30.0,"hb":300.0,"cost":22.0,"avail":"specialty","src":"Producer typical"},{"id":"Rene41","cond":"Solution treated + aged","uts":1420.0,"ys":1060.0,"el":14.0,"hb":380.0,"cost":35.0,"avail":"specialty","src":"Producer typical"},{"id":"Haynes230","cond":"Annealed","uts":860.0,"ys":390.0,"el":48.0,"hb":210.0,"cost":30.0,"avail":"specialty","src":"Producer typical"},{"id":"Haynes282","cond":"Solution treated + aged","uts":1150.0,"ys":720.0,"el":30.0,"hb":330.0,"cost":32.0,"avail":"specialty","src":"Producer typical"},{"id":"In617","cond":"Annealed","uts":755.0,"ys":350.0,"el":58.0,"hb":170.0,"cost":30.0,"avail":"specialty","src":"Producer typical"},{"id":"Haynes188","cond":"Annealed","uts":945.0,"ys":460.0,"el":53.0,"hb":240.0,"cost":35.0,"avail":"specialty","src":"Producer typical"},{"id":"F75","cond":"As cast","uts":655.0,"ys":450.0,"el":8.0,"hb":300.0,"cost":30.0,"avail":"specialty","src":"ASTM F75 typical"},{"id":"TiGr1","cond":"Annealed","uts":240.0,"ys":170.0,"el":24.0,"hb":120.0,"cost":14.0,"avail":"stock","src":"ASTM B348 typical"},{"id":"TiGr3","cond":"Annealed","uts":450.0,"ys":380.0,"el":18.0,"hb":225.0,"cost":16.0,"avail":"specialty","src":"ASTM B348 typical"},{"id":"TiGr23","cond":"Annealed","uts":860.0,"ys":795.0,"el":15.0,"hb":320.0,"cost":24.0,"avail":"stock","src":"ASTM F136 typical"},{"id":"Ti5Al25Sn","cond":"Annealed","uts":860.0,"ys":807.0,"el":16.0,"hb":335.0,"cost":28.0,"avail":"specialty","src":"AMS 4926 typical"},{"id":"Ti6Al7Nb","cond":"Annealed","uts":900.0,"ys":800.0,"el":10.0,"hb":300.0,"cost":30.0,"avail":"specialty","src":"ASTM F1295 typical"},{"id":"Ti811","cond":"Duplex annealed","uts":1000.0,"ys":930.0,"el":15.0,"hb":330.0,"cost":30.0,"avail":"specialty","src":"AMS 4972 typical"},{"id":"AA6063","cond":"T5","uts":186.0,"ys":145.0,"el":12.0,"hb":60.0,"cost":3.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA6351","cond":"T6","uts":310.0,"ys":283.0,"el":14.0,"hb":95.0,"cost":3.2,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2014","cond":"T4","uts":427.0,"ys":290.0,"el":20.0,"hb":105.0,"cost":4.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2024","cond":"T4","uts":469.0,"ys":324.0,"el":20.0,"hb":120.0,"cost":4.5,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA5052","cond":"O","uts":193.0,"ys":90.0,"el":25.0,"hb":47.0,"cost":3.2,"avail":"stock","src":"Aluminum Association typical"},{"id":"AA5083","cond":"O","uts":290.0,"ys":145.0,"el":22.0,"hb":70.0,"cost":3.5,"avail":"specialty","src":"Aluminum Association typical"},{"id":"AA2011","cond":"T8","uts":407.0,"ys":310.0,"el":12.0,"hb":100.0,"cost":4.0,"avail":"stock","src":"Aluminum Association typical"},{"id":"C70600","cond":"Annealed","uts":303.0,"ys":110.0,"el":42.0,"hb":65.0,"cost":9.0,"avail":"specialty","src":"CDA typical"},{"id":"C71500","cond":"Annealed","uts":380.0,"ys":140.0,"el":45.0,"hb":80.0,"cost":12.0,"avail":"specialty","src":"CDA typical"},{"id":"C61400","cond":"Annealed (O60)","uts":524.0,"ys":228.0,"el":40.0,"hb":130.0,"cost":8.0,"avail":"specialty","src":"CDA typical"},{"id":"C51000","cond":"Annealed","uts":340.0,"ys":130.0,"el":58.0,"hb":80.0,"cost":7.0,"avail":"stock","src":"CDA typical"},{"id":"C17500","cond":"TF00 (solution treated + aged)","uts":760.0,"ys":655.0,"el":12.0,"hb":220.0,"cost":18.0,"avail":"specialty","src":"Producer typical"},{"id":"AM60B","cond":"As die cast (F)","uts":220.0,"ys":130.0,"el":6.0,"hb":62.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"AM50A","cond":"As die cast (F)","uts":210.0,"ys":125.0,"el":10.0,"hb":57.0,"cost":5.0,"avail":"specialty","src":"Producer typical"},{"id":"ZE41A","cond":"T5 (cast)","uts":205.0,"ys":140.0,"el":4.0,"hb":62.0,"cost":12.0,"avail":"specialty","src":"Producer typical"},{"id":"AZ61A","cond":"As extruded (F)","uts":310.0,"ys":230.0,"el":16.0,"hb":60.0,"cost":6.5,"avail":"specialty","src":"Producer typical"},{"id":"Zamak2","cond":"As die cast","uts":359.0,"ys":283.0,"el":7.0,"hb":100.0,"cost":2.7,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"ZA8","cond":"As die cast","uts":374.0,"ys":290.0,"el":8.0,"hb":103.0,"cost":2.7,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"ZA12","cond":"As die cast","uts":400.0,"ys":320.0,"el":5.0,"hb":100.0,"cost":2.75,"avail":"specialty","src":"ASTM B86 / NADCA typical"},{"id":"31CrMo12","cond":"Q&T (typical)","uts":1130.0,"ys":940.0,"el":11.0,"hb":340.0,"cost":0.0,"avail":"import","src":"MakeItFrom EN 1.8515"},{"id":"30NCD16","cond":"Q&T, tempered 625 \u00b0C (HB est. from UTS)","uts":1000.0,"ys":900.0,"el":19.0,"hb":295.0,"cost":0.0,"avail":"import","src":"Aubert & Duval FDMA / AIR 9160 typical"}]; // end PROPDB
+const PROXY = {"42CrMo4":"4140","GB-42CrMo":"4140","SCM440":"4140","708M40":"4140","4142":"4140","4137":"4140","B7":"4140","25CrMo4":"4130","SCM430":"4130","25CD4":"4130","817M40":"4340","SNCM439":"4340","40KhN2MA":"4340","E4340":"4340","41Cr4":"5140","SCr440":"5140","40Kh":"5140","51CrV4":"6150","55Cr3":"5160"}; // end PROXY
 const WEIGHTS = {uts:.30, ys:.25, hb:.15, el:.10, di:.10, cost:.10};
+const HARDEN_FAMS = new Set(['Carbon steel','Alloy steel']);
+const AVAIL_TXT = {stock:'Commonly stocked by US metals distributors', specialty:'Sold by US specialty / aerospace distributors (may need a mill order)'};
+const ALLOY_BY_ID = {}; ALLOYS.forEach(a=>ALLOY_BY_ID[a.id]=a);
 
 // approx product-analysis tolerances
 function tol(el, lim){
@@ -342,17 +386,20 @@ function evaluate(alloy, meas, opt){
     rows.push({e, m:{raw:'not entered'}, r:alloy.L[e], status:'miss', basis:'missing'});
   });
   const baseMis = rows.some(r=>r.basis==='balance' && r.status==='fail') ? 1 : 0;
+  // tightness: how narrowly this grade pins down the elements that were actually checked (two-sided ranges score higher)
+  const chk = rows.filter(r=>r.basis==='spec' && r.r);
+  const tight = chk.length ? chk.reduce((t,r)=>{ const [mn,mx]=r.r; return t + ((mn!=null&&mx!=null&&mx>0)? Math.max(0,1-(mx-mn)/mx) : 0); },0)/chk.length : 0;
   // specificity: count of spec'd elements, and sum of widths (narrower = more specific)
   const specN = Object.keys(alloy.L).length;
   const width = Object.values(alloy.L).reduce((s,[a,b])=> s + ((a!=null&&b!=null)?(b-a):(b!=null?b:1)),0);
-  return {alloy, rows, fails, dev, checked, specN, width, missing, baseMis};
+  return {alloy, rows, fails, dev, checked, specN, width, missing, baseMis, tight};
 }
 
 function rankAll(meas,opt){
   const fam = $('#famFilter') ? $('#famFilter').value : '';
   const pool = fam ? ALLOYS.filter(a=>famGroup(a.fam)===fam) : ALLOYS;
   return pool.map(a=>evaluate(a,meas,opt)).sort((x,y)=>
-    x.baseMis-y.baseMis || x.fails-y.fails || x.missing.length-y.missing.length || x.dev-y.dev || y.specN-x.specN || x.width-y.width);
+    x.baseMis-y.baseMis || x.fails-y.fails || x.missing.length-y.missing.length || x.dev-y.dev || (y.tight-x.tight) || x.width-y.width || y.specN-x.specN || x.width-y.width);
 }
 
 function checklistTable(res, animate){
@@ -445,129 +492,202 @@ function renderRankAll(ranked){
 }
 
 // ---------- Alternatives ----------
-function grossmann(c){ // relative hardenability index (approximate Grossmann multiplying factors)
-  const C=c.C||0, f = {
-    Mn:1+3.333*(c.Mn||0), Si:1+0.7*(c.Si||0), Cr:1+2.16*(c.Cr||0), Ni:1+0.363*(c.Ni||0), Mo:1+3.0*(c.Mo||0)};
+function grossmann(c){ // relative hardenability index (approximate Grossmann multiplying factors; Cr factor capped at 2.0 %)
+  const C=c.C||0, cr=Math.min(c.Cr||0,2.0), f = {
+    Mn:1+3.333*(c.Mn||0), Si:1+0.7*(c.Si||0), Cr:1+2.16*cr, Ni:1+0.363*(c.Ni||0), Mo:1+3.0*(c.Mo||0)};
   const base=Math.sqrt(C);
-  return {base, f, di: base*f.Mn*f.Si*f.Cr*f.Ni*f.Mo};
+  return {base, f, di: base*f.Mn*f.Si*f.Cr*f.Ni*f.Mo, crCapped:(c.Cr||0)>2.0};
 }
+function nominalComp(a){ // mid-range of each specified element; residual-only limits count as 0
+  const o={}; ['C','Mn','Si','Cr','Ni','Mo'].forEach(e=>{ const r=a.L[e]; o[e]= !r?0 : (r[0]!=null&&r[1]!=null)?(r[0]+r[1])/2 : (r[0]!=null?r[0]:0); }); return o;
+}
+function pointAt(rec,T){ // linear interpolation along a tempering curve
+  const c=rec.curve; if(T<=c[0][0]) T=c[0][0]; if(T>=c[c.length-1][0]) T=c[c.length-1][0];
+  let i=0; while(i<c.length-2 && T>c[i+1][0]) i++;
+  const a=c[i], b=c[i+1], f=(T-a[0])/(b[0]-a[0]), L=(k)=>a[k]+f*(b[k]-a[k]);
+  return {T, uts:L(1), ys:L(2), el:L(3), hb:L(4), seg:[a,b], f};
+}
+function propRecords(id){ return PROPDB.filter(p=>p.id===id); }
+function targetFor(alloy){
+  let recs=propRecords(alloy.id), proxy=null;
+  if(!recs.length && PROXY[alloy.id]){ proxy=PROXY[alloy.id]; recs=propRecords(proxy); }
+  if(!recs.length) return null;
+  const r=recs[0], v=r.curve? pointAt(r,540) : r;
+  return {uts:Math.round(v.uts), ys:Math.round(v.ys), el:+v.el.toFixed(1), hb:Math.round(v.hb),
+          label: r.cond+(r.curve?', tempered 540 °C':''), proxy, src:r.src};
+}
+// HRC -> HB (approx. ASTM E140, steel)
+const HRC_HB=[[20,226],[25,253],[30,286],[35,327],[40,371],[45,421],[50,481],[55,543],[60,615]];
+function hrcToHb(h){ const t=HRC_HB; if(h<=t[0][0]) return t[0][1]; for(let i=0;i<t.length-1;i++){ if(h<=t[i+1][0]){ const f=(h-t[i][0])/(t[i+1][0]-t[i][0]); return t[i][1]+f*(t[i+1][1]-t[i][1]); } } return t[t.length-1][1]; }
+
 let altState=null;
 function renderAlternatives(best){
   const S = $('#altSection');
-  const p = PROPS[best.alloy.id];
-  if(!p){
-    S.innerHTML = `<div class="section-title">US-available alternatives</div><p class="section-sub">No mechanical-property record is stored for ${best.alloy.name}, so the alternative ranking only runs when the identified alloy is one with property data (31CrMo12, 30NCD16, 4140, 4130, 4340).</p>`;
-    altState=null; return;
-  }
   const meas = readInputs();
   const comp = {}; ['C','Mn','Si','Cr','Ni','Mo'].forEach(e=> comp[e]= meas[e]? meas[e].v : 0);
-  const tgt = {uts:p.uts, ys:p.ys, el:p.el, hb:p.hb, comp};
+  const keep = altState && altState.best && altState.best.alloy.id===best.alloy.id && altState.userSet;
+  const auto = targetFor(best.alloy);
+  const tgt = keep ? {...altState.tgt} : (auto ? {uts:auto.uts, ys:auto.ys, el:auto.el, hb:auto.hb} : {uts:0,ys:0,el:0,hb:0});
+  tgt.comp = comp; tgt.harden = HARDEN_FAMS.has(best.alloy.fam); tgt.g = grossmann(comp);
+  const scope = altState ? altState.scope : 'same';
+  const srcTxt = keep ? 'your entered values'
+    : auto ? `typical ${auto.label} properties of ${auto.proxy?ALLOY_BY_ID[auto.proxy].name+' (closest US equivalent of '+best.alloy.name+')':best.alloy.name}`
+    : null;
   S.innerHTML = `
-   <div class="section-title">US-available alternatives to ${best.alloy.name}</div>
-   <p class="section-sub">Ranked by closeness of tensile strength, yield strength, hardness, ductility and hardenability, plus cost and availability in the US. Target values default to typical ${p.cond} properties of ${best.alloy.name} — replace them with the pin’s measured values if you have them.</p>
+   <div class="alt-title">US-available alternatives to ${best.alloy.name}</div>
+   <p class="section-sub">Every US-standard grade and condition in the property database (${PROPDB.filter(p=>p.avail!=='import').length} records from ${new Set(PROPDB.filter(p=>p.avail!=='import').map(p=>p.id)).size} grades) is scored against the target. For quenched-and-tempered steels the search picks the tempering temperature that gives the best match.
+   ${srcTxt?`Targets are ${srcTxt}; replace them with the part’s measured values if you have them.`:`<b>No property data is stored for ${best.alloy.name}</b> — enter the part’s measured or specified properties below, or estimate them from a hardness reading.`}</p>
    <div class="target">
-     <label>Target UTS (MPa)<input id="t_uts" value="${p.uts}"></label>
-     <label>Target yield (MPa)<input id="t_ys" value="${p.ys}"></label>
-     <label>Target elongation (%)<input id="t_el" value="${p.el}"></label>
-     <label>Target hardness (HB)<input id="t_hb" value="${p.hb}"></label>
-     <button id="reAlt" style="align-self:flex-end">Recalculate</button>
+     <label>Target UTS (MPa)<input id="t_uts" value="${tgt.uts||''}"></label>
+     <label>Target yield (MPa)<input id="t_ys" value="${tgt.ys||''}"></label>
+     <label>Target elongation (%)<input id="t_el" value="${tgt.el||''}"></label>
+     <label>Target hardness (HB)<input id="t_hb" value="${tgt.hb||''}"></label>
+     <label>Search candidates<select id="t_scope" style="padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)">
+       <option value="same"${scope==='same'?' selected':''}>Same base metal (${best.alloy.base})</option><option value="any"${scope==='any'?' selected':''}>Any base metal</option></select></label>
+     <button id="reAlt" class="primary" style="align-self:flex-end">Recalculate</button>
    </div>
-   <div class="alt-grid" id="altGrid"></div>`;
-  $('#reAlt').onclick = ()=>{ altState.tgt.uts=+$('#t_uts').value; altState.tgt.ys=+$('#t_ys').value; altState.tgt.el=+$('#t_el').value; altState.tgt.hb=+$('#t_hb').value; drawAlts(); };
-  altState = {best, tgt};
+   <div class="target" style="margin-top:-6px">
+     <label>Measured hardness<input id="t_hard" placeholder="e.g. 36"></label>
+     <label>Scale<select id="t_hscale" style="padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)"><option>HRC</option><option>HB</option></select></label>
+     <button id="hardEst" style="align-self:flex-end">Estimate steel targets from hardness</button>
+   </div>
+   <div id="altInfo" class="section-sub" style="margin:4px 0 10px"></div>
+   <div class="alt-grid" id="altGrid"></div>
+   <div id="altTable" style="margin-top:14px"></div>`;
+  const readT=()=>{ altState.tgt.uts=+$('#t_uts').value; altState.tgt.ys=+$('#t_ys').value; altState.tgt.el=+$('#t_el').value; altState.tgt.hb=+$('#t_hb').value; };
+  $('#reAlt').onclick = ()=>{ readT(); altState.userSet=true; drawAlts(); };
+  $('#t_scope').onchange = ()=>{ altState.scope=$('#t_scope').value; readT(); drawAlts(); };
+  $('#hardEst').onclick = ()=>{
+    const h=+$('#t_hard').value; if(!h) return;
+    const hb = $('#t_hscale').value==='HRC' ? hrcToHb(h) : h, uts=3.45*hb;
+    $('#t_hb').value=Math.round(hb); $('#t_uts').value=Math.round(uts); $('#t_ys').value=Math.round(0.86*uts);
+    if(!+$('#t_el').value) $('#t_el').value=12;
+    readT(); altState.userSet=true; altState.hardNote=`Targets estimated from ${h} ${$('#t_hscale').value}: HB ${Math.round(hb)}, UTS ≈ 3.45 × HB = ${Math.round(uts)} MPa, yield ≈ 0.86 × UTS (typical Q&T ratio). Steel only.`; drawAlts(); };
+  altState = {best, tgt, scope, userSet:keep, hardNote: keep?altState.hardNote:null};
   drawAlts();
 }
-function scoreCand(id, tgt){
-  const p=PROPS[id];
-  const gT = grossmann(tgt.comp), gC = grossmann(p.nom);
-  const s = {
-    uts: Math.max(0,1-Math.abs(p.uts-tgt.uts)/tgt.uts),
-    ys:  Math.max(0,1-Math.abs(p.ys-tgt.ys)/tgt.ys),
-    hb:  Math.max(0,1-Math.abs(p.hb-tgt.hb)/tgt.hb),
-    el:  Math.min(1,p.el/tgt.el),
-    di:  Math.min(1,gC.di/gT.di),
-    cost:Math.min(1,1/p.cost)
+function evalCand(rec, tgt){
+  const a=ALLOY_BY_ID[rec.id];
+  const useDi = tgt.harden && HARDEN_FAMS.has(a.fam);
+  const g = useDi ? grossmann(nominalComp(a)) : null;
+  const w = {...WEIGHTS}; if(!useDi) delete w.di;
+  const wsum = Object.values(w).reduce((x,y)=>x+y,0); Object.keys(w).forEach(k=>w[k]/=wsum);
+  const score = v => {
+    const s = { uts:Math.max(0,1-Math.abs(v.uts-tgt.uts)/tgt.uts), ys:Math.max(0,1-Math.abs(v.ys-tgt.ys)/tgt.ys),
+                hb:Math.max(0,1-Math.abs(v.hb-tgt.hb)/tgt.hb), el:tgt.el>0?Math.min(1,v.el/tgt.el):1, cost:Math.min(1,tgt.cost/rec.cost) };
+    if(useDi) s.di=Math.min(1,g.di/tgt.g.di);
+    return {s, total:Object.keys(w).reduce((t,k)=>t+w[k]*s[k],0)};
   };
-  const total = Object.keys(WEIGHTS).reduce((t,k)=>t+WEIGHTS[k]*s[k],0);
-  return {id,p,s,total,gT,gC};
+  let best=null;
+  if(rec.curve){
+    for(let T=rec.curve[0][0]; T<=rec.curve[rec.curve.length-1][0]+1e-9; T+=5){ const v=pointAt(rec,T), r=score(v); if(!best||r.total>best.total) best={v,...r}; }
+  } else { const v={uts:rec.uts,ys:rec.ys,el:rec.el,hb:rec.hb}; best={v,...score(v)}; }
+  const condTxt = rec.curve ? `${rec.cond}, tempered ≈ ${Math.round(best.v.T)} °C` : rec.cond;
+  return {rec, a, v:best.v, s:best.s, total:best.total, w, g, useDi, condTxt};
 }
 function drawAlts(){
-  const {best,tgt}=altState;
-  const cands = US_CANDIDATES.filter(id=>id!==best.alloy.id).map(id=>scoreCand(id,tgt)).sort((a,b)=>b.total-a.total);
+  const {best,tgt,scope}=altState;
+  if(!(tgt.uts>0 && tgt.ys>0 && tgt.hb>0)){ altState.cands=null; $('#altGrid').innerHTML=''; $('#altTable').innerHTML='';
+    $('#altInfo').textContent='Enter target UTS, yield and hardness to search.'; return; }
+  const pool = PROPDB.filter(p=>p.avail!=='import' && p.id!==best.alloy.id && ALLOY_BY_ID[p.id] && (scope==='any' || ALLOY_BY_ID[p.id].base===best.alloy.base));
+  { // cost reference: the identified grade (or its US proxy) if known, else 4140 for steels, else the cheapest same-base candidate
+    const own = propRecords(best.alloy.id).concat(PROXY[best.alloy.id]?propRecords(PROXY[best.alloy.id]):[]).find(r=>r.cost>0);
+    if(own){ tgt.cost=own.cost; tgt.costRef=`${ALLOY_BY_ID[own.id].name} cost index`; }
+    else if(best.alloy.base==='Fe'){ tgt.cost=1.0; tgt.costRef='AISI 4140 = 1.00, used for steels without a cost record'; }
+    else { const same=PROPDB.filter(p=>p.avail!=='import' && ALLOY_BY_ID[p.id] && ALLOY_BY_ID[p.id].base===best.alloy.base);
+      tgt.cost = same.length? Math.min(...same.map(p=>p.cost)) : 1.0; tgt.costRef=`cheapest ${best.alloy.base}-base grade in the property database`; }
+  }
+  const cands = pool.map(r=>evalCand(r,tgt)).sort((a,b)=>b.total-a.total);
   altState.cands=cands;
-  $('#altGrid').innerHTML = cands.slice(0,3).map((c,i)=>{
-    const a = ALLOYS.find(x=>x.id===c.id);
-    return `<div class="alt">
-      <div class="alt-head"><div><div class="rank">Alternative #${i+1}</div><div class="name" style="font-size:19px">${a.name}</div></div>
-      <button class="primary" data-calc="${c.id}">Calculations</button></div>
-      <div class="score">${(c.total*100).toFixed(1)}<span style="font-size:14px;color:var(--muted)"> / 100 match</span></div>
+  const n90=cands.filter(c=>c.total>=0.9).length;
+  $('#altInfo').innerHTML = `${cands.length} candidate grade/condition combinations evaluated · <b>${n90} at 90% or higher</b>${altState.hardNote?'<br>'+altState.hardNote:''}`;
+  $('#altGrid').innerHTML = cands.slice(0,3).map((c,i)=>`<div class="alt">
+      <div class="alt-head"><div><div class="rank">Alternative #${i+1}</div><div class="alt-name">${c.a.name}</div></div>
+      <button class="primary" data-calc="${i}">Calculations</button></div>
+      <div class="score">${(c.total*100).toFixed(1)}%<small>Total equivalence</small></div>
       <div class="kv">
-        <span>UTS</span><span>${c.p.uts} MPa (${pct(c.p.uts,tgt.uts)})</span>
-        <span>Yield</span><span>${c.p.ys} MPa (${pct(c.p.ys,tgt.ys)})</span>
-        <span>Hardness</span><span>${c.p.hb} HB (${pct(c.p.hb,tgt.hb)})</span>
-        <span>Elongation</span><span>${c.p.el} %</span>
-        <span>Hardenability vs target</span><span>${(c.gC.di/c.gT.di*100).toFixed(0)} %</span>
-        <span>Cost index</span><span>${c.p.cost.toFixed(2)}</span>
+        <span>UTS</span><span>${Math.round(c.v.uts)} MPa (${pct(c.v.uts,tgt.uts)})</span>
+        <span>Yield</span><span>${Math.round(c.v.ys)} MPa (${pct(c.v.ys,tgt.ys)})</span>
+        <span>Hardness</span><span>${Math.round(c.v.hb)} HB (${pct(c.v.hb,tgt.hb)})</span>
+        <span>Elongation</span><span>${c.v.el.toFixed(1)} %</span>
+        ${c.useDi?`<span>Hardenability vs target</span><span>${(c.g.di/tgt.g.di*100).toFixed(0)} %</span>`:''}
+        <span>Cost index</span><span>${c.rec.cost.toFixed(2)}</span>
       </div>
-      <p><b>Condition:</b> ${c.p.cond}</p>
-      <p><b>US availability:</b> ${c.p.avail}</p>
-    </div>`;}).join('');
-  document.querySelectorAll('[data-calc]').forEach(b=> b.onclick=()=>openCalc(b.dataset.calc));
+      <p><b>Condition:</b> ${c.condTxt}</p>
+      <p><b>US availability:</b> ${AVAIL_TXT[c.rec.avail]}</p>
+    </div>`).join('');
+  const list = cands.filter(c=>c.total>=0.9); const show = list.length>=3 ? list : cands.slice(0,10);
+  $('#altTable').innerHTML = `<div class="card" style="padding:14px">
+    <div style="font-weight:700;margin-bottom:8px">${list.length>=3?`All ${list.length} candidates at 90% or higher`:`Top ${show.length} candidates (fewer than 3 reach 90%)`}</div>
+    <div style="overflow-x:auto"><table><thead><tr><th>#</th><th>Alloy</th><th>Condition</th><th>Total equiv.</th><th>UTS</th><th>Yield</th><th>HB</th><th>Elong.</th><th>US availability</th><th>Cost idx</th><th></th></tr></thead><tbody>
+    ${show.map(c=>{ const i=cands.indexOf(c); return `<tr class="${c.total>=0.9?'row-pass':''}"><td>${i+1}</td><td class="t"><b>${c.a.name}</b></td><td class="t">${c.condTxt}</td><td><b>${(c.total*100).toFixed(1)}%</b></td><td>${Math.round(c.v.uts)}</td><td>${Math.round(c.v.ys)}</td><td>${Math.round(c.v.hb)}</td><td>${c.v.el.toFixed(1)}</td><td class="t">${c.rec.avail==='stock'?'Stocked':'Specialty'}</td><td>${c.rec.cost.toFixed(2)}</td><td><button data-calc="${i}" style="padding:4px 10px;font-size:12.5px">Calculations</button></td></tr>`; }).join('')}
+    </tbody></table></div></div>`;
+  document.querySelectorAll('[data-calc]').forEach(b=> b.onclick=()=>openCalc(+b.dataset.calc));
 }
 function pct(a,b){ const d=(a-b)/b*100; return (d>=0?'+':'')+d.toFixed(1)+'%'; }
 
-function openCalc(id){
-  const {best,tgt,cands}=altState; const c=cands.find(x=>x.id===id); const a=ALLOYS.find(x=>x.id===id);
-  const T=tgt, P=c.p, f=n=>n.toFixed(3);
-  const gLine=(g,lbl,comp)=>`${lbl}: √C = √${comp.C.toFixed(3)} = ${g.base.toFixed(3)}
-  × fMn(1+3.333·${comp.Mn.toFixed(2)}) ${g.f.Mn.toFixed(3)}
-  × fSi(1+0.70·${comp.Si.toFixed(2)}) ${g.f.Si.toFixed(3)}
-  × fCr(1+2.16·${comp.Cr.toFixed(2)}) ${g.f.Cr.toFixed(3)}
-  × fNi(1+0.363·${comp.Ni.toFixed(2)}) ${g.f.Ni.toFixed(3)}
-  × fMo(1+3.00·${comp.Mo.toFixed(2)}) ${g.f.Mo.toFixed(3)}
-  = ${g.di.toFixed(2)}`;
-  const rows = [
-    ['UTS', `1 − |${P.uts} − ${T.uts}| / ${T.uts}`, c.s.uts, WEIGHTS.uts],
-    ['Yield', `1 − |${P.ys} − ${T.ys}| / ${T.ys}`, c.s.ys, WEIGHTS.ys],
-    ['Hardness', `1 − |${P.hb} − ${T.hb}| / ${T.hb}`, c.s.hb, WEIGHTS.hb],
-    ['Elongation', `min(1, ${P.el} / ${T.el})`, c.s.el, WEIGHTS.el],
-    ['Hardenability', `min(1, ${c.gC.di.toFixed(2)} / ${c.gT.di.toFixed(2)})`, c.s.di, WEIGHTS.di],
-    ['Cost', `min(1, 1 / ${P.cost.toFixed(2)})`, c.s.cost, WEIGHTS.cost],
-  ];
+function openCalc(i){
+  const {best,cands}=altState; const c=cands[i];
   $('#modal').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-      <div><h3>${a.name} vs ${best.alloy.name}</h3><div class="std">Step-by-step similarity calculation</div></div>
+      <div><h3>${c.a.name} vs ${best.alloy.name}</h3><div class="std">${c.condTxt} · step-by-step similarity calculation</div></div>
       <button id="closeM">Close</button>
-    </div>
-    <h4>1 · Property comparison</h4>
-    <table><thead><tr><th>Property</th><th>Target (${best.alloy.name})</th><th>${a.name}</th><th>Δ</th><th>Δ %</th></tr></thead><tbody>
-      <tr><td class="t">UTS (MPa)</td><td>${T.uts}</td><td>${P.uts}</td><td>${P.uts-T.uts}</td><td>${pct(P.uts,T.uts)}</td></tr>
-      <tr><td class="t">Yield (MPa)</td><td>${T.ys}</td><td>${P.ys}</td><td>${P.ys-T.ys}</td><td>${pct(P.ys,T.ys)}</td></tr>
-      <tr><td class="t">Hardness (HB)</td><td>${T.hb}</td><td>${P.hb}</td><td>${P.hb-T.hb}</td><td>${pct(P.hb,T.hb)}</td></tr>
-      <tr><td class="t">Elongation (%)</td><td>${T.el}</td><td>${P.el}</td><td>${(P.el-T.el).toFixed(1)}</td><td>${pct(P.el,T.el)}</td></tr>
-      <tr><td class="t">Yield/UTS ratio</td><td>${(T.ys/T.uts).toFixed(3)}</td><td>${(P.ys/P.uts).toFixed(3)}</td><td colspan="2">—</td></tr>
-    </tbody></table>
-    <div class="note">Candidate data: ${P.cond}, ${P.src}. Target: typical Q&amp;T ${best.alloy.name} unless you overrode it.</div>
-
-    <h4>2 · Relative hardenability (approx. Grossmann multiplying factors)</h4>
-    <div class="formula">Index = √C × fMn × fSi × fCr × fNi × fMo
-${gLine(c.gT,'Target (measured pin chemistry)',T.comp)}
-${gLine(c.gC,a.name+' (nominal mid-range)',P.nom)}
-Ratio = ${c.gC.di.toFixed(2)} / ${c.gT.di.toFixed(2)} = ${(c.gC.di/c.gT.di).toFixed(3)}</div>
-    <div class="note">This is a relative index for ranking only, not an ideal critical diameter. The linear Cr factor is extrapolated above ~2% Cr, so it overstates the 3% Cr target somewhat. For a small-diameter pin, all three US grades through-harden in oil, so this term is weighted lightly.</div>
-
-    <h4>3 · Sub-scores and weighted total</h4>
-    <table><thead><tr><th>Criterion</th><th>Formula</th><th>Sub-score</th><th>Weight</th><th>Weighted</th></tr></thead><tbody>
-      ${rows.map(r=>`<tr><td class="t">${r[0]}</td><td>${r[1]}</td><td>${f(r[2])}</td><td>${r[3].toFixed(2)}</td><td>${f(r[2]*r[3])}</td></tr>`).join('')}
-      <tr><td class="t"><b>Total</b></td><td colspan="3">Σ weight × sub-score</td><td><b>${f(c.total)}</b> → ${(c.total*100).toFixed(1)} / 100</td></tr>
-    </tbody></table>
-    <div class="note">Elongation, hardenability and cost are one-sided: a candidate isn’t penalised for being more ductile, deeper-hardening or cheaper than the target. Cost index is a relative estimate (4140 = 1.00); get a current quote for your size and certification (e.g. AMS / MTR).</div>
-
-    <h4>4 · Procurement</h4>
-    <p style="margin:0;font-size:14px">${P.avail}.</p>
-  `;
+    </div>` + calcBody(i);
   $('#modalBg').classList.add('open');
   $('#closeM').onclick=closeCalc;
+}
+function calcBody(i){
+  const {best,tgt,cands}=altState; const c=cands[i], T=tgt, V=c.v, f=n=>n.toFixed(3), r0=n=>Math.round(n);
+  let sec=1; const h=t=>`<h4>${sec++} · ${t}</h4>`;
+  let out = h('Property comparison') + `
+    <table><thead><tr><th>Property</th><th>Target (${best.alloy.name})</th><th>${c.a.name}</th><th>Δ</th><th>Δ %</th></tr></thead><tbody>
+      <tr><td class="t">UTS (MPa)</td><td>${T.uts}</td><td>${r0(V.uts)}</td><td>${r0(V.uts-T.uts)}</td><td>${pct(V.uts,T.uts)}</td></tr>
+      <tr><td class="t">Yield (MPa)</td><td>${T.ys}</td><td>${r0(V.ys)}</td><td>${r0(V.ys-T.ys)}</td><td>${pct(V.ys,T.ys)}</td></tr>
+      <tr><td class="t">Hardness (HB)</td><td>${T.hb}</td><td>${r0(V.hb)}</td><td>${r0(V.hb-T.hb)}</td><td>${pct(V.hb,T.hb)}</td></tr>
+      <tr><td class="t">Elongation (%)</td><td>${T.el}</td><td>${V.el.toFixed(1)}</td><td>${(V.el-T.el).toFixed(1)}</td><td>${T.el?pct(V.el,T.el):'—'}</td></tr>
+      <tr><td class="t">Yield/UTS ratio</td><td>${(T.ys/T.uts).toFixed(3)}</td><td>${(V.ys/V.uts).toFixed(3)}</td><td colspan="2">—</td></tr>
+    </tbody></table>
+    <div class="note">Candidate: ${c.a.name}, ${c.condTxt}. Data: ${c.rec.src} (typical values, not specification minimums).</div>`;
+  if(c.rec.curve){
+    const [p,q]=V.seg;
+    out += h('Heat-treatment selection (tempering temperature)') + `
+    <table><thead><tr><th>Tempered at (°C)</th><th>UTS</th><th>Yield</th><th>Elong. %</th><th>HB</th></tr></thead><tbody>
+      ${c.rec.curve.map(pt=>`<tr class="${pt===p||pt===q?'row-pass':''}"><td>${pt[0]}</td><td>${pt[1]}</td><td>${pt[2]}</td><td>${pt[3]}</td><td>${pt[4]}</td></tr>`).join('')}
+    </tbody></table>
+    <div class="formula">Searched ${c.rec.curve[0][0]}–${c.rec.curve[c.rec.curve.length-1][0]} °C in 5 °C steps; best total at T = ${r0(V.T)} °C
+f = (${r0(V.T)} − ${p[0]}) / (${q[0]} − ${p[0]}) = ${V.f.toFixed(3)}
+UTS = ${p[1]} + f × (${q[1]} − ${p[1]}) = ${r0(V.uts)} MPa
+YS  = ${p[2]} + f × (${q[2]} − ${p[2]}) = ${r0(V.ys)} MPa
+El  = ${p[3]} + f × (${q[3]} − ${p[3]}) = ${V.el.toFixed(1)} %
+HB  = ${p[4]} + f × (${q[4]} − ${p[4]}) = ${r0(V.hb)}</div>
+    <div class="note">Linear interpolation between published tempering points. The actual tempering temperature for a given section size and quench should be set by the heat treater and verified by hardness/tensile testing.</div>`;
+  }
+  if(c.useDi){
+    const gl=(g,lbl,comp)=>`${lbl}: √C = √${(comp.C||0).toFixed(3)} = ${g.base.toFixed(3)}
+  × fMn(1+3.333·${(comp.Mn||0).toFixed(2)}) ${g.f.Mn.toFixed(3)}
+  × fSi(1+0.70·${(comp.Si||0).toFixed(2)}) ${g.f.Si.toFixed(3)}
+  × fCr(1+2.16·${Math.min(comp.Cr||0,2).toFixed(2)}${(comp.Cr||0)>2?' [capped at 2.00]':''}) ${g.f.Cr.toFixed(3)}
+  × fNi(1+0.363·${(comp.Ni||0).toFixed(2)}) ${g.f.Ni.toFixed(3)}
+  × fMo(1+3.00·${(comp.Mo||0).toFixed(2)}) ${g.f.Mo.toFixed(3)}
+  = ${g.di.toFixed(2)}`;
+    out += h('Relative hardenability (approx. Grossmann multiplying factors)') + `
+    <div class="formula">Index = √C × fMn × fSi × fCr × fNi × fMo
+${gl(T.g,'Target (measured part chemistry)',T.comp)}
+${gl(c.g,c.a.name+' (nominal mid-range)',nominalComp(c.a))}
+Ratio = ${c.g.di.toFixed(2)} / ${T.g.di.toFixed(2)} = ${(c.g.di/T.g.di).toFixed(3)}</div>
+    <div class="note">Relative index for ranking only, not an ideal critical diameter. The Cr factor is capped at 2% Cr because the linear factor is not valid above that.</div>`;
+  }
+  const lbl={uts:'UTS',ys:'Yield',hb:'Hardness',el:'Elongation',di:'Hardenability',cost:'Cost'};
+  const fx={uts:`1 − |${r0(V.uts)} − ${T.uts}| / ${T.uts}`, ys:`1 − |${r0(V.ys)} − ${T.ys}| / ${T.ys}`, hb:`1 − |${r0(V.hb)} − ${T.hb}| / ${T.hb}`,
+            el:`min(1, ${V.el.toFixed(1)} / ${T.el})`, di:c.useDi?`min(1, ${c.g.di.toFixed(2)} / ${T.g.di.toFixed(2)})`:'', cost:`min(1, ${T.cost.toFixed(2)} / ${c.rec.cost.toFixed(2)})`};
+  out += h('Sub-scores and weighted total') + `
+    <table><thead><tr><th>Criterion</th><th>Formula</th><th>Sub-score</th><th>Weight</th><th>Weighted</th></tr></thead><tbody>
+      ${Object.keys(c.w).map(k=>`<tr><td class="t">${lbl[k]}</td><td>${fx[k]}</td><td>${f(c.s[k])}</td><td>${c.w[k].toFixed(3)}</td><td>${f(c.s[k]*c.w[k])}</td></tr>`).join('')}
+      <tr><td class="t"><b>Total</b></td><td colspan="3">Σ weight × sub-score</td><td><b>${f(c.total)}</b> → ${(c.total*100).toFixed(1)}%</td></tr>
+    </tbody></table>
+    <div class="note">Base weights: UTS 0.30, yield 0.25, hardness 0.15, elongation 0.10, hardenability 0.10, cost 0.10.${c.useDi?'':' Hardenability applies only to carbon/alloy steel targets and candidates, so here the other weights are scaled up to sum to 1.'} Elongation and cost are one-sided: a candidate isn’t penalised for being more ductile or cheaper. Cost is compared with the reference cost ${T.cost.toFixed(2)} (${esc(T.costRef)}); cost indices are rough relative estimates per kg (4140 = 1.00).</div>`;
+  out += h('Procurement') + `<p style="margin:0;font-size:14px">${AVAIL_TXT[c.rec.avail]}. Confirm stock, form/size and certification (e.g. AMS, MTR) with the supplier.</p>`;
+  return out;
 }
 function closeCalc(){ $('#modalBg').classList.remove('open'); }
 $('#modalBg').addEventListener('click',e=>{ if(e.target.id==='modalBg') closeCalc(); });
@@ -577,6 +697,151 @@ $('#run').onclick=run;
 $('#reset').onclick=()=>{ loadRows({}); run(); $('#inputs .el').focus(); };
 $('#addRow').onclick=()=>addRow('','',true);
 $('#remToggle').onchange=toggleRemainder;
+
+// ================= Report export =================
+const esc = t => String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let downloadsNS; let dlPromise=null;
+function getDownloads(){
+  if(!dlPromise){
+    dlPromise = (window.claude && typeof window.claude.use==='function')
+      ? Promise.race([window.claude.use('downloads').catch(()=>null), new Promise(r=>setTimeout(()=>r(null),10000))])
+      : Promise.resolve(null);
+  }
+  return dlPromise;
+}
+async function saveFile(filename, blob){
+  const dl = await getDownloads();
+  if(dl){
+    try{ await dl.save({filename, data:blob}); return 'saved'; }
+    catch(e){ if(e && e.code==='declined') return 'declined'; if(e && !['unavailable','not_granted','capability_disabled','capability_removed'].includes(e.code)) throw e; }
+  }
+  // plain browser (e.g. GitHub Pages): ordinary download link
+  const url=URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  return 'saved';
+}
+function reportFields(){
+  return {part:$('#rp_part').value.trim(), lab:$('#rp_lab').value.trim(), by:$('#rp_by').value.trim(), org:$('#rp_org').value.trim(), notes:$('#rp_notes').value.trim()};
+}
+function buildReport(){
+  if(!lastRank || !lastBest) return false;
+  const F=reportFields(), best=lastBest, next=lastRank.slice(1,4), meas=readInputs();
+  const now=new Date(), stamp=now.toLocaleString();
+  const opt=[$('#optResid').checked?'residual limits for carbon/alloy steels: ON':'residual limits: OFF',
+             $('#optTol').checked?'product-analysis tolerances: ON':'product-analysis tolerances: OFF'];
+  const scope=$('#famFilter').selectedOptions[0].textContent;
+  const ent=Object.entries(meas), chunks=[]; for(let i=0;i<ent.length;i+=8) chunks.push(ent.slice(i,i+8));
+  const comp=chunks.map(ch=>`<table style="margin-bottom:8px"><thead><tr><th>Element</th>${ch.map(([e])=>`<th style="text-transform:none">${e}</th>`).join('')}</tr></thead><tbody><tr><td class="t" style="color:#555">wt%</td>${ch.map(([e,m])=>`<td>${esc(m.rem?'Rem. ≈ '+m.v.toFixed(2):m.raw)}</td>`).join('')}</tr></tbody></table>`).join('');
+  const blocks=[];
+  blocks.push(`<div class="rblock"><div class="rhead"><h1>Material Identification Report</h1>
+    <div style="color:#555">Alloy grade screening by chemical composition</div>
+    <div style="margin-top:4px;font-size:14px;font-weight:700;color:#1f5c4a">Prepared by ${esc(F.by||'Volynt Aero')}</div></div>
+    <table class="meta" style="margin-top:10px"><tbody>
+      <tr><td>Part / description</td><td><b style="font-size:14px">${F.part?esc(F.part):'—'}</b></td></tr>
+      ${F.lab?`<tr><td>Lab / report no.</td><td>${esc(F.lab)}</td></tr>`:''}
+      <tr><td>Prepared by</td><td>${esc(F.by||'Volynt Aero')}${F.org?' · '+esc(F.org):''}</td></tr>
+      <tr><td>Generated</td><td>${esc(stamp)}</td></tr>
+      <tr><td>Search scope</td><td>${esc(scope)}</td></tr>
+      <tr><td>Options</td><td>${opt.join('; ')}</td></tr>
+      ${F.notes?`<tr><td>Notes</td><td>${esc(F.notes).replace(/\n/g,'<br>')}</td></tr>`:''}
+    </tbody></table></div>`);
+  blocks.push(`<div class="rblock"><h2>1. Measured composition (wt%)</h2>
+    ${comp}</div>`);
+  const fullN = lastRank.filter(r=>r.fails===0 && !r.missing.length).length;
+  blocks.push(`<div class="rblock"><h2>2. Identified alloy: ${esc(best.alloy.name)}</h2>
+    <div>${esc(best.alloy.std)}${best.alloy.aka?' · '+esc(best.alloy.aka):''}</div>
+    <div style="color:#555;margin:2px 0 8px">Family: ${esc(best.alloy.fam)} · Origin: ${esc(best.alloy.origin)} · Typical use: ${esc(best.alloy.use)}</div>
+    <div style="margin-bottom:8px">${verdictBadge(best)} &nbsp;${best.fails===0&&!best.missing.length
+      ? (fullN===1?'Only grade in the database with every measured element inside its specified range.':`${fullN} grades contain every measured element; this one has the most specific limits.`)
+      : failList(best)}</div>
+    ${checklistTable(best,false)}</div>`);
+  next.forEach((n,i)=>blocks.push(`<div class="rblock"><h2>${i===0?'3. Next closest alloys<br>':''}<span style="color:#111">#${i+2} ${esc(n.alloy.name)}</span></h2>
+    <div>${esc(n.alloy.std)}${n.alloy.aka?' · '+esc(n.alloy.aka):''} · ${esc(n.alloy.origin)}</div>
+    <div style="margin:6px 0 8px">${verdictBadge(n)} &nbsp;${failList(n)}</div>
+    ${checklistTable(n,false)}</div>`));
+  if(altState && altState.cands){
+    const T=altState.tgt, C=altState.cands, top=C.slice(0,3);
+    const n90=C.filter(c=>c.total>=0.9).length, list=C.filter(c=>c.total>=0.9), tbl=(list.length>=3?list:C.slice(0,10)).slice(0,15);
+    blocks.push(`<div class="rblock"><h2 style="font-size:19px;font-weight:800">4. US-available alternatives to ${esc(best.alloy.name)}</h2>
+      <div style="display:grid;grid-template-columns:repeat(${top.length},1fr);gap:10px;margin:8px 0 12px">
+      ${top.map((c,i)=>`<div style="border:1px solid #d4d8d4;border-radius:8px;padding:10px 12px">
+        <div style="font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#555">Alternative #${i+1}</div>
+        <div style="font-size:21px;font-weight:800;margin:2px 0 2px">${esc(c.a.name)}</div>
+        <div style="font-size:10.5px;color:#555;margin-bottom:4px">${esc(c.condTxt)}</div>
+        <div style="font-family:var(--mono);font-size:34px;font-weight:700;color:#1f5c4a;line-height:1.05">${(c.total*100).toFixed(1)}%</div>
+        <div style="font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#555">Total equivalence</div></div>`).join('')}
+      </div>
+      <div style="margin-bottom:6px">Target properties used: UTS ${T.uts} MPa · yield ${T.ys} MPa · elongation ${T.el}% · hardness ${T.hb} HB${altState.hardNote?' ('+esc(altState.hardNote)+')':''}.
+      Candidates searched: ${altState.scope==='any'?'all base metals':'same base metal ('+esc(best.alloy.base)+')'} — ${C.length} grade/condition combinations, <b>${n90} at 90% or higher</b>.</div>
+      <table><thead><tr><th>#</th><th>Alloy</th><th>Condition</th><th>Total equiv.</th><th>UTS</th><th>Yield</th><th>HB</th><th>El. %</th><th>US avail.</th><th>Cost</th></tr></thead><tbody>
+      ${tbl.map(c=>`<tr><td>${C.indexOf(c)+1}</td><td class="t"><b style="font-size:12.5px">${esc(c.a.name)}</b></td><td class="t">${esc(c.condTxt)}</td><td><b>${(c.total*100).toFixed(1)}%</b></td><td>${Math.round(c.v.uts)}</td><td>${Math.round(c.v.ys)}</td><td>${Math.round(c.v.hb)}</td><td>${c.v.el.toFixed(1)}</td><td class="t">${c.rec.avail==='stock'?'Stocked':'Specialty'}</td><td>${c.rec.cost.toFixed(2)}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="note">Properties are typical values at the stated condition; for quenched-and-tempered steels the tempering temperature is interpolated from published tempering data. These are candidates for engineering evaluation, not approved substitutes.</div></div>`);
+    top.forEach((c,i)=>blocks.push(`<div class="rblock"><h3>Calculation ${i+1}: ${esc(c.a.name)} (${esc(c.condTxt)}) vs ${esc(best.alloy.name)}</h3>${calcBody(i)}</div>`));
+  }
+  blocks.push(`<div class="rblock"><h2>${altState&&altState.cands?'5':'4'}. Method, data sources and limitations</h2>
+    <p style="margin:0 0 6px">Each of ${ALLOYS.length} grades in the tool's database was checked element by element against its specified minimum/maximum. Ranking order: base-metal match, number of out-of-range elements, required elements not measured, total normalized deviation, then specificity of the grade's limits.</p>
+    <p style="margin:0 0 8px">Composition limits are summaries of SAE J403/J404, ASTM A29/A182/A193/A240/A276/A564/A600/A681/A743, EN 10083/10084/10085/10087/10089/10250, BS 970, AIR 9160, JIS G4051/G4053, GOST 1050/4543, GB/T 3077, Aluminum Association registrations, ASTM B348 and UNS/AMS designations. Mechanical properties for the alternatives search come from a database of ${PROPDB.length} typical-property records (ASM Handbook tempering data, Aluminum Association / AMS / producer typicals); they are typical values, not specification minimums. The cost index is a relative estimate per kg (4140 = 1.00).</p>
+    <div class="disc"><b>Limitations.</b> This report is a screening aid generated by software. The composition limits in the database have not been individually verified against the current editions of the governing specifications, and specifications are revised. The identification must be confirmed against the governing material specification and certified test results before it is relied on. The listed alternatives have not been evaluated for any specific application and are not approved material substitutions.</div></div>`);
+  $('#report').innerHTML = blocks.join('');
+  return true;
+}
+function setStatus(t){ $('#expStatus').textContent=t; }
+function libsReady(){ return window.html2canvas && window.jspdf && window.jspdf.jsPDF; }
+async function renderBlock(el){ return html2canvas(el,{scale:2,backgroundColor:'#ffffff',logging:false,useCORS:true}); }
+function fileBase(){
+  const F=reportFields(); const id=(F.part||F.lab||lastBest.alloy.name).replace(/[^A-Za-z0-9._-]+/g,'_');
+  return `alloy-report_${id}_${new Date().toISOString().slice(0,10)}`;
+}
+async function exportPDF(){
+  if(!buildReport()){ setStatus('Run a match first.'); return; }
+  if(!libsReady()){ setStatus('The export libraries did not load (they come from cdnjs.cloudflare.com). Check your connection and reload the page.'); return; }
+  setStatus('Rendering PDF…');
+  try{
+    await document.fonts.ready;
+    const {jsPDF}=window.jspdf; const pdf=new jsPDF({unit:'pt',format:'letter'});
+    const PW=612, PH=792, M=36, W=PW-2*M, TOP=M, BOT=PH-M-18;
+    let y=TOP;
+    for(const el of document.querySelectorAll('#report .rblock')){
+      const cv=await renderBlock(el); const h=cv.height*W/cv.width;
+      if(h <= BOT-TOP){
+        if(y+h>BOT){ pdf.addPage(); y=TOP; }
+        pdf.addImage(cv.toDataURL('image/jpeg',0.9),'JPEG',M,y,W,h); y+=h;
+      } else {                       // taller than a page: slice it
+        const pxPerPt=cv.width/W; let sy=0;
+        while(sy<cv.height){
+          if(y>TOP+1){ pdf.addPage(); y=TOP; }
+          const sh=Math.min(cv.height-sy, Math.floor((BOT-y)*pxPerPt));
+          const part=document.createElement('canvas'); part.width=cv.width; part.height=sh;
+          part.getContext('2d').drawImage(cv,0,sy,cv.width,sh,0,0,cv.width,sh);
+          pdf.addImage(part.toDataURL('image/jpeg',0.9),'JPEG',M,y,W,sh/pxPerPt); y+=sh/pxPerPt; sy+=sh;
+        }
+      }
+    }
+    const n=pdf.getNumberOfPages(), F=reportFields();
+    for(let i=1;i<=n;i++){ pdf.setPage(i); pdf.setFontSize(8); pdf.setTextColor(110);
+      pdf.text(`${F.part?'Part # '+F.part+' · ':''}Material Identification Report${F.lab?' · '+F.lab:''} · ${lastBest.alloy.name} · Prepared by ${F.by||'Volynt Aero'}`, M, PH-20);
+      pdf.text(`Page ${i} of ${n}`, PW-M, PH-20, {align:'right'}); }
+    const res=await saveFile(fileBase()+'.pdf', pdf.output('blob'));
+    setStatus(res==='declined'?'Download cancelled.':`PDF ready (${n} page${n>1?'s':''}).`);
+  }catch(e){ console.error(e); setStatus('Export failed: '+(e.message||e.code||e)); }
+}
+async function exportPNG(){
+  if(!buildReport()){ setStatus('Run a match first.'); return; }
+  if(!libsReady()){ setStatus('The export libraries did not load (they come from cdnjs.cloudflare.com). Check your connection and reload the page.'); return; }
+  setStatus('Rendering image…');
+  try{
+    await document.fonts.ready;
+    const cv=await renderBlock($('#report'));
+    const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
+    const res=await saveFile(fileBase()+'.png', blob);
+    setStatus(res==='declined'?'Download cancelled.':`PNG ready (${cv.width}×${cv.height}px).`);
+  }catch(e){ console.error(e); setStatus('Export failed: '+(e.message||e.code||e)); }
+}
+$('#expPdf').onclick=exportPDF;
+$('#expPng').onclick=exportPNG;
+getDownloads();
 function famGroup(f){ return f.startsWith('Aluminum') ? 'Aluminum' : f; }
 (function(){
   const groups=[...new Set(ALLOYS.map(a=>famGroup(a.fam)))];

@@ -1,0 +1,70 @@
+# Stainless steels — ASTM A240 / A276 / A479 / A564 / A743 (limits merged where bar and plate differ slightly)
+@family Stainless steel
+@base Fe
+@defaults Mn -2.00; Si -1.00; P -.045; S -.030
+201|Type 201|UNS S20100 · EN 1.4372||US|Austenitic Cr-Mn-Ni|C -.15; Mn 5.5-7.5; P -.060; Cr 16.0-18.0; Ni 3.5-5.5; N -.25
+202|Type 202|UNS S20200 · EN 1.4373||US|Austenitic Cr-Mn-Ni|C -.15; Mn 7.5-10.0; P -.060; Cr 17.0-19.0; Ni 4.0-6.0; N -.25
+301|Type 301|UNS S30100 · EN 1.4310||US|Austenitic, springs|C -.15; Cr 16.0-18.0; Ni 6.0-8.0; N -.10
+302|Type 302|UNS S30200||US|Austenitic|C -.15; Si -.75; Cr 17.0-19.0; Ni 8.0-10.0; N -.10
+303|Type 303|UNS S30300 · EN 1.4305||US|Free-machining austenitic|C -.15; P -.20; S .15-; Cr 17.0-19.0; Ni 8.0-10.0
+304|Type 304|UNS S30400 · EN 1.4301|18-8, SUS304, 08Kh18N10|US|Austenitic general purpose|C -.08; Si -.75; Cr 17.5-20.0; Ni 8.0-10.5; N -.10
+304L|Type 304L|UNS S30403 · EN 1.4307/1.4306|SUS304L, 03Kh18N11|US|Low-carbon austenitic|C -.030; Si -.75; Cr 17.5-20.0; Ni 8.0-12.0; N -.10
+304H|Type 304H|UNS S30409 · EN 1.4948||US|High-temp austenitic|C .04-.10; Si -.75; Cr 18.0-20.0; Ni 8.0-10.5
+305|Type 305|UNS S30500 · EN 1.4303||US|Cold-heading austenitic|C -.12; Si -.75; Cr 17.0-19.0; Ni 10.5-13.0
+309S|Type 309S|UNS S30908 · EN 1.4833||US|Heat-resistant austenitic|C -.08; Si -.75; Cr 22.0-24.0; Ni 12.0-15.0
+310S|Type 310S|UNS S31008 · EN 1.4845||US|Heat-resistant austenitic|C -.08; Si -1.50; Cr 24.0-26.0; Ni 19.0-22.0
+316|Type 316|UNS S31600 · EN 1.4401|SUS316|US|Mo austenitic|C -.08; Si -.75; Cr 16.0-18.0; Ni 10.0-14.0; Mo 2.00-3.00; N -.10
+316L|Type 316L|UNS S31603 · EN 1.4404|SUS316L|US|Low-carbon Mo austenitic|C -.030; Si -.75; Cr 16.0-18.0; Ni 10.0-14.0; Mo 2.00-3.00; N -.10
+316Ti|Type 316Ti|UNS S31635 · EN 1.4571||US|Ti-stabilized Mo austenitic|C -.08; Si -.75; Cr 16.0-18.0; Ni 10.0-14.0; Mo 2.00-3.00; Ti .15-.70; N -.10
+317L|Type 317L|UNS S31703 · EN 1.4438||US|High-Mo austenitic|C -.030; Si -.75; Cr 18.0-20.0; Ni 11.0-15.0; Mo 3.0-4.0; N -.10
+321|Type 321|UNS S32100 · EN 1.4541|12Kh18N10T (approx.)|US|Ti-stabilized austenitic|C -.08; Si -.75; Cr 17.0-19.0; Ni 9.0-12.0; Ti .15-.70; N -.10
+347|Type 347|UNS S34700 · EN 1.4550||US|Nb-stabilized austenitic|C -.08; Si -.75; Cr 17.0-19.0; Ni 9.0-13.0; Nb .40-1.00
+904L|904L|UNS N08904 · EN 1.4539||US|Super-austenitic|C -.020; Cr 19.0-23.0; Ni 23.0-28.0; Mo 4.0-5.0; Cu 1.0-2.0; N -.10
+254SMO|254 SMO|UNS S31254 · EN 1.4547||US/EU|6Mo super-austenitic|C -.020; Mn -1.00; Si -.80; P -.030; S -.010; Cr 19.5-20.5; Ni 17.5-18.5; Mo 6.0-6.5; Cu .50-1.00; N .18-.25
+AL6XN|AL-6XN|UNS N08367||US|6Mo super-austenitic|C -.030; P -.040; Cr 20.0-22.0; Ni 23.5-25.5; Mo 6.0-7.0; Cu -.75; N .18-.25
+XM19|Nitronic 50 (XM-19)|UNS S20910||US|High-strength austenitic|C -.06; Mn 4.0-6.0; Cr 20.5-23.5; Ni 11.5-13.5; Mo 1.50-3.00; Nb .10-.30; V .10-.30; N .20-.40
+S21800|Nitronic 60|UNS S21800||US|Galling-resistant austenitic|C -.10; Mn 7.0-9.0; Si 3.5-4.5; P -.060; Cr 16.0-18.0; Ni 8.0-9.0; N .08-.18
+# duplex
+2205|Duplex 2205|UNS S32205 / S31803 · EN 1.4462||US/EU|Duplex|C -.030; Si -1.00; P -.030; S -.020; Cr 21.0-23.0; Ni 4.5-6.5; Mo 2.50-3.50; N .08-.20
+2507|Super duplex 2507|UNS S32750 · EN 1.4410||US/EU|Super duplex|C -.030; Mn -1.20; Si -.80; P -.035; S -.020; Cr 24.0-26.0; Ni 6.0-8.0; Mo 3.0-5.0; Cu -.50; N .24-.32
+2304|Lean duplex 2304|UNS S32304 · EN 1.4362||US/EU|Lean duplex|C -.030; Mn -2.50; P -.040; S -.030; Cr 21.5-24.5; Ni 3.0-5.5; Mo .05-.60; Cu .05-.60; N .05-.20
+255|Ferralium 255|UNS S32550||US|Super duplex|C -.04; Mn -1.50; P -.040; Cr 24.0-27.0; Ni 4.5-6.5; Mo 2.9-3.9; Cu 1.50-2.50; N .10-.25
+# ferritic / martensitic
+@defaults Mn -1.00; Si -1.00; P -.040; S -.030
+405|Type 405|UNS S40500 · EN 1.4002||US|Ferritic|C -.08; Cr 11.5-14.5; Ni -.60; Al .10-.30
+409|Type 409|UNS S40910 · EN 1.4512||US|Ferritic exhaust|C -.030; Cr 10.5-11.7; Ni -.50; Ti .08-.50; N -.030
+410|Type 410|UNS S41000 · EN 1.4006|SUS410, 12Kh13|US|Martensitic|C .08-.15; Cr 11.5-13.5; Ni -.75
+410S|Type 410S|UNS S41008||US|Ferritic/low-C 410|C -.08; Cr 11.5-13.5; Ni -.60
+414|Type 414|UNS S41400||US|Martensitic Ni|C -.15; Cr 11.5-13.5; Ni 1.25-2.50
+416|Type 416|UNS S41600 · EN 1.4005||US|Free-machining martensitic|C -.15; Mn -1.25; P -.060; S .15-; Cr 12.0-14.0; Mo -.60
+420|Type 420|UNS S42000 · EN 1.4021/1.4028|20Kh13–40Kh13 (approx.)|US|Martensitic cutlery, shafts|C .15-.40; Cr 12.0-14.0; Ni -.50
+429|Type 429|UNS S42900||US|Ferritic|C -.12; Cr 14.0-16.0; Ni -.75
+430|Type 430|UNS S43000 · EN 1.4016|SUS430|US|Ferritic|C -.12; Cr 16.0-18.0; Ni -.75
+430F|Type 430F|UNS S43020 · EN 1.4104||US|Free-machining ferritic|C -.12; Mn -1.25; P -.060; S .15-; Cr 16.0-18.0; Mo -.60
+431|Type 431|UNS S43100 · EN 1.4057||US|Martensitic Ni (shafts, fasteners)|C -.20; Cr 15.0-17.0; Ni 1.25-2.50
+434|Type 434|UNS S43400 · EN 1.4113||US|Ferritic Mo|C -.12; Cr 16.0-18.0; Mo .75-1.25
+436|Type 436|UNS S43600 · EN 1.4526||US|Ferritic Mo-Nb|C -.12; Cr 16.0-18.0; Mo .75-1.25; Nb .05-.80
+439|Type 439|UNS S43035 · EN 1.4510||US|Ti-stabilized ferritic|C -.030; Cr 17.0-19.0; Ni -.50; Ti .20-1.10; Al -.15; N -.030
+440A|Type 440A|UNS S44002||US|Martensitic high-C|C .60-.75; Cr 16.0-18.0; Mo -.75
+440B|Type 440B|UNS S44003||US|Martensitic high-C|C .75-.95; Cr 16.0-18.0; Mo -.75
+440C|Type 440C|UNS S44004 · EN 1.4125||US|Bearing / knife martensitic|C .95-1.20; Cr 16.0-18.0; Mo -.75
+444|Type 444|UNS S44400 · EN 1.4521||US|Ferritic Mo|C -.025; Cr 17.5-19.5; Mo 1.75-2.50; Ni -1.00; Ti .10-.80; N -.035
+446|Type 446|UNS S44600||US|Heat-resistant ferritic|C -.20; Mn -1.50; Cr 23.0-27.0; Ni -.75; N -.25
+# precipitation hardening / special
+17-4PH|17-4PH (Type 630)|UNS S17400 · EN 1.4542 · AMS 5643||US|PH stainless|C -.07; P -.040; Cr 15.0-17.5; Ni 3.0-5.0; Cu 3.0-5.0; Nb .15-.45
+15-5PH|15-5PH (XM-12)|UNS S15500 · AMS 5659||US|PH stainless, aerospace|C -.07; P -.040; Cr 14.0-15.5; Ni 3.5-5.5; Cu 2.5-4.5; Nb .15-.45
+17-7PH|17-7PH (Type 631)|UNS S17700 · EN 1.4568||US|PH stainless, springs|C -.09; P -.040; Cr 16.0-18.0; Ni 6.5-7.75; Al .75-1.50
+13-8Mo|PH 13-8 Mo (XM-13)|UNS S13800 · AMS 5629||US|PH stainless, aerospace|C -.05; Mn -.20; Si -.10; P -.010; S -.008; Cr 12.25-13.25; Ni 7.5-8.5; Mo 2.00-2.50; Al .90-1.35; N -.01
+C450|Custom 450 (XM-25)|UNS S45000||US|PH stainless|C -.05; P -.030; Cr 14.0-16.0; Ni 5.0-7.0; Mo .50-1.00; Cu 1.25-1.75; Nb .40-
+C465|Custom 465|UNS S46500 · AMS 5936||US|PH stainless, aerospace|C -.02; Mn -.25; Si -.25; P -.015; S -.010; Cr 11.0-12.5; Ni 10.75-11.25; Mo .75-1.25; Ti 1.50-1.80
+A286|A-286|UNS S66286 · AMS 5732/5737||US|Fe-Ni superalloy fasteners|C -.08; Mn -2.00; P -.040; Cr 13.5-16.0; Ni 24.0-27.0; Mo 1.00-1.50; Ti 1.90-2.35; V .10-.50; Al -.35; B .001-.010
+# cast stainless (ASTM A743/A744/A351)
+@defaults Mn -1.50; Si -2.00; P -.040; S -.040
+CF8|CF8 (cast 304)|ASTM A351/A743 · UNS J92600||US|Cast austenitic|C -.08; Cr 18.0-21.0; Ni 8.0-11.0; Mo -.50
+CF3|CF3 (cast 304L)|ASTM A351/A743 · UNS J92500||US|Cast austenitic|C -.03; Cr 17.0-21.0; Ni 8.0-12.0; Mo -.50
+CF8M|CF8M (cast 316)|ASTM A351/A743 · UNS J92900||US|Cast Mo austenitic|C -.08; Si -1.50; Cr 18.0-21.0; Ni 9.0-12.0; Mo 2.0-3.0
+CF3M|CF3M (cast 316L)|ASTM A351/A743 · UNS J92800||US|Cast Mo austenitic|C -.03; Si -1.50; Cr 17.0-21.0; Ni 9.0-13.0; Mo 2.0-3.0
+CA15|CA15 (cast 410)|ASTM A743 · UNS J91150||US|Cast martensitic|C -.15; Mn -1.00; Si -1.50; Cr 11.5-14.0; Ni -1.00; Mo -.50
+CA6NM|CA6NM|ASTM A743 · UNS J91540||US|Cast martensitic (pumps, turbines)|C -.06; Mn -1.00; Si -1.00; P -.04; S -.03; Cr 11.5-14.0; Ni 3.5-4.5; Mo .40-1.00
+CN7M|CN7M (cast Alloy 20)|ASTM A743 · UNS N08007||US|Cast Ni-Cr-Mo-Cu|C -.07; Si -1.50; Cr 19.0-22.0; Ni 27.5-30.5; Mo 2.0-3.0; Cu 3.0-4.0
+CD4MCu|CD4MCu|ASTM A890 1A · UNS J93370||US|Cast duplex|C -.04; Mn -1.00; Si -1.00; Cr 24.5-26.5; Ni 4.75-6.00; Mo 1.75-2.25; Cu 2.75-3.25

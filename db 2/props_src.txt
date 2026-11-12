@@ -1,0 +1,211 @@
+# Typical mechanical properties (room temperature) used for the alternatives search.
+# Values are typical published figures (ASM Handbook tables, AMS/MMPDS typicals, producer datasheets),
+# compiled for screening — NOT specification minimums, and not individually re-verified.
+#
+# Fixed condition:  id | condition | UTS MPa | YS MPa | Elong % | HB | cost | avail | source
+# Tempering curve:  id | condition | curve T:UTS/YS/El/HB, T:... | cost | avail | source
+#   (curve points are tempering temperatures in °C after quenching; the search interpolates between them)
+# cost  = relative cost index per kg, AISI 4140 bar = 1.00 (rough estimate)
+# avail = stock     – US-standard grade commonly stocked by US metals distributors
+#         specialty – US-standard grade sold by US specialty / aerospace distributors (may need mill order)
+#         import    – foreign-standard grade; used as a TARGET only, never offered as an alternative
+# Proxy lines (@proxy FOREIGN_ID US_ID) let a foreign identified grade borrow a close US equivalent's data as its target.
+
+# ---------- Quenched & tempered carbon / alloy steels (ASM typical, 1 h temper) ----------
+1040|Oil quenched & tempered|curve 205:896/662/16/262, 315:889/648/18/255, 425:862/634/21/248, 540:758/551/26/223, 650:669/434/30/201|0.80|stock|ASM Handbook typical (OQ)
+1060|Oil quenched & tempered|curve 205:1103/779/13/321, 315:1103/779/13/321, 425:1076/765/14/311, 540:965/669/17/277, 650:800/524/23/229|0.85|stock|ASM Handbook typical (OQ)
+1080|Oil quenched & tempered|curve 205:1310/979/12/388, 315:1303/979/12/388, 425:1289/951/13/375, 540:1131/807/16/321, 650:889/600/21/255|0.90|stock|ASM Handbook typical (OQ)
+1137|Water quenched & tempered|curve 205:1496/1165/5/415, 315:1372/1124/9/375, 425:1103/986/14/311, 540:827/710/19/262, 650:669/524/25/197|0.85|stock|ASM Handbook typical (WQ)
+1141|Oil quenched & tempered|curve 205:1634/1213/6/461, 315:1462/1282/9/415, 425:1165/1034/12/331, 540:896/765/18/262, 650:710/593/23/217|0.85|stock|ASM Handbook typical (OQ)
+1144|Oil quenched & tempered|curve 205:876/627/17/277, 315:869/621/17/262, 425:848/607/18/248, 540:807/600/20/235, 650:724/538/22/217|0.90|stock|ASM Handbook typical (OQ)
+4130|Water quenched & tempered|curve 205:1627/1462/10/467, 315:1496/1379/11/435, 425:1282/1193/13/380, 540:1040/979/18/302, 650:814/703/22/245|1.05|stock|ASM Handbook typical (WQ 855 °C)
+4140|Oil quenched & tempered|curve 205:1772/1641/8/510, 315:1551/1434/9/445, 425:1250/1140/13/370, 540:1075/986/15/311, 650:758/655/21/230|1.00|stock|ASM Handbook typical (OQ 845 °C)
+4150|Oil quenched & tempered|curve 205:1931/1724/10/530, 315:1765/1593/10/495, 425:1517/1379/12/440, 540:1207/1103/15/370, 650:958/841/19/290|1.10|stock|ASM Handbook typical (OQ)
+4340|Oil quenched & tempered|curve 205:1875/1675/10/520, 315:1724/1586/10/486, 425:1469/1365/10/430, 540:1207/1145/14/352, 650:965/855/19/280|1.50|stock|ASM Handbook typical (OQ)
+5140|Oil quenched & tempered|curve 205:1793/1641/9/490, 315:1585/1427/10/440, 425:1275/1158/13/375, 540:965/834/18/280, 650:758/655/26/235|0.95|specialty|ASM Handbook typical (OQ)
+5150|Oil quenched & tempered|curve 205:1944/1731/5/525, 315:1731/1586/6/475, 425:1434/1324/9/440, 540:1144/1034/15/340, 650:806/731/20/245|1.00|specialty|ASM Handbook typical (OQ)
+5160|Oil quenched & tempered|curve 205:2220/1793/4/627, 315:1999/1793/9/555, 425:1585/1448/10/461, 540:1207/1089/12/341, 650:931/807/20/269|0.95|stock|ASM Handbook typical (OQ)
+6150|Oil quenched & tempered|curve 205:1931/1689/8/538, 315:1724/1572/8/483, 425:1434/1331/9/420, 540:1158/1069/13/338, 650:945/841/17/282|1.20|specialty|ASM Handbook typical (OQ)
+8630|Water quenched & tempered|curve 205:1641/1503/9/465, 315:1482/1392/10/430, 425:1276/1172/13/375, 540:1034/896/17/310, 650:793/689/23/240|1.10|specialty|ASM Handbook typical (WQ)
+8640|Oil quenched & tempered|curve 205:1862/1669/10/505, 315:1641/1503/10/460, 425:1365/1248/12/400, 540:1053/924/17/315, 650:834/703/22/250|1.15|specialty|ASM Handbook typical (OQ)
+8740|Oil quenched & tempered|curve 205:1999/1655/10/578, 315:1717/1551/11/495, 425:1434/1358/13/415, 540:1207/1138/15/363, 650:986/903/20/302|1.20|specialty|ASM Handbook typical (OQ)
+9255|Oil quenched & tempered|curve 205:2103/2048/1/601, 315:1937/1793/4/578, 425:1606/1489/8/477, 540:1255/1103/15/352, 650:993/814/20/285|1.00|specialty|ASM Handbook typical (OQ)
+# ---------- High-strength / aerospace steels (single typical condition) ----------
+4330V|Q&T to 150 ksi class (typical)|1034|931|18|311|2.50|specialty|Producer typical
+300M|Q&T, tempered ~300 °C (280 ksi class)|1965|1655|9|540|4.00|specialty|AMS 6419 typical
+D6AC|Q&T (220 ksi class)|1585|1450|12|460|4.00|specialty|AMS 6431 typical
+HP9-4-30|Q&T (220 ksi class)|1550|1380|16|440|15.00|specialty|Producer typical
+AerMet100|Solution treated + aged 482 °C|1965|1724|14|540|20.00|specialty|Producer typical
+Mar250|Aged 480 °C|1800|1725|10|480|10.00|specialty|AMS 6512 typical
+Mar300|Aged 480 °C|2050|2000|8|520|11.00|specialty|AMS 6514 typical
+N135M|Q&T, tempered 650 °C (core)|965|758|18|285|1.60|specialty|Producer typical
+H11|Hardened & tempered to ~45 HRC (aircraft structural)|1517|1310|10|421|3.00|specialty|Producer typical
+# ---------- Stainless steels ----------
+304|Annealed|586|290|55|170|2.50|stock|ASM typical
+316|Annealed|579|290|50|170|3.20|stock|ASM typical
+2205|Annealed|760|515|30|240|4.00|stock|Producer typical
+2507|Annealed|850|600|28|270|5.50|specialty|Producer typical
+XM19|Annealed (Nitronic 50)|827|414|45|210|6.00|specialty|Producer typical
+410|Hardened, tempered 315 °C|1310|1000|15|380|2.00|stock|ASM typical
+410|Hardened, tempered 595 °C|793|586|20|240|2.00|stock|ASM typical
+420|Hardened, tempered 205 °C|1720|1480|8|500|2.50|stock|ASM typical
+431|Hardened, tempered 260 °C|1360|1030|16|400|3.00|specialty|ASM typical
+431|Hardened, tempered 595 °C|862|655|20|260|3.00|specialty|ASM typical
+440C|Hardened, tempered 315 °C|1970|1900|2|555|3.50|stock|ASM typical
+17-4PH|Condition H900|1379|1241|10|420|4.00|stock|ASTM A564 typical
+17-4PH|Condition H1025|1069|1000|12|331|4.00|stock|ASTM A564 typical
+17-4PH|Condition H1075|1000|862|13|311|4.00|stock|ASTM A564 typical
+17-4PH|Condition H1150|931|724|16|277|4.00|stock|ASTM A564 typical
+15-5PH|Condition H1025|1069|1000|14|331|5.00|specialty|AMS 5659 typical
+15-5PH|Condition H900|1379|1241|11|420|5.00|specialty|AMS 5659 typical
+13-8Mo|Condition H1000|1517|1413|10|444|9.00|specialty|AMS 5629 typical
+13-8Mo|Condition H1050|1310|1207|12|400|9.00|specialty|AMS 5629 typical
+C465|Condition H950|1758|1620|11|480|12.00|specialty|Producer typical
+A286|Solution treated + aged|1069|758|24|300|8.00|specialty|AMS 5737 typical
+# ---------- Nickel and cobalt alloys ----------
+In718|Solution treated + aged (AMS 5662/5663)|1380|1170|21|400|25.00|specialty|Producer typical
+In625|Annealed|930|460|50|200|22.00|specialty|Producer typical
+InX750|Solution treated + aged|1270|850|24|330|25.00|specialty|Producer typical
+In600|Annealed|655|310|40|150|18.00|specialty|Producer typical
+MonelK500|Cold drawn + aged|1100|790|20|300|18.00|specialty|Producer typical
+Monel400|Annealed|550|240|45|130|14.00|specialty|Producer typical
+Waspaloy|Solution treated + aged|1280|795|25|360|30.00|specialty|Producer typical
+HastC276|Annealed|790|355|60|194|25.00|specialty|Producer typical
+MP35N|Work-hardened + aged|2000|1900|9|520|40.00|specialty|Producer typical
+L605|Annealed|1015|485|55|250|35.00|specialty|Producer typical
+# ---------- Titanium ----------
+TiGr2|Annealed|485|345|24|200|15.00|stock|ASTM B348 typical
+TiGr4|Annealed|662|586|20|265|17.00|specialty|ASTM B348 typical
+TiGr5|Annealed|950|880|14|334|20.00|stock|AMS 4928 typical
+TiGr5|Solution treated + aged|1170|1100|10|379|21.00|specialty|AMS 4965 typical
+TiGr9|Annealed|690|586|15|256|22.00|specialty|ASTM B348 typical
+Ti6242|Duplex annealed|1000|930|15|330|30.00|specialty|AMS 4919 typical
+Ti1023|Solution treated + aged|1240|1170|8|380|35.00|specialty|AMS 4984 typical
+Ti5553|Solution treated + aged|1300|1220|7|390|35.00|specialty|Producer typical
+TiBetaC|Solution treated + aged|1240|1170|12|380|35.00|specialty|AMS 4957 typical
+# ---------- Aluminum (wrought, cast) ----------
+AA1100|H14|125|115|9|32|3.00|stock|Aluminum Association typical
+AA3003|H14|150|145|8|40|3.00|stock|Aluminum Association typical
+AA5052|H32|228|193|12|60|3.20|stock|Aluminum Association typical
+AA5083|H116|317|228|16|75|3.50|stock|Aluminum Association typical
+AA5086|H116|290|207|12|72|3.50|specialty|Aluminum Association typical
+AA6061|T6|310|276|12|95|3.00|stock|Aluminum Association typical
+AA6061|T4|241|145|22|65|3.00|stock|Aluminum Association typical
+AA6063|T6|241|214|12|73|3.00|stock|Aluminum Association typical
+AA6082|T6|310|260|10|95|3.20|specialty|Aluminum Association typical
+AA2011|T3|379|296|15|95|4.00|stock|Aluminum Association typical
+AA2014|T6|483|414|13|135|4.50|specialty|Aluminum Association typical
+AA2017|T4|427|276|22|105|4.50|specialty|Aluminum Association typical
+AA2024|T3|483|345|18|120|4.50|stock|Aluminum Association typical
+AA2024|T351|469|324|19|120|4.50|stock|Aluminum Association typical
+AA2219|T87|476|393|10|130|6.00|specialty|Aluminum Association typical
+AA2618|T61|440|370|10|115|6.00|specialty|Aluminum Association typical
+AA7005|T53|393|345|15|110|5.00|specialty|Producer typical
+AA7050|T7451|524|469|11|140|6.00|specialty|Aluminum Association typical
+AA7075|T6|572|503|11|150|5.00|stock|Aluminum Association typical
+AA7075|T73 / T7351|505|435|13|135|5.00|stock|Aluminum Association typical
+AA7175|T74|524|455|11|145|6.50|specialty|Producer typical
+AA7475|T7351|490|414|12|135|7.00|specialty|Producer typical
+AA7178|T6|607|538|10|160|6.50|specialty|Aluminum Association typical
+AA356.0|T6 (sand cast)|228|165|4|70|3.50|specialty|Aluminum Association typical
+AAA356.0|T6 (permanent mold)|262|186|5|80|3.80|specialty|Aluminum Association typical
+AAA357.0|T6|345|276|5|100|4.50|specialty|Aluminum Association typical
+AA380.0|As die cast (F)|324|159|4|80|3.00|specialty|Aluminum Association typical
+AA535.0|As cast (F)|275|140|13|70|4.00|specialty|Aluminum Association typical
+AA201.0|T7|469|414|6|130|7.00|specialty|Aluminum Association typical
+# ---------- Magnesium ----------
+AZ31B|H24|290|221|15|73|6.00|specialty|ASTM B90 typical
+AZ80A|T5|380|275|7|82|7.00|specialty|Producer typical
+ZK60A|T5|365|305|11|88|8.00|specialty|Producer typical
+AZ91D|As die cast (F)|230|160|3|63|5.00|specialty|Producer typical
+WE43|T6 (cast)|250|165|2|85|15.00|specialty|Producer typical
+# ---------- Copper alloys ----------
+C17200|TF00 (solution treated + aged)|1200|1030|6|360|20.00|stock|Producer typical
+C17200|TH04 (hard + aged)|1310|1140|3|380|20.00|stock|Producer typical
+C63000|HR50 rod|760|415|15|195|9.00|stock|CDA typical
+C95400|As cast|586|241|18|170|7.00|stock|CDA typical
+C95400|TQ50 (heat treated)|760|415|10|190|7.50|specialty|CDA typical
+C95500|As cast|703|303|12|192|8.00|stock|CDA typical
+C95500|TQ50 (heat treated)|862|586|10|230|8.50|specialty|CDA typical
+C93200|As cast|241|124|20|65|7.00|stock|CDA typical
+C36000|H02 half-hard rod|400|310|25|110|5.00|stock|CDA typical
+C26000|H02 half hard|427|359|25|125|5.00|stock|CDA typical
+C51000|H04 hard|552|517|10|160|7.00|stock|CDA typical
+# ---------- Zinc ----------
+Zamak3|As die cast|283|221|10|82|2.50|specialty|ASTM B86 / NADCA typical
+Zamak5|As die cast|331|228|7|91|2.60|specialty|ASTM B86 / NADCA typical
+ZA27|As die cast|421|371|3|119|2.80|specialty|ASTM B86 / NADCA typical
+# ---------- Additional records ----------
+303|Annealed|620|240|50|160|3.00|stock|ASM typical
+304L|Annealed|564|210|58|150|2.60|stock|ASM typical
+316L|Annealed|558|290|50|150|3.30|stock|ASM typical
+321|Annealed|621|241|60|160|3.50|stock|ASM typical
+347|Annealed|655|276|45|160|4.00|specialty|ASM typical
+410|Annealed|517|276|30|155|2.00|stock|ASM typical
+416|Annealed|517|276|30|155|2.20|stock|ASM typical
+430|Annealed|517|310|30|155|2.00|stock|ASM typical
+2304|Annealed|700|450|30|230|3.50|specialty|Producer typical
+S21800|Annealed (Nitronic 60)|703|414|64|205|6.00|specialty|Producer typical
+17-7PH|Condition TH1050|1379|1276|9|400|5.00|specialty|Producer typical
+17-7PH|Condition RH950|1586|1448|6|450|5.00|specialty|Producer typical
+15-5PH|Condition H1150|1000|862|16|300|5.00|specialty|AMS 5659 typical
+C450|Condition H900|1365|1290|14|420|7.00|specialty|Producer typical
+CA6NM|Normalized + tempered (cast)|795|620|15|250|4.00|specialty|ASTM A743 typical
+CF8M|As cast, solution annealed|485|205|30|160|3.50|specialty|ASTM A743 typical
+In825|Annealed|690|310|45|150|16.00|specialty|Producer typical
+In800|Annealed|600|295|45|140|12.00|specialty|Producer typical
+HastX|Annealed|785|360|43|190|25.00|specialty|Producer typical
+Nim80A|Solution treated + aged|1250|780|30|300|22.00|specialty|Producer typical
+Rene41|Solution treated + aged|1420|1060|14|380|35.00|specialty|Producer typical
+Haynes230|Annealed|860|390|48|210|30.00|specialty|Producer typical
+Haynes282|Solution treated + aged|1150|720|30|330|32.00|specialty|Producer typical
+In617|Annealed|755|350|58|170|30.00|specialty|Producer typical
+Haynes188|Annealed|945|460|53|240|35.00|specialty|Producer typical
+F75|As cast|655|450|8|300|30.00|specialty|ASTM F75 typical
+TiGr1|Annealed|240|170|24|120|14.00|stock|ASTM B348 typical
+TiGr3|Annealed|450|380|18|225|16.00|specialty|ASTM B348 typical
+TiGr23|Annealed|860|795|15|320|24.00|stock|ASTM F136 typical
+Ti5Al25Sn|Annealed|860|807|16|335|28.00|specialty|AMS 4926 typical
+Ti6Al7Nb|Annealed|900|800|10|300|30.00|specialty|ASTM F1295 typical
+Ti811|Duplex annealed|1000|930|15|330|30.00|specialty|AMS 4972 typical
+AA6063|T5|186|145|12|60|3.00|stock|Aluminum Association typical
+AA6351|T6|310|283|14|95|3.20|specialty|Aluminum Association typical
+AA2014|T4|427|290|20|105|4.50|specialty|Aluminum Association typical
+AA2024|T4|469|324|20|120|4.50|stock|Aluminum Association typical
+AA5052|O|193|90|25|47|3.20|stock|Aluminum Association typical
+AA5083|O|290|145|22|70|3.50|specialty|Aluminum Association typical
+AA2011|T8|407|310|12|100|4.00|stock|Aluminum Association typical
+C70600|Annealed|303|110|42|65|9.00|specialty|CDA typical
+C71500|Annealed|380|140|45|80|12.00|specialty|CDA typical
+C61400|Annealed (O60)|524|228|40|130|8.00|specialty|CDA typical
+C51000|Annealed|340|130|58|80|7.00|stock|CDA typical
+C17500|TF00 (solution treated + aged)|760|655|12|220|18.00|specialty|Producer typical
+AM60B|As die cast (F)|220|130|6|62|5.00|specialty|Producer typical
+AM50A|As die cast (F)|210|125|10|57|5.00|specialty|Producer typical
+ZE41A|T5 (cast)|205|140|4|62|12.00|specialty|Producer typical
+AZ61A|As extruded (F)|310|230|16|60|6.50|specialty|Producer typical
+Zamak2|As die cast|359|283|7|100|2.70|specialty|ASTM B86 / NADCA typical
+ZA8|As die cast|374|290|8|103|2.70|specialty|ASTM B86 / NADCA typical
+ZA12|As die cast|400|320|5|100|2.75|specialty|ASTM B86 / NADCA typical
+# ---------- Foreign grades: targets only ----------
+31CrMo12|Q&T (typical)|1130|940|11|340|0|import|MakeItFrom EN 1.8515
+30NCD16|Q&T, tempered 625 °C (HB est. from UTS)|1000|900|19|295|0|import|Aubert & Duval FDMA / AIR 9160 typical
+@proxy 42CrMo4 4140
+@proxy GB-42CrMo 4140
+@proxy SCM440 4140
+@proxy 708M40 4140
+@proxy 4142 4140
+@proxy 4137 4140
+@proxy B7 4140
+@proxy 25CrMo4 4130
+@proxy SCM430 4130
+@proxy 25CD4 4130
+@proxy 817M40 4340
+@proxy SNCM439 4340
+@proxy 40KhN2MA 4340
+@proxy E4340 4340
+@proxy 41Cr4 5140
+@proxy SCr440 5140
+@proxy 40Kh 5140
+@proxy 51CrV4 6150
+@proxy 55Cr3 5160

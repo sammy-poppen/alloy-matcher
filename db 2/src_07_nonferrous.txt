@@ -1,0 +1,127 @@
+# Titanium — ASTM B348 / B265 / AMS
+@family Titanium
+@base Ti
+@oth 0.10
+@defaults C -.08; N -.05; H -.015
+TiGr1|Ti Grade 1 (CP)|ASTM B348 · UNS R50250||US/Intl|Commercially pure Ti|Fe -.20; O -.18; N -.03
+TiGr2|Ti Grade 2 (CP)|ASTM B348 · UNS R50400||US/Intl|Commercially pure Ti|Fe -.30; O -.25; N -.03
+TiGr3|Ti Grade 3 (CP)|ASTM B348 · UNS R50550||US/Intl|Commercially pure Ti|Fe -.30; O -.35
+TiGr4|Ti Grade 4 (CP)|ASTM B348 · UNS R50700||US/Intl|Commercially pure Ti|Fe -.50; O -.40
+TiGr5|Ti-6Al-4V (Grade 5)|ASTM B348 · UNS R56400 · AMS 4928||US/Intl|Aerospace, implants, fasteners|Al 5.50-6.75; V 3.50-4.50; Fe -.40; O -.20
+TiGr23|Ti-6Al-4V ELI (Grade 23)|ASTM B348/F136 · UNS R56401||US/Intl|Medical implants, cryogenic|Al 5.50-6.50; V 3.50-4.50; Fe -.25; O -.13; N -.03; H -.0125
+TiGr7|Ti Grade 7 (Ti-0.15Pd)|ASTM B348 · UNS R52400||US/Intl|Corrosion service|Pd .12-.25; Fe -.30; O -.25; N -.03
+TiGr9|Ti-3Al-2.5V (Grade 9)|ASTM B348 · UNS R56320||US/Intl|Hydraulic tubing, bike frames|Al 2.5-3.5; V 2.0-3.0; Fe -.25; O -.15; N -.03
+TiGr12|Ti Grade 12 (Ti-0.3Mo-0.8Ni)|ASTM B348 · UNS R53400||US/Intl|Corrosion service|Mo .2-.4; Ni .6-.9; Fe -.30; O -.25; N -.03
+Ti6242|Ti-6Al-2Sn-4Zr-2Mo|AMS 4919/4975 · UNS R54620||US|Jet-engine parts|Al 5.50-6.50; Sn 1.80-2.20; Zr 3.60-4.40; Mo 1.80-2.20; Si .06-.10; Fe -.25; O -.15
+Ti6246|Ti-6Al-2Sn-4Zr-6Mo|AMS 4981 · UNS R56260||US|Jet-engine disks|Al 5.50-6.50; Sn 1.75-2.25; Zr 3.50-4.50; Mo 5.50-6.50; Fe -.15; O -.15
+Ti1023|Ti-10V-2Fe-3Al|AMS 4983/4984 · UNS R56410||US|Landing gear forgings|V 9.0-11.0; Fe 1.6-2.2; Al 2.6-3.4; O -.13
+Ti5553|Ti-5Al-5Mo-5V-3Cr|AMS 4995 (approx.)||US/Intl|Landing gear, beta forgings|Al 4.4-5.7; Mo 4.0-5.5; V 4.0-5.5; Cr 2.5-3.5; Fe .3-.5; O -.18
+Ti15333|Ti-15V-3Cr-3Sn-3Al|AMS 4914 · UNS R58153||US|Beta sheet, springs|V 14.0-16.0; Cr 2.5-3.5; Sn 2.5-3.5; Al 2.5-3.5; Fe -.25; O -.13
+Ti811|Ti-8Al-1Mo-1V|AMS 4972 · UNS R54810||US|Compressor blades|Al 7.35-8.35; Mo .75-1.25; V .75-1.25; Fe -.30; O -.12
+Ti5Al25Sn|Ti-5Al-2.5Sn (Grade 6)|AMS 4926 · UNS R54520||US|Cryogenic, weldable|Al 4.50-5.75; Sn 2.0-3.0; Fe -.50; O -.20
+Ti6Al7Nb|Ti-6Al-7Nb|ASTM F1295 · UNS R56700||US/Intl|Medical implants|Al 5.50-6.50; Nb 6.50-7.50; Ta -.50; Fe -.25; O -.20
+TiBetaC|Ti Beta-C (Ti-3Al-8V-6Cr-4Mo-4Zr, Grade 19)|AMS 4957 · UNS R58640||US|Springs, fasteners|Al 3.0-4.0; V 7.5-8.5; Cr 5.5-6.5; Mo 3.5-4.5; Zr 3.5-4.5; Fe -.30; O -.12
+# Nickel alloys (base Ni unless Fe is the balance per spec)
+@family Nickel alloy
+@base Ni
+@oth
+@defaults
+Ni200|Nickel 200|UNS N02200 · ASTM B160||US|Commercially pure Ni|Ni 99.0-; Cu -.25; Fe -.40; Mn -.35; C -.15; Si -.35; S -.01
+Ni201|Nickel 201|UNS N02201 · ASTM B160||US|Low-carbon pure Ni|Ni 99.0-; Cu -.25; Fe -.40; Mn -.35; C -.02; Si -.35; S -.01
+Monel400|Monel 400|UNS N04400 · ASTM B164||US|Marine, chemical|Ni 63.0-; Cu 28.0-34.0; Fe -2.5; Mn -2.0; C -.30; Si -.50; S -.024
+MonelK500|Monel K-500|UNS N05500 · ASTM B865||US|Pump shafts, fasteners|Ni 63.0-; Cu 27.0-33.0; Al 2.30-3.15; Ti .35-.85; Fe -2.0; Mn -1.5; C -.25; Si -.50; S -.01
+In600|Inconel 600|UNS N06600 · ASTM B166||US|Heat/corrosion resistant|Ni 72.0-; Cr 14.0-17.0; Fe 6.0-10.0; C -.15; Mn -1.0; S -.015; Si -.50; Cu -.50
+In617|Inconel 617|UNS N06617 · ASTM B166||US|Gas turbine combustors|Ni 44.5-; Cr 20.0-24.0; Co 10.0-15.0; Mo 8.0-10.0; Al .8-1.5; C .05-.15; Fe -3.0; Mn -1.0; Si -1.0; Ti -.6; Cu -.5; B -.006
+In625|Inconel 625|UNS N06625 · ASTM B446||US|Corrosion/heat resistant|Ni 58.0-; Cr 20.0-23.0; Mo 8.0-10.0; Nb 3.15-4.15; Fe -5.0; C -.10; Mn -.50; Si -.50; Al -.40; Ti -.40; Co -1.0; P -.015; S -.015
+In690|Inconel 690|UNS N06690 · ASTM B166||US|Nuclear steam generators|Ni 58.0-; Cr 27.0-31.0; Fe 7.0-11.0; C -.05; Mn -.50; Si -.50; Cu -.50; S -.015
+InX750|Inconel X-750|UNS N07750 · AMS 5667||US|Springs, turbine parts|Ni 70.0-; Cr 14.0-17.0; Fe 5.0-9.0; Ti 2.25-2.75; Al .40-1.00; Nb .70-1.20; Co -1.0; C -.08; Mn -1.0; Si -.50; Cu -.50; S -.01
+HastC276|Hastelloy C-276|UNS N10276 · ASTM B574||US|Severe corrosion|Mo 15.0-17.0; Cr 14.5-16.5; Fe 4.0-7.0; W 3.0-4.5; Co -2.5; C -.010; Si -.08; Mn -1.0; V -.35; P -.04; S -.03
+HastC22|Hastelloy C-22|UNS N06022 · ASTM B574||US|Severe corrosion|Cr 20.0-22.5; Mo 12.5-14.5; Fe 2.0-6.0; W 2.5-3.5; Co -2.5; C -.015; Si -.08; Mn -.50; V -.35
+HastB2|Hastelloy B-2|UNS N10665 · ASTM B335||US|Reducing acids|Mo 26.0-30.0; Fe -2.0; Cr -1.0; Co -1.0; C -.02; Si -.10; Mn -1.0
+HastX|Hastelloy X|UNS N06002 · AMS 5536||US|Combustors, high temp|Cr 20.5-23.0; Fe 17.0-20.0; Mo 8.0-10.0; Co .5-2.5; W .2-1.0; C .05-.15; Mn -1.0; Si -1.0; B -.010
+Waspaloy|Waspaloy|UNS N07001 · AMS 5706||US|Turbine disks, fasteners|Cr 18.0-21.0; Co 12.0-15.0; Mo 3.5-5.0; Ti 2.75-3.25; Al 1.20-1.60; Fe -2.0; C .02-.10; Zr .02-.08; B .003-.010; Mn -.10; Si -.15
+Rene41|René 41|UNS N07041 · AMS 5712||US|Turbine parts|Cr 18.0-20.0; Co 10.0-12.0; Mo 9.0-10.5; Ti 3.0-3.3; Al 1.4-1.6; Fe -5.0; C .06-.12; B .003-.010; Mn -.10; Si -.50
+Nim80A|Nimonic 80A|UNS N07080 · BS HR201||Foreign (UK)|Exhaust valves, fasteners|Cr 18.0-21.0; Ti 1.8-2.7; Al 1.0-1.8; Fe -3.0; Co -2.0; C -.10; Mn -1.0; Si -1.0; Cu -.20
+Nim90|Nimonic 90|UNS N07090||Foreign (UK)|Turbine blades, springs|Cr 18.0-21.0; Co 15.0-21.0; Ti 2.0-3.0; Al 1.0-2.0; Fe -1.5; C -.13; Mn -1.0; Si -1.0
+Nim263|Nimonic 263|UNS N07263 · AMS 5872||Foreign (UK)|Combustor sheet|Co 19.0-21.0; Cr 19.0-21.0; Mo 5.6-6.1; Ti 1.9-2.4; Al .3-.6; Fe -.7; C .04-.08; Mn -.6; Si -.4
+Haynes230|Haynes 230|UNS N06230 · AMS 5878||US|High-temp sheet|Cr 20.0-24.0; W 13.0-15.0; Mo 1.0-3.0; Fe -3.0; Co -5.0; Mn .30-1.00; Si .25-.75; Al .20-.50; C .05-.15; La .005-.050
+Haynes282|Haynes 282|UNS N07208 · AMS 5951||US|Turbine structural|Cr 18.5-20.5; Co 9.0-11.0; Mo 8.0-9.0; Ti 1.90-2.30; Al 1.38-1.65; Fe -1.5; C .04-.08; Mn -.30; Si -.15
+# Ni-Fe alloys where Fe is the specified balance
+@base Fe
+In601|Inconel 601|UNS N06601 · ASTM B166||US|Heat-treating fixtures|Ni 58.0-63.0; Cr 21.0-25.0; Al 1.0-1.7; C -.10; Mn -1.0; Si -.50; Cu -1.0; S -.015
+In718|Inconel 718|UNS N07718 · AMS 5662/5663||US|Jet-engine disks, fasteners|Ni 50.0-55.0; Cr 17.0-21.0; Nb 4.75-5.50; Mo 2.80-3.30; Ti .65-1.15; Al .20-.80; Co -1.0; C -.08; Mn -.35; Si -.35; Cu -.30; B -.006; P -.015; S -.015
+In725|Inconel 725|UNS N07725||US|Oil & gas fasteners|Ni 55.0-59.0; Cr 19.0-22.5; Mo 7.0-9.5; Nb 2.75-4.00; Ti 1.00-1.70; Al -.35; C -.03; Mn -.35; Si -.20
+In800|Incoloy 800|UNS N08800 · ASTM B408||US|Heat exchangers|Ni 30.0-35.0; Cr 19.0-23.0; Fe 39.5-; Al .15-.60; Ti .15-.60; C -.10; Mn -1.5; Si -1.0; Cu -.75
+In800H|Incoloy 800H|UNS N08810 · ASTM B408||US|High-temp pressure parts|Ni 30.0-35.0; Cr 19.0-23.0; Fe 39.5-; Al .15-.60; Ti .15-.60; C .05-.10; Mn -1.5; Si -1.0; Cu -.75
+In825|Incoloy 825|UNS N08825 · ASTM B425||US|Acid-resistant|Ni 38.0-46.0; Cr 19.5-23.5; Fe 22.0-; Mo 2.5-3.5; Cu 1.5-3.0; Ti .6-1.2; C -.05; Mn -1.0; Si -.50; Al -.20
+Alloy20|Alloy 20 (20Cb-3)|UNS N08020 · ASTM B473||US|Sulfuric-acid service|Ni 32.0-38.0; Cr 19.0-21.0; Mo 2.0-3.0; Cu 3.0-4.0; Nb -1.0; C -.07; Mn -2.0; Si -1.0
+Invar36|Invar 36|UNS K93603 · ASTM F1684||US|Low-expansion|Ni 35.0-37.0; Mn -.60; Si -.40; C -.05; Co -.50; Cr -.25
+Kovar|Kovar|UNS K94610 · ASTM F15||US|Glass-to-metal seals|Ni 28.5-29.5; Co 16.8-17.8; Mn -.50; Si -.20; C -.04; Cr -.20; Cu -.20
+Alloy42|Alloy 42|UNS K94100 · ASTM F30||US|Lead frames, seals|Ni 40.5-42.5; Mn -.80; Si -.30; C -.05; Cr -.25; Co -.50
+# Cobalt alloys
+@family Cobalt alloy
+@base Co
+Stellite6|Stellite 6|UNS R30006 · AMS 5387 (approx.)||US|Hardfacing, wear parts|Cr 27.0-32.0; W 4.0-6.0; C .9-1.4; Ni -3.0; Fe -3.0; Si -2.0; Mn -1.0; Mo -1.0
+Stellite21|Stellite 21|UNS R30021||US|Wear / valve seats|Cr 25.5-29.0; Mo 5.0-6.0; Ni 1.75-3.75; C .20-.35; Fe -3.0; Si -1.5; Mn -1.0
+L605|Haynes 25 (L-605)|UNS R30605 · AMS 5537||US|Turbine parts, implants|Cr 19.0-21.0; W 14.0-16.0; Ni 9.0-11.0; Fe -3.0; Mn 1.0-2.0; C .05-.15; Si -.40
+Haynes188|Haynes 188|UNS R30188 · AMS 5608||US|Combustor sheet|Ni 20.0-24.0; Cr 20.0-24.0; W 13.0-16.0; Fe -3.0; La .02-.12; C .05-.15; Mn -1.25; Si .20-.50
+F75|CoCrMo (ASTM F75)|ASTM F75 · UNS R30075||US|Cast implants|Cr 27.0-30.0; Mo 5.0-7.0; Ni -.50; Fe -.75; C -.35; Si -1.0; Mn -1.0
+MP35N|MP35N|UNS R30035 · AMS 5844||US|High-strength fasteners, medical|Ni 33.0-37.0; Cr 19.0-21.0; Mo 9.0-10.5; Ti -1.0; Fe -1.0; C -.025; Mn -.15; Si -.15
+# Copper alloys — CDA/UNS (Cu = balance unless noted)
+@family Copper alloy
+@base Cu
+C10100|C10100 (OFE copper)|UNS C10100 · ASTM B170||US|Oxygen-free electronic|Cu 99.99-; O -.0005; Pb -.0005; Zn -.0001
+C11000|C11000 (ETP copper)|UNS C11000 · ASTM B187||US|Electrical bus|Cu 99.90-; O -.04
+C12200|C12200 (DHP copper)|UNS C12200 · ASTM B75||US|Plumbing tube|Cu 99.9-; P .015-.040
+C14500|C14500 (tellurium copper)|UNS C14500||US|Free-machining copper|Cu 99.90-; Te .40-.7; P .004-.012
+C17200|C17200 (beryllium copper)|UNS C17200 · ASTM B196||US|Springs, non-sparking tools|Be 1.80-2.00; Co -.60; Ni -.60; Fe -.20; Al -.20; Si -.20; Pb -.02
+C17500|C17500 (beryllium copper, Class 3)|UNS C17500||US|Welding electrodes, conductive springs|Be .40-.7; Co 2.4-2.7; Fe -.10; Al -.20; Si -.20
+C18150|C18150 (chromium zirconium copper)|UNS C18150||US|Resistance welding electrodes|Cr .50-1.5; Zr .05-.25
+C18200|C18200 (chromium copper)|UNS C18200||US|Welding electrodes|Cr .6-1.2; Fe -.10; Si -.10; Pb -.05
+C51000|C51000 (phosphor bronze A)|UNS C51000 · ASTM B103/B139||US|Springs, contacts|Sn 4.2-5.8; P .03-.35; Pb -.05; Fe -.10; Zn -.30
+C52100|C52100 (phosphor bronze C)|UNS C52100||US|Springs, bushings|Sn 7.0-9.0; P .03-.35; Pb -.05; Fe -.10; Zn -.20
+C54400|C54400 (phosphor bronze B-2)|UNS C54400 · ASTM B139||US|Free-machining bushings|Sn 3.5-4.5; Pb 3.5-4.5; Zn 1.5-4.5; P .01-.50; Fe -.10
+C61400|C61400 (aluminum bronze D)|UNS C61400||US|Marine, chemical|Al 6.0-8.0; Fe 1.5-3.5; Mn -1.0; Zn -.20; Pb -.01; P -.015
+C62300|C62300 (aluminum bronze)|UNS C62300 · ASTM B150||US|Bushings, gears|Al 8.5-10.0; Fe 2.0-4.0; Ni -1.0; Mn -.50; Si -.25; Sn -.6
+C63000|C63000 (nickel aluminum bronze)|UNS C63000 · ASTM B150||US|Marine, aerospace bushings|Al 9.0-11.0; Fe 2.0-4.0; Ni 4.0-5.5; Mn -1.5; Si -.25; Zn -.30; Sn -.20
+C64200|C64200 (Al-Si bronze)|UNS C64200 · ASTM B150||US|Valve stems, fasteners|Al 6.3-7.6; Si 1.5-2.2; Fe -.30; Ni -.25; Mn -.10; Zn -.50; Pb -.05; Sn -.20; As -.15
+C65500|C65500 (high-silicon bronze A)|UNS C65500 · ASTM B98||US|Fasteners, marine|Si 2.8-3.8; Mn .50-1.3; Fe -.8; Zn -1.5; Ni -.6; Pb -.05
+C70600|C70600 (90-10 Cu-Ni)|UNS C70600 · ASTM B111||US|Seawater piping|Ni 9.0-11.0; Fe 1.0-1.8; Mn -1.0; Zn -1.0; Pb -.05
+C71500|C71500 (70-30 Cu-Ni)|UNS C71500 · ASTM B111||US|Condenser tube|Ni 29.0-33.0; Fe .40-1.0; Mn -1.0; Zn -1.0; Pb -.05
+C83600|C83600 (85-5-5-5 leaded red brass)|UNS C83600 · ASTM B62||US|Valve and pump castings|Cu 84.0-86.0; Sn 4.0-6.0; Pb 4.0-6.0; Zn 4.0-6.0; Fe -.30; Ni -1.0; Sb -.25; P -.05
+C86300|C86300 (manganese bronze, cast)|UNS C86300 · ASTM B505||US|High-strength castings|Cu 60.0-66.0; Zn 22.0-28.0; Al 5.0-7.5; Fe 2.0-4.0; Mn 2.5-5.0; Ni -1.0; Pb -.20; Sn -.20
+C90500|C90500 (tin bronze, gun metal)|UNS C90500 · ASTM B584||US|Gears, bearings|Cu 86.0-89.0; Sn 9.0-11.0; Zn 1.0-3.0; Pb -.30; Fe -.20; Ni -1.0
+C93200|C93200 (SAE 660 bearing bronze)|UNS C93200 · ASTM B505||US|Bushings, bearings|Cu 81.0-85.0; Sn 6.3-7.5; Pb 6.0-8.0; Zn 2.0-4.0; Fe -.20; Ni -1.0; Sb -.35
+C95400|C95400 (aluminum bronze, cast)|UNS C95400 · ASTM B505||US|Gears, bushings, valve parts|Cu 83.0-; Al 10.0-11.5; Fe 3.0-5.0; Ni -1.5; Mn -.50
+C95500|C95500 (nickel aluminum bronze, cast)|UNS C95500 · ASTM B505||US|Marine propellers, valve parts|Cu 78.0-; Al 10.0-11.5; Fe 3.0-5.0; Ni 3.0-5.5; Mn -3.5
+# Brasses: Zn is the specified balance
+@base Zn
+C22000|C22000 (commercial bronze 90/10)|UNS C22000 · ASTM B36||US|Decorative, hardware|Cu 89.0-91.0; Pb -.05; Fe -.05
+C23000|C23000 (red brass 85/15)|UNS C23000 · ASTM B36||US|Plumbing, hardware|Cu 84.0-86.0; Pb -.05; Fe -.05
+C26000|C26000 (cartridge brass 70/30)|UNS C26000 · ASTM B36||US|Ammunition cases, deep-drawn parts|Cu 68.5-71.5; Pb -.07; Fe -.05
+C27000|C27000 (yellow brass 65/35)|UNS C27000 · ASTM B36||US|Hardware, fasteners|Cu 63.0-68.5; Pb -.10; Fe -.07
+C28000|C28000 (Muntz metal 60/40)|UNS C28000||US|Marine hardware, condenser plates|Cu 59.0-63.0; Pb -.30; Fe -.07
+C36000|C36000 (free-cutting brass)|UNS C36000 · ASTM B16||US|Screw-machine parts, fittings|Cu 60.0-63.0; Pb 2.5-3.7; Fe -.35
+C46400|C46400 (naval brass)|UNS C46400 · ASTM B21||US|Marine hardware, shafts|Cu 59.0-62.0; Sn .50-1.0; Pb -.20; Fe -.10
+C67500|C67500 (manganese bronze A)|UNS C67500 · ASTM B138||US|Valve stems, pump rods|Cu 57.0-60.0; Fe .8-2.0; Sn .50-1.5; Mn .05-.50; Al -.25; Pb -.20
+# Magnesium — ASTM B90/B93/B107
+@family Magnesium alloy
+@base Mg
+AZ31B|AZ31B|ASTM B90 · UNS M11311||US/Intl|Wrought sheet/extrusions|Al 2.5-3.5; Zn .6-1.4; Mn .20-1.0; Si -.10; Cu -.05; Ni -.005; Fe -.005; Ca -.04
+AZ61A|AZ61A|ASTM B107 · UNS M11610||US/Intl|Extrusions, forgings|Al 5.8-7.2; Zn .40-1.5; Mn .15-.50; Si -.10; Cu -.05; Ni -.005; Fe -.005
+AZ80A|AZ80A|ASTM B91 · UNS M11800||US/Intl|Forgings|Al 7.8-9.2; Zn .20-.8; Mn .12-.50; Si -.10; Cu -.05; Ni -.005; Fe -.005
+AZ91D|AZ91D|ASTM B93/B94 · UNS M11917||US/Intl|Die castings|Al 8.3-9.7; Zn .35-1.0; Mn .15-.50; Si -.10; Cu -.030; Ni -.002; Fe -.005
+AM60B|AM60B|ASTM B94 · UNS M10603||US/Intl|Die castings (auto)|Al 5.5-6.5; Mn .24-.6; Zn -.22; Si -.10; Cu -.010; Ni -.002; Fe -.005
+AM50A|AM50A|ASTM B94 · UNS M10501||US/Intl|Die castings (auto)|Al 4.4-5.4; Mn .26-.6; Zn -.22; Si -.10; Cu -.010; Ni -.002; Fe -.004
+ZK60A|ZK60A|ASTM B107 · UNS M16600||US/Intl|High-strength extrusions|Zn 4.8-6.2; Zr .45-
+WE43|WE43|AMS 4427 · UNS M18430||US/Intl|Aerospace castings|Y 3.7-4.3; Nd 2.0-2.5; Zr .40-1.0; Zn -.20; Mn -.15
+ZE41A|ZE41A|ASTM B80 · UNS M16410||US/Intl|Aerospace castings|Zn 3.5-5.0; Ce .75-1.75; Zr .40-1.0; Mn -.15; Cu -.10; Ni -.01
+# Zinc die-casting alloys — ASTM B86
+@family Zinc alloy
+@base Zn
+Zamak3|Zamak 3 (Alloy 3, AG40A)|ASTM B86 · UNS Z33521||US/Intl|Die castings|Al 3.7-4.3; Cu -.10; Mg .02-.05; Fe -.035; Pb -.004; Cd -.003; Sn -.0015
+Zamak5|Zamak 5 (Alloy 5, AC41A)|ASTM B86 · UNS Z35531||US/Intl|Die castings|Al 3.7-4.3; Cu .75-1.25; Mg .02-.05; Fe -.035; Pb -.004; Cd -.003; Sn -.0015
+Zamak2|Zamak 2 (Alloy 2)|ASTM B86 · UNS Z35541||US/Intl|Die castings|Al 3.7-4.3; Cu 2.6-3.3; Mg .02-.05; Fe -.035; Pb -.004; Cd -.003; Sn -.0015
+ZA8|ZA-8|ASTM B86 · UNS Z35636||US/Intl|Die/gravity castings|Al 8.0-8.8; Cu .8-1.3; Mg .015-.030; Fe -.065; Pb -.005; Cd -.005; Sn -.002
+ZA12|ZA-12|ASTM B86 · UNS Z35631||US/Intl|Castings, bearings|Al 10.5-11.5; Cu .5-1.2; Mg .015-.030; Fe -.065; Pb -.005; Cd -.005; Sn -.002
+ZA27|ZA-27|ASTM B86 · UNS Z35841||US/Intl|Bearings, high-strength castings|Al 25.0-28.0; Cu 2.0-2.5; Mg .010-.020; Fe -.075; Pb -.005; Cd -.005; Sn -.002
