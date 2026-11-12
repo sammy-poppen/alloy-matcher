@@ -1,0 +1,33 @@
+# Tool steels — ASTM A681 / A600
+@family Tool steel
+@base Fe
+@defaults P -.030; S -.030
+W1|W1|ASTM A686 · UNS T72301||US|Water-hardening|C .70-1.50; Mn .10-.40; Si .10-.40; Cr -.15; V -.10; W -.15; Mo -.10; Ni -.20; Cu -.20
+O1|O1|ASTM A681 · UNS T31501|1.2510|US|Oil-hardening|C .85-1.00; Mn 1.00-1.40; Si -.50; Cr .40-.70; W .40-.60; V -.30; Ni -.30
+O2|O2|ASTM A681 · UNS T31502|1.2842|US|Oil-hardening|C .85-.95; Mn 1.40-1.80; Si -.50; Cr -.35; V -.30; Mo -.30; Ni -.30
+O6|O6|ASTM A681 · UNS T31506||US|Graphitic oil-hardening|C 1.25-1.55; Mn .30-1.10; Si .55-1.50; Cr -.30; Mo .20-.30; Ni -.30
+A2|A2|ASTM A681 · UNS T30102|1.2363|US|Air-hardening|C .95-1.05; Mn .40-1.00; Si .10-.50; Cr 4.75-5.50; Mo .90-1.40; V .15-.50; Ni -.30
+A6|A6|ASTM A681 · UNS T30106||US|Air-hardening low-temp|C .65-.75; Mn 1.80-2.50; Si .10-.50; Cr .90-1.20; Mo .90-1.40; Ni -.30
+A10|A10|ASTM A681 · UNS T30110||US|Graphitic air-hardening|C 1.25-1.50; Mn 1.60-2.10; Si 1.00-1.50; Ni 1.55-2.05; Mo 1.25-1.75; Cr -.30
+D2|D2|ASTM A681 · UNS T30402|1.2379, SKD11 (approx.)|US|High-C high-Cr cold work|C 1.40-1.60; Mn .10-.60; Si .10-.60; Cr 11.00-13.00; Mo .70-1.20; V -1.10; Ni -.30; Co -1.00
+D3|D3|ASTM A681 · UNS T30403|1.2080|US|High-C high-Cr cold work|C 2.00-2.35; Mn .10-.60; Si .10-.60; Cr 11.00-13.50; V -1.00; W -1.00; Ni -.30
+D7|D7|ASTM A681 · UNS T30407||US|High-V cold work|C 2.15-2.50; Mn .10-.60; Si .10-.60; Cr 11.50-13.50; Mo .70-1.20; V 3.80-4.40; Ni -.30
+S1|S1|ASTM A681 · UNS T41901||US|Shock-resisting|C .40-.55; Mn .10-.40; Si .15-1.20; Cr 1.00-1.80; W 1.50-3.00; V .15-.30; Mo -.50; Ni -.30
+S5|S5|ASTM A681 · UNS T41905||US|Shock-resisting|C .50-.65; Mn .60-1.00; Si 1.75-2.25; Cr .10-.50; Mo .20-1.35; V -.35; Ni -.30
+S7|S7|ASTM A681 · UNS T41907||US|Shock-resisting|C .45-.55; Mn .20-.90; Si .20-1.00; Cr 3.00-3.50; Mo 1.30-1.80; V .20-.30; Ni -.30
+H10|H10|ASTM A681 · UNS T20810||US|Hot work Cr|C .35-.45; Mn .25-.70; Si .80-1.20; Cr 3.00-3.75; Mo 2.00-3.00; V .25-.75; Ni -.30
+H11|H11|ASTM A681 · UNS T20811|1.2343|US|Hot work, also aircraft structural|C .33-.43; Mn .20-.50; Si .80-1.20; Cr 4.75-5.50; Mo 1.10-1.60; V .30-.60; Ni -.30
+H12|H12|ASTM A681 · UNS T20812|1.2606|US|Hot work|C .30-.40; Mn .20-.50; Si .80-1.20; Cr 4.75-5.50; Mo 1.25-1.75; W 1.00-1.70; V -.50; Ni -.30
+H13|H13|ASTM A681 · UNS T20813|1.2344, SKD61|US|Hot work dies|C .32-.45; Mn .20-.50; Si .80-1.20; Cr 4.75-5.50; Mo 1.10-1.75; V .80-1.20; Ni -.30
+H19|H19|ASTM A681 · UNS T20819||US|Hot work W-Co|C .32-.45; Mn .20-.50; Si .20-.50; Cr 4.00-4.75; W 3.75-4.50; Co 4.00-4.50; V 1.75-2.20; Mo .30-.55; Ni -.30
+H21|H21|ASTM A681 · UNS T20821|1.2581|US|Hot work W|C .26-.36; Mn .15-.40; Si .15-.50; Cr 3.00-3.75; W 8.50-10.00; V .30-.60; Ni -.30
+M1|M1|ASTM A600 · UNS T11301||US|Mo high-speed|C .78-.88; Mn .15-.40; Si .20-.50; Cr 3.50-4.00; Mo 8.20-9.20; W 1.40-2.10; V 1.00-1.35; Ni -.30
+M2|M2 (regular C)|ASTM A600 · UNS T11302|1.3343, SKH51|US|High-speed general purpose|C .78-.88; Mn .15-.40; Si .20-.45; Cr 3.75-4.50; Mo 4.50-5.50; W 5.50-6.75; V 1.75-2.20; Ni -.30
+M2HC|M2 (high C)|ASTM A600 · UNS T11302||US|High-speed|C .95-1.05; Mn .15-.40; Si .20-.45; Cr 3.75-4.50; Mo 4.50-5.50; W 5.50-6.75; V 1.75-2.20; Ni -.30
+M4|M4|ASTM A600 · UNS T11304||US|High-V high-speed|C 1.25-1.40; Mn .15-.40; Si .20-.45; Cr 3.75-4.75; Mo 4.25-5.50; W 5.25-6.50; V 3.75-4.50; Ni -.30
+M7|M7|ASTM A600 · UNS T11307||US|High-speed|C .97-1.05; Mn .15-.40; Si .20-.55; Cr 3.50-4.00; Mo 8.20-9.20; W 1.40-2.10; V 1.75-2.25; Ni -.30
+M42|M42|ASTM A600 · UNS T11342|1.3247|US|Cobalt high-speed|C 1.05-1.15; Mn .15-.40; Si .15-.65; Cr 3.50-4.25; Mo 9.00-10.00; W 1.15-1.85; V .95-1.35; Co 7.75-8.75; Ni -.30
+T1|T1|ASTM A600 · UNS T12001||US|Tungsten high-speed|C .65-.80; Mn .10-.40; Si .20-.40; Cr 3.75-4.50; W 17.25-18.75; V .90-1.30; Ni -.30
+T15|T15|ASTM A600 · UNS T12015||US|Co-W high-speed|C 1.50-1.60; Mn .15-.40; Si .15-.40; Cr 3.75-5.00; W 11.75-13.00; V 4.50-5.25; Co 4.75-5.25; Ni -.30
+L6|L6|ASTM A681 · UNS T61206||US|Low-alloy special purpose|C .65-.75; Mn .25-.80; Si .10-.50; Cr .60-1.20; Ni 1.25-2.00; Mo -.50
+P20|P20|ASTM A681 · UNS T51620|1.2311 (approx.)|US|Plastic mold steel|C .28-.40; Mn .60-1.00; Si .20-.80; Cr 1.40-2.00; Mo .30-.55; Ni -.30

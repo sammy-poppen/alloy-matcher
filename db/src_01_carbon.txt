@@ -1,0 +1,102 @@
+# SAE/AISI carbon steels — SAE J403 (heat analysis). P/S per older J403 limits (lenient).
+@family Carbon steel
+@base Fe
+@defaults P -.040; S -.050
+1005|AISI 1005|SAE J403 · UNS G10050||US|Low-carbon sheet/wire|C -.06; Mn -.35
+1006|AISI 1006|SAE J403 · UNS G10060||US|Low-carbon sheet/wire|C -.08; Mn .25-.40
+1008|AISI 1008|SAE J403 · UNS G10080||US|Low-carbon sheet/wire|C -.10; Mn .30-.50
+1010|AISI 1010|SAE J403 · UNS G10100||US|Low-carbon|C .08-.13; Mn .30-.60
+1012|AISI 1012|SAE J403 · UNS G10120||US|Low-carbon|C .10-.15; Mn .30-.60
+1015|AISI 1015|SAE J403 · UNS G10150||US|Low-carbon|C .13-.18; Mn .30-.60
+1016|AISI 1016|SAE J403 · UNS G10160||US|Low-carbon|C .13-.18; Mn .60-.90
+1017|AISI 1017|SAE J403 · UNS G10170||US|Low-carbon|C .15-.20; Mn .30-.60
+1018|AISI 1018|SAE J403 · UNS G10180||US|Low-carbon, cold-finished bar|C .15-.20; Mn .60-.90
+1019|AISI 1019|SAE J403 · UNS G10190||US|Low-carbon|C .15-.20; Mn .70-1.00
+1020|AISI 1020|SAE J403 · UNS G10200||US|Low-carbon|C .18-.23; Mn .30-.60
+1021|AISI 1021|SAE J403 · UNS G10210||US|Low-carbon|C .18-.23; Mn .60-.90
+1022|AISI 1022|SAE J403 · UNS G10220||US|Low-carbon, fasteners|C .18-.23; Mn .70-1.00
+1023|AISI 1023|SAE J403 · UNS G10230||US|Low-carbon|C .20-.25; Mn .30-.60
+1025|AISI 1025|SAE J403 · UNS G10250||US|Low-carbon|C .22-.28; Mn .30-.60
+1026|AISI 1026|SAE J403 · UNS G10260||US|Low-carbon|C .22-.28; Mn .60-.90
+1029|AISI 1029|SAE J403 · UNS G10290||US|Medium-carbon|C .25-.31; Mn .60-.90
+1030|AISI 1030|SAE J403 · UNS G10300||US|Medium-carbon|C .28-.34; Mn .60-.90
+1035|AISI 1035|SAE J403 · UNS G10350||US|Medium-carbon|C .32-.38; Mn .60-.90
+1038|AISI 1038|SAE J403 · UNS G10380||US|Medium-carbon, fasteners|C .35-.42; Mn .60-.90
+1040|AISI 1040|SAE J403 · UNS G10400||US|Medium-carbon|C .37-.44; Mn .60-.90
+1042|AISI 1042|SAE J403 · UNS G10420||US|Medium-carbon|C .40-.47; Mn .60-.90
+1043|AISI 1043|SAE J403 · UNS G10430||US|Medium-carbon|C .40-.47; Mn .70-1.00
+1044|AISI 1044|SAE J403 · UNS G10440||US|Medium-carbon|C .43-.50; Mn .30-.60
+1045|AISI 1045|SAE J403 · UNS G10450|≈ C45, S45C|US|Medium-carbon shafts|C .43-.50; Mn .60-.90
+1046|AISI 1046|SAE J403 · UNS G10460||US|Medium-carbon|C .43-.50; Mn .70-1.00
+1049|AISI 1049|SAE J403 · UNS G10490||US|Medium-carbon|C .46-.53; Mn .60-.90
+1050|AISI 1050|SAE J403 · UNS G10500||US|Medium-carbon|C .48-.55; Mn .60-.90
+1053|AISI 1053|SAE J403 · UNS G10530||US|Medium-carbon|C .48-.55; Mn .70-1.00
+1055|AISI 1055|SAE J403 · UNS G10550||US|Medium-carbon|C .50-.60; Mn .60-.90
+1060|AISI 1060|SAE J403 · UNS G10600||US|High-carbon|C .55-.65; Mn .60-.90
+1065|AISI 1065|SAE J403 · UNS G10650||US|High-carbon, springs|C .60-.70; Mn .60-.90
+1070|AISI 1070|SAE J403 · UNS G10700||US|High-carbon|C .65-.75; Mn .60-.90
+1074|AISI 1074|SAE J403 · UNS G10740||US|High-carbon spring strip|C .70-.80; Mn .50-.80
+1075|AISI 1075|SAE J403 · UNS G10750||US|High-carbon|C .70-.80; Mn .40-.70
+1078|AISI 1078|SAE J403 · UNS G10780||US|High-carbon|C .72-.85; Mn .30-.60
+1080|AISI 1080|SAE J403 · UNS G10800||US|High-carbon|C .75-.88; Mn .60-.90
+1084|AISI 1084|SAE J403 · UNS G10840||US|High-carbon, blades|C .80-.93; Mn .60-.90
+1085|AISI 1085|SAE J403 · UNS G10850||US|High-carbon|C .80-.93; Mn .70-1.00
+1086|AISI 1086|SAE J403 · UNS G10860||US|High-carbon|C .80-.93; Mn .30-.50
+1090|AISI 1090|SAE J403 · UNS G10900||US|High-carbon|C .85-.98; Mn .60-.90
+1095|AISI 1095|SAE J403 · UNS G10950||US|High-carbon springs, blades|C .90-1.03; Mn .30-.50
+# resulfurized / rephosphorized
+1117|AISI 1117|SAE J403 · UNS G11170||US|Free-machining carburizing|C .14-.20; Mn 1.00-1.30; S .08-.13
+1118|AISI 1118|SAE J403 · UNS G11180||US|Free-machining|C .14-.20; Mn 1.30-1.60; S .08-.13
+1137|AISI 1137|SAE J403 · UNS G11370||US|Free-machining|C .32-.39; Mn 1.35-1.65; S .08-.13
+1141|AISI 1141|SAE J403 · UNS G11410||US|Free-machining|C .37-.45; Mn 1.35-1.65; S .08-.13
+1144|AISI 1144|SAE J403 · UNS G11440|Stressproof-type|US|Free-machining shafts|C .40-.48; Mn 1.35-1.65; S .24-.33
+1212|AISI 1212|SAE J403 · UNS G12120||US|Free-machining|C -.13; Mn .70-1.00; P .07-.12; S .16-.23
+1213|AISI 1213|SAE J403 · UNS G12130||US|Free-machining|C -.13; Mn .70-1.00; P .07-.12; S .24-.33
+1215|AISI 1215|SAE J403 · UNS G12150||US|Free-machining screw stock|C -.09; Mn .75-1.05; P .04-.09; S .26-.35
+12L14|AISI 12L14|SAE J403 · UNS G12144||US|Leaded free-machining|C -.15; Mn .85-1.15; P .04-.09; S .26-.35; Pb .15-.35
+# high-manganese carbon
+1513|AISI 1513|SAE J403 · UNS G15130||US|C-Mn steel|C .10-.16; Mn 1.10-1.40
+1518|AISI 1518|SAE J403 · UNS G15180||US|C-Mn steel|C .15-.21; Mn 1.10-1.40
+1522|AISI 1522|SAE J403 · UNS G15220||US|C-Mn steel|C .18-.24; Mn 1.10-1.40
+1524|AISI 1524|SAE J403 · UNS G15240||US|C-Mn steel|C .19-.25; Mn 1.35-1.65
+1526|AISI 1526|SAE J403 · UNS G15260||US|C-Mn steel|C .22-.29; Mn 1.10-1.40
+1527|AISI 1527|SAE J403 · UNS G15270||US|C-Mn steel|C .22-.29; Mn 1.20-1.50
+1536|AISI 1536|SAE J403 · UNS G15360||US|C-Mn steel|C .30-.37; Mn 1.20-1.50
+1541|AISI 1541|SAE J403 · UNS G15410||US|C-Mn steel, forgings|C .36-.44; Mn 1.35-1.65
+1547|AISI 1547|SAE J403 · UNS G15470||US|C-Mn steel|C .43-.51; Mn 1.35-1.65
+1548|AISI 1548|SAE J403 · UNS G15480||US|C-Mn steel|C .44-.52; Mn 1.10-1.40
+1552|AISI 1552|SAE J403 · UNS G15520||US|C-Mn steel|C .47-.55; Mn 1.20-1.50
+1566|AISI 1566|SAE J403 · UNS G15660||US|C-Mn steel|C .60-.71; Mn .85-1.15
+10B21|AISI 10B21|SAE J403 · UNS G10211||US|Boron cold-heading|C .18-.23; Mn .70-1.00; B .0005-.003
+15B41|AISI 15B41|SAE J403 · UNS G15411||US|Boron steel|C .36-.44; Mn 1.35-1.65; B .0005-.003
+# structural / pressure (US)
+A36|ASTM A36 (shapes)|ASTM A36||US|Structural shapes and plate|C -.26; P -.04; S -.05; Si -.40
+A105|ASTM A105|ASTM A105||US|Carbon-steel piping forgings|C -.35; Mn .60-1.05; P -.035; S -.040; Si .10-.35; Cu -.40; Ni -.40; Cr -.30; Mo -.12; V -.08
+A516-70|ASTM A516 Gr 70|ASTM A516||US|Pressure-vessel plate|C -.31; Mn .85-1.20; P -.025; S -.025; Si .13-.45
+# EN non-alloy (EN 10083-2 / 10277)
+@defaults Si -.40; P -.045; S -.045; Cr -.40; Mo -.10; Ni -.40
+C15|C15 / C15E|EN 10084 · W.Nr. 1.0401/1.1141||Foreign (EU)|Case-hardening|C .12-.18; Mn .30-.60
+C22|C22 / C22E|EN 10083-2 · W.Nr. 1.0402/1.1151||Foreign (EU)|General purpose|C .17-.24; Mn .40-.70
+C35|C35 / C35E|EN 10083-2 · W.Nr. 1.0501/1.1181||Foreign (EU)|Q&T|C .32-.39; Mn .50-.80
+C40|C40 / C40E|EN 10083-2 · W.Nr. 1.0511/1.1186||Foreign (EU)|Q&T|C .37-.44; Mn .50-.80
+C45|C45 / C45E|EN 10083-2 · W.Nr. 1.0503/1.1191|≈ AISI 1045|Foreign (EU)|Q&T shafts|C .42-.50; Mn .50-.80
+C50|C50 / C50E|EN 10083-2 · W.Nr. 1.0540/1.1206||Foreign (EU)|Q&T|C .47-.55; Mn .60-.90
+C55|C55 / C55E|EN 10083-2 · W.Nr. 1.0535/1.1203||Foreign (EU)|Q&T|C .52-.60; Mn .60-.90
+C60|C60 / C60E|EN 10083-2 · W.Nr. 1.0601/1.1221||Foreign (EU)|Q&T|C .57-.65; Mn .60-.90
+11SMn30|11SMn30|EN 10087 · W.Nr. 1.0715|≈ 1215|Foreign (EU)|Free-machining|C -.14; Mn .90-1.30; Si -.05; P -.11; S .27-.33
+11SMnPb30|11SMnPb30|EN 10087 · W.Nr. 1.0718|≈ 12L14|Foreign (EU)|Leaded free-machining|C -.14; Mn .90-1.30; Si -.05; P -.11; S .27-.33; Pb .20-.35
+S355J2|S355J2|EN 10025-2 · W.Nr. 1.0577||Foreign (EU)|Structural|C -.22; Si -.55; Mn -1.60; P -.030; S -.030; Cu -.55
+080M40|080M40 (EN8)|BS 970||Foreign (UK)|General engineering|C .36-.44; Si .10-.40; Mn .60-1.00; P -.050; S -.050
+070M20|070M20 (EN3B)|BS 970||Foreign (UK)|Mild steel|C .16-.24; Mn .50-.90; P -.050; S -.050
+# JIS
+@defaults Si .15-.35; P -.030; S -.035; Cu -.30; Ni -.20; Cr -.20
+S35C|S35C|JIS G4051||Foreign (JP)|Machine structural|C .32-.38; Mn .60-.90
+S45C|S45C|JIS G4051|≈ 1045|Foreign (JP)|Machine structural|C .42-.48; Mn .60-.90
+S50C|S50C|JIS G4051||Foreign (JP)|Machine structural|C .47-.53; Mn .60-.90
+S55C|S55C|JIS G4051||Foreign (JP)|Machine structural|C .52-.58; Mn .60-.90
+# GOST / GB
+@defaults Si .17-.37; P -.035; S -.040; Cr -.25; Ni -.30; Cu -.30
+GOST-20|Steel 20 (Сталь 20)|GOST 1050||Foreign (RU)|Structural|C .17-.24; Mn .35-.65
+GOST-35|Steel 35 (Сталь 35)|GOST 1050||Foreign (RU)|Structural|C .32-.40; Mn .50-.80
+GOST-45|Steel 45 (Сталь 45)|GOST 1050|≈ 1045 / GB 45|Foreign (RU/CN)|Structural|C .42-.50; Mn .50-.80
+GOST-65G|65G (65Г)|GOST 14959||Foreign (RU)|Spring steel|C .62-.70; Mn .90-1.20
