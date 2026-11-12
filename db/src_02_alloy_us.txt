@@ -1,4 +1,6 @@
 # SAE/AISI alloy steels — SAE J404 / ASTM A29 (heat analysis)
+@ref SAEJ404 ASTMA29
+@ver std
 @family Alloy steel
 @base Fe
 @defaults Si .15-.35; P -.035; S -.040
@@ -77,6 +79,7 @@ E4340|AISI E4340 (aircraft quality)|AMS 6414/6415 · UNS G43406||US|Aircraft-qua
 9310|AISI 9310|AMS 6265 · UNS G93106||US|Aircraft carburized gears|C .08-.13; Mn .45-.65; Ni 3.00-3.50; Cr 1.00-1.40; Mo .08-.15; P -.025; S -.025
 94B17|AISI 94B17|SAE J404 · UNS G94171||US|Boron carburizing|C .15-.20; Mn .75-1.00; Ni .30-.60; Cr .30-.50; Mo .08-.15; B .0005-.003
 94B30|AISI 94B30|SAE J404 · UNS G94301||US|Boron Q&T|C .28-.33; Mn .75-1.00; Ni .30-.60; Cr .30-.50; Mo .08-.15; B .0005-.003
+@ref ASTMPV
 # aerospace / high-strength / special
 @conf typical
 4330V|4330V (4330 mod)|AMS 6411 (typical)||US|Oil-tool / aerospace|C .28-.33; Mn .75-1.00; Ni 1.65-2.00; Cr .75-1.00; Mo .35-.50; V .05-.10

@@ -1,4 +1,6 @@
 # Titanium — ASTM B348 / B265 / AMS
+@ref ASTMB348
+@ver std
 @family Titanium
 @base Ti
 @oth 0.10
@@ -8,7 +10,7 @@ TiGr2|Ti Grade 2 (CP)|ASTM B348 · UNS R50400||US/Intl|Commercially pure Ti|Fe -
 TiGr3|Ti Grade 3 (CP)|ASTM B348 · UNS R50550||US/Intl|Commercially pure Ti|Fe -.30; O -.35
 TiGr4|Ti Grade 4 (CP)|ASTM B348 · UNS R50700||US/Intl|Commercially pure Ti|Fe -.50; O -.40
 TiGr5|Ti-6Al-4V (Grade 5)|ASTM B348 · UNS R56400 · AMS 4928||US/Intl|Aerospace, implants, fasteners|Al 5.50-6.75; V 3.50-4.50; Fe -.40; O -.20
-TiGr23|Ti-6Al-4V ELI (Grade 23)|ASTM B348/F136 · UNS R56401||US/Intl|Medical implants, cryogenic|Al 5.50-6.50; V 3.50-4.50; Fe -.25; O -.13; N -.03; H -.0125
+TiGr23|Ti-6Al-4V ELI (Grade 23)|ASTM B348 Gr 23 (UNS R56407) · ASTM F136 (UNS R56401)||US/Intl|Medical implants, cryogenic|Al 5.50-6.50; V 3.50-4.50; Fe -.25; O -.13; N -.03; H -.0125
 TiGr7|Ti Grade 7 (Ti-0.15Pd)|ASTM B348 · UNS R52400||US/Intl|Corrosion service|Pd .12-.25; Fe -.30; O -.25; N -.03
 TiGr9|Ti-3Al-2.5V (Grade 9)|ASTM B348 · UNS R56320||US/Intl|Hydraulic tubing, bike frames|Al 2.5-3.5; V 2.0-3.0; Fe -.25; O -.15; N -.03
 TiGr12|Ti Grade 12 (Ti-0.3Mo-0.8Ni)|ASTM B348 · UNS R53400||US/Intl|Corrosion service|Mo .2-.4; Ni .6-.9; Fe -.30; O -.25; N -.03
@@ -22,6 +24,7 @@ Ti5Al25Sn|Ti-5Al-2.5Sn (Grade 6)|AMS 4926 · UNS R54520||US|Cryogenic, weldable|
 Ti6Al7Nb|Ti-6Al-7Nb|ASTM F1295 · UNS R56700||US/Intl|Medical implants|Al 5.50-6.50; Nb 6.50-7.50; Ta -.50; Fe -.25; O -.20
 TiBetaC|Ti Beta-C (Ti-3Al-8V-6Cr-4Mo-4Zr, Grade 19)|AMS 4957 · UNS R58640||US|Springs, fasteners|Al 3.0-4.0; V 7.5-8.5; Cr 5.5-6.5; Mo 3.5-4.5; Zr 3.5-4.5; Fe -.30; O -.12
 # Nickel alloys (base Ni unless Fe is the balance per spec)
+@ref NICO
 @family Nickel alloy
 @base Ni
 @oth
@@ -68,6 +71,7 @@ Haynes188|Haynes 188|UNS R30188 · AMS 5608||US|Combustor sheet|Ni 20.0-24.0; Cr
 F75|CoCrMo (ASTM F75)|ASTM F75 · UNS R30075||US|Cast implants|Cr 27.0-30.0; Mo 5.0-7.0; Ni -.50; Fe -.75; C -.35; Si -1.0; Mn -1.0
 MP35N|MP35N|UNS R30035 · AMS 5844||US|High-strength fasteners, medical|Ni 33.0-37.0; Cr 19.0-21.0; Mo 9.0-10.5; Ti -1.0; Fe -1.0; C -.025; Mn -.15; Si -.15
 # Copper alloys — CDA/UNS (Cu = balance unless noted)
+@ref CDA
 @family Copper alloy
 @base Cu
 C10100|C10100 (OFE copper)|UNS C10100 · ASTM B170||US|Oxygen-free electronic|Cu 99.99-; O -.0005; Pb -.0005; Zn -.0001
@@ -105,6 +109,7 @@ C36000|C36000 (free-cutting brass)|UNS C36000 · ASTM B16||US|Screw-machine part
 C46400|C46400 (naval brass)|UNS C46400 · ASTM B21||US|Marine hardware, shafts|Cu 59.0-62.0; Sn .50-1.0; Pb -.20; Fe -.10
 C67500|C67500 (manganese bronze A)|UNS C67500 · ASTM B138||US|Valve stems, pump rods|Cu 57.0-60.0; Fe .8-2.0; Sn .50-1.5; Mn .05-.50; Al -.25; Pb -.20
 # Magnesium — ASTM B90/B93/B107
+@ref MGZN
 @family Magnesium alloy
 @base Mg
 AZ31B|AZ31B|ASTM B90 · UNS M11311||US/Intl|Wrought sheet/extrusions|Al 2.5-3.5; Zn .6-1.4; Mn .20-1.0; Si -.10; Cu -.05; Ni -.005; Fe -.005; Ca -.04
@@ -117,6 +122,7 @@ ZK60A|ZK60A|ASTM B107 · UNS M16600||US/Intl|High-strength extrusions|Zn 4.8-6.2
 WE43|WE43|AMS 4427 · UNS M18430||US/Intl|Aerospace castings|Y 3.7-4.3; Nd 2.0-2.5; Zr .40-1.0; Zn -.20; Mn -.15
 ZE41A|ZE41A|ASTM B80 · UNS M16410||US/Intl|Aerospace castings|Zn 3.5-5.0; Ce .75-1.75; Zr .40-1.0; Mn -.15; Cu -.10; Ni -.01
 # Zinc die-casting alloys — ASTM B86
+@ref MGZN
 @family Zinc alloy
 @base Zn
 Zamak3|Zamak 3 (Alloy 3, AG40A)|ASTM B86 · UNS Z33521||US/Intl|Die castings|Al 3.7-4.3; Cu -.10; Mg .02-.05; Fe -.035; Pb -.004; Cd -.003; Sn -.0015

@@ -1,4 +1,6 @@
 # European alloy steels — EN 10083-3, 10084, 10085, 10089, 10250-3, 683-17
+@ref EN10083 EUOTHER
+@ver std
 @family Alloy steel
 @base Fe
 @defaults Si -.40; P -.025; S -.035
@@ -20,7 +22,11 @@
 34CrNiMo6|34CrNiMo6|EN 10083-3 · W.Nr. 1.6582|≈ 4340 (approx.)|Foreign (EU)|Q&T heavy sections|C .30-.38; Mn .50-.80; Cr 1.30-1.70; Mo .15-.30; Ni 1.30-1.70
 30CrNiMo8|30CrNiMo8|EN 10083-3 · W.Nr. 1.6580||Foreign (EU)|Q&T|C .26-.34; Mn .50-.80; Cr 1.80-2.20; Mo .30-.50; Ni 1.80-2.20
 35NiCr6|35NiCr6|EN 10083-3 · W.Nr. 1.5815||Foreign (EU)|Q&T|C .30-.37; Mn .60-.90; Cr .80-1.10; Ni 1.20-1.60
+@ref EN10083 ss30ncd
+@ver web
 30NiCrMo16-6|30NiCrMo16-6|EN 10083-3 · W.Nr. 1.6747||Foreign (EU)|Q&T heavy-duty shafts, gears|C .26-.33; Mn .50-.80; Cr 1.20-1.50; Mo .30-.60; Ni 3.30-4.30; S -.025
+@ref EN10083 EUOTHER
+@ver std
 36NiCrMo16|36NiCrMo16|EN 10083 (old) · W.Nr. 1.6773||Foreign (EU)|Q&T|C .32-.39; Mn .30-.60; Cr 1.60-2.00; Mo .25-.45; Ni 3.60-4.10
 51CrV4|51CrV4|EN 10083-3 / 10089 · W.Nr. 1.8159|≈ 6150|Foreign (EU)|Springs, Q&T|C .47-.55; Mn .70-1.10; Cr .90-1.20; V .10-.25
 52CrMoV4|52CrMoV4|EN 10089 · W.Nr. 1.7701||Foreign (EU)|Springs|C .48-.56; Mn .70-1.10; Cr .90-1.20; Mo .15-.30; V .10-.20
@@ -35,8 +41,13 @@
 33MnCrB5-2|33MnCrB5-2|EN 10083-3 · W.Nr. 1.7185||Foreign (EU)|Boron Q&T|C .30-.36; Mn 1.20-1.50; Cr .30-.60; B .0008-.005
 39MnCrB6-2|39MnCrB6-2|EN 10083-3 · W.Nr. 1.7189||Foreign (EU)|Boron Q&T|C .36-.42; Mn 1.40-1.70; Cr .30-.60; B .0008-.005
 100Cr6|100Cr6|EN ISO 683-17 · W.Nr. 1.3505|≈ 52100|Foreign (EU)|Bearing steel|C .93-1.05; Si .15-.35; Mn .25-.45; Cr 1.35-1.60; Mo -.10; S -.015
+@ref EN10085
 # EN 10085 nitriding steels
+@ref EN10085 steeldata mif31 adgk3
+@ver web
 31CrMo12|31CrMo12|EN 10085 · W.Nr. 1.8515|AFNOR/AIR 30CD12 · WL 1.8564 · Aubert & Duval GK3|Foreign (EU)|Nitriding / Q&T — gears, shafts, aerospace pins|C .28-.35; Mn .40-.70; Cr 2.80-3.30; Mo .30-.50; Ni -.30
+@ref EN10085
+@ver std
 31CrMoV9|31CrMoV9|EN 10085 · W.Nr. 1.8519||Foreign (EU)|Nitriding steel|C .27-.34; Mn .40-.70; Cr 2.30-2.70; Mo .15-.25; V .10-.20
 33CrMoV12-9|33CrMoV12-9|EN 10085 · W.Nr. 1.8522||Foreign (EU)|Nitriding steel|C .29-.36; Mn .40-.70; Cr 2.80-3.30; Mo .70-1.00; V .15-.25
 40CrMoV13-9|40CrMoV13-9 (40CDV12)|EN 10085 · W.Nr. 1.8523|897M39 / EN40C|Foreign (EU)|Nitriding steel|C .36-.43; Mn .40-.70; Cr 3.00-3.50; Mo .80-1.10; V .15-.25
@@ -44,7 +55,12 @@
 34CrAlMo5-10|34CrAlMo5-10|EN 10085 · W.Nr. 1.8507||Foreign (EU)|Nitriding steel|C .30-.37; Mn .40-.70; Cr 1.00-1.30; Mo .15-.25; Al .80-1.20
 41CrAlMo7-10|41CrAlMo7-10|EN 10085 · W.Nr. 1.8509|≈ Nitralloy 135M|Foreign (EU)|Nitriding steel|C .38-.45; Mn .40-.70; Cr 1.50-1.80; Mo .20-.35; Al .80-1.20
 34CrAlNi7-10|34CrAlNi7-10|EN 10085 · W.Nr. 1.8550||Foreign (EU)|Nitriding steel|C .30-.37; Mn .40-.70; Cr 1.50-1.80; Mo .15-.25; Al .80-1.20; Ni .85-1.15
+@ref EUOTHER ss32crmo
+@ver web
 32CrMo12|32CrMo12|EN 10250-3 · W.Nr. 1.7361|Open-die forging version of 31CrMo12|Foreign (EU)|Large forgings|C .28-.35; Mn .40-.70; Cr 2.80-3.30; Mo .30-.50; Ni -.60; P -.035
+@ref EN10085
+@ver std
+@ref BS970
 # British BS 970
 @defaults Si .10-.35; P -.035; S -.040
 605M36|605M36 (EN16)|BS 970||Foreign (UK)|Mn-Mo Q&T|C .32-.40; Mn 1.30-1.70; Mo .22-.32
@@ -52,13 +68,22 @@
 709M40|709M40 (EN19)|BS 970||Foreign (UK)|Cr-Mo Q&T|C .36-.44; Mn .70-1.00; Cr .90-1.20; Mo .25-.35
 817M40|817M40 (EN24)|BS 970|≈ 4340 (approx.)|Foreign (UK)|Ni-Cr-Mo high tensile|C .36-.44; Mn .45-.70; Cr 1.00-1.40; Mo .20-.35; Ni 1.30-1.70
 826M40|826M40 (EN26)|BS 970||Foreign (UK)|Ni-Cr-Mo high tensile|C .36-.44; Mn .45-.70; Cr .50-.80; Mo .45-.65; Ni 2.30-2.80
+@ref BS970 acmat
+@ver web
 835M30|835M30 (En30B)|BS 970||Foreign (UK)|Air-hardening 4% Ni-Cr-Mo|C .26-.34; Mn .45-.75; Cr 1.10-1.40; Mo .20-.35; Ni 3.90-4.30
+@ref BS970
+@ver std
 655M13|655M13 (EN36A)|BS 970||Foreign (UK)|3% Ni-Cr case-hardening|C .10-.16; Mn .35-.60; Cr .70-1.00; Ni 3.00-3.75
 722M24|722M24 (En40B)|BS 970||Foreign (UK)|Nitriding steel|C .20-.28; Mn .45-.70; Cr 3.00-3.50; Mo .45-.65
 535A99|535A99 (EN31)|BS 970|≈ 52100|Foreign (UK)|Bearing steel|C .95-1.10; Mn .40-.70; Cr 1.20-1.60
+@ref AIR9160
 # French aerospace (AIR 9160 / 9117)
 @defaults Si .10-.40; P -.025; S -.020
+@ref AIR9160 icast acmat adfdma
+@ver web
 30NCD16|30NCD16|AIR 9160 · EN 30NiCrMo16|Aubert & Duval FDMA · AECMA FE-PL75|Foreign (FR)|Aerospace bolts, safety-critical parts, gears|C .26-.33; Mn .20-.60; Cr 1.20-1.50; Mo .30-.60; Ni 3.30-4.30
+@ref AIR9160
+@ver std
 35NCD16|35NCD16|AIR 9160C|819B|Foreign (FR)|Aerospace structural parts|C .30-.40; Si .15-.40; Mn .30-.60; Cr 1.60-2.00; Mo .25-.60; Ni 3.50-4.20
 16NCD13|16NCD13|AIR 9160|≈ 14NiCrMo13-4|Foreign (FR)|Aerospace carburizing|C .12-.18; Mn .30-.60; Cr .80-1.10; Mo .20-.30; Ni 3.00-3.50
 25CD4|25CD4|AIR 9160|≈ 4130, 25CrMo4|Foreign (FR)|Aerospace structural|C .22-.29; Mn .60-.90; Cr .90-1.20; Mo .15-.30
@@ -66,6 +91,7 @@
 32CDV13|32CDV13|AIR 9160||Foreign (FR)|Aerospace nitriding (bearing races)|C .29-.36; Mn .40-.70; Cr 2.80-3.30; Mo .70-1.20; V .15-.35
 15CDV6|15CDV6|AIR 9160 · W.Nr. 1.7734||Foreign (FR/DE)|Weldable aerospace sheet/tube|C .12-.18; Mn .80-1.10; Si -.20; Cr 1.25-1.50; Mo .80-1.00; V .20-.30
 1.2766|35NiCrMo16 (1.2766)|DIN · W.Nr. 1.2766||Foreign (DE)|Tool / mould steel|C .32-.38; Si .15-.30; Mn .40-.60; Cr 1.20-1.50; Mo .20-.40; Ni 3.80-4.30; P -.035; S -.035
+@ref JISG4053
 # JIS G4053
 @defaults Si .15-.35; P -.030; S -.030; Cu -.30
 SCr420|SCr420|JIS G4053||Foreign (JP)|Case-hardening|C .18-.23; Mn .60-.90; Cr .90-1.20; Ni -.25
@@ -80,6 +106,7 @@ SNCM220|SNCM220|JIS G4053|≈ 8620|Foreign (JP)|Case-hardening|C .17-.23; Mn .60
 SNCM439|SNCM439|JIS G4053|≈ 4340|Foreign (JP)|Q&T|C .36-.43; Mn .60-.90; Ni 1.60-2.00; Cr .60-1.00; Mo .15-.30
 SNCM447|SNCM447|JIS G4053||Foreign (JP)|Q&T|C .44-.50; Mn .60-.90; Ni 1.60-2.00; Cr .60-1.00; Mo .15-.30
 SUJ2|SUJ2|JIS G4805|≈ 52100|Foreign (JP)|Bearing steel|C .95-1.10; Mn -.50; Cr 1.30-1.60; P -.025; S -.025; Mo -.08
+@ref GOST4543
 # GOST 4543 (Russian) — Si .17-.37 unless noted
 @defaults Si .17-.37; P -.025; S -.025; Ni -.30; Cu -.30
 40Kh|40Kh (40Х)|GOST 4543|≈ 5140, GB 40Cr|Foreign (RU/CN)|Q&T|C .36-.44; Mn .50-.80; Cr .80-1.10
@@ -94,6 +121,7 @@ SUJ2|SUJ2|JIS G4805|≈ 52100|Foreign (JP)|Bearing steel|C .95-1.10; Mn -.50; Cr
 38Kh2MYuA|38Kh2MYuA (38Х2МЮА)|GOST 4543|≈ GB 38CrMoAl|Foreign (RU/CN)|Nitriding steel|C .35-.42; Si .20-.45; Mn .30-.60; Cr 1.35-1.65; Mo .15-.25; Al .70-1.10
 30Kh3MF|30Kh3MF (30Х3МФ)|GOST 4543||Foreign (RU)|Nitriding steel|C .27-.34; Mn .30-.60; Cr 2.30-2.70; Mo .20-.30; V .06-.12
 ShKh15|ShKh15 (ШХ15)|GOST 801|≈ 52100, GB GCr15|Foreign (RU/CN)|Bearing steel|C .95-1.05; Mn .20-.40; Cr 1.30-1.65; Ni -.30; Cu -.25
+@ref GB3077
 # GB (Chinese) — Si .17-.37, P/S .035
 @defaults Si .17-.37; P -.035; S -.035; Ni -.30; Cu -.30
 GB-42CrMo|42CrMo|GB/T 3077|≈ 4140|Foreign (CN)|Q&T|C .38-.45; Mn .50-.80; Cr .90-1.20; Mo .15-.25

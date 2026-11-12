@@ -1,4 +1,6 @@
 # SAE/AISI carbon steels — SAE J403 (heat analysis). P/S per older J403 limits (lenient).
+@ref SAEJ403 ASTMA29
+@ver std
 @family Carbon steel
 @base Fe
 @defaults P -.040; S -.050
@@ -69,10 +71,12 @@
 1566|AISI 1566|SAE J403 · UNS G15660||US|C-Mn steel|C .60-.71; Mn .85-1.15
 10B21|AISI 10B21|SAE J403 · UNS G10211||US|Boron cold-heading|C .18-.23; Mn .70-1.00; B .0005-.003
 15B41|AISI 15B41|SAE J403 · UNS G15411||US|Boron steel|C .36-.44; Mn 1.35-1.65; B .0005-.003
+@ref ASTMPV
 # structural / pressure (US)
 A36|ASTM A36 (shapes)|ASTM A36||US|Structural shapes and plate|C -.26; P -.04; S -.05; Si -.40
 A105|ASTM A105|ASTM A105||US|Carbon-steel piping forgings|C -.35; Mn .60-1.05; P -.035; S -.040; Si .10-.35; Cu -.40; Ni -.40; Cr -.30; Mo -.12; V -.08
 A516-70|ASTM A516 Gr 70|ASTM A516||US|Pressure-vessel plate|C -.31; Mn .85-1.20; P -.025; S -.025; Si .13-.45
+@ref EUOTHER
 # EN non-alloy (EN 10083-2 / 10277)
 @defaults Si -.40; P -.045; S -.045; Cr -.40; Mo -.10; Ni -.40
 C15|C15 / C15E|EN 10084 · W.Nr. 1.0401/1.1141||Foreign (EU)|Case-hardening|C .12-.18; Mn .30-.60
@@ -88,12 +92,14 @@ C60|C60 / C60E|EN 10083-2 · W.Nr. 1.0601/1.1221||Foreign (EU)|Q&T|C .57-.65; Mn
 S355J2|S355J2|EN 10025-2 · W.Nr. 1.0577||Foreign (EU)|Structural|C -.22; Si -.55; Mn -1.60; P -.030; S -.030; Cu -.55
 080M40|080M40 (EN8)|BS 970||Foreign (UK)|General engineering|C .36-.44; Si .10-.40; Mn .60-1.00; P -.050; S -.050
 070M20|070M20 (EN3B)|BS 970||Foreign (UK)|Mild steel|C .16-.24; Mn .50-.90; P -.050; S -.050
+@ref JISG4053
 # JIS
 @defaults Si .15-.35; P -.030; S -.035; Cu -.30; Ni -.20; Cr -.20
 S35C|S35C|JIS G4051||Foreign (JP)|Machine structural|C .32-.38; Mn .60-.90
 S45C|S45C|JIS G4051|≈ 1045|Foreign (JP)|Machine structural|C .42-.48; Mn .60-.90
 S50C|S50C|JIS G4051||Foreign (JP)|Machine structural|C .47-.53; Mn .60-.90
 S55C|S55C|JIS G4051||Foreign (JP)|Machine structural|C .52-.58; Mn .60-.90
+@ref GOST4543
 # GOST / GB
 @defaults Si .17-.37; P -.035; S -.040; Cr -.25; Ni -.30; Cu -.30
 GOST-20|Steel 20 (Сталь 20)|GOST 1050||Foreign (RU)|Structural|C .17-.24; Mn .35-.65

@@ -1,4 +1,6 @@
 # Stainless steels — ASTM A240 / A276 / A479 / A564 / A743 (limits merged where bar and plate differ slightly)
+@ref ASTMSS
+@ver std
 @family Stainless steel
 @base Fe
 @defaults Mn -2.00; Si -1.00; P -.045; S -.030
@@ -50,12 +52,33 @@ S21800|Nitronic 60|UNS S21800||US|Galling-resistant austenitic|C -.10; Mn 7.0-9.
 440C|Type 440C|UNS S44004 · EN 1.4125||US|Bearing / knife martensitic|C .95-1.20; Cr 16.0-18.0; Mo -.75
 444|Type 444|UNS S44400 · EN 1.4521||US|Ferritic Mo|C -.025; Cr 17.5-19.5; Mo 1.75-2.50; Ni -1.00; Ti .10-.80; N -.035
 446|Type 446|UNS S44600||US|Heat-resistant ferritic|C -.20; Mn -1.50; Cr 23.0-27.0; Ni -.75; N -.25
+@ref ASTMA564 ASTMSS
 # precipitation hardening / special
+@ref ASTMA564 gsa564
+@ver web
 17-4PH|17-4PH (Type 630)|UNS S17400 · EN 1.4542 · AMS 5643||US|PH stainless|C -.07; P -.040; Cr 15.0-17.5; Ni 3.0-5.0; Cu 3.0-5.0; Nb .15-.45
+@ref ASTMA564 ASTMSS
+@ver std
+@ref ASTMA564 gsa564
+@ver web
 15-5PH|15-5PH (XM-12)|UNS S15500 · AMS 5659||US|PH stainless, aerospace|C -.07; P -.040; Cr 14.0-15.5; Ni 3.5-5.5; Cu 2.5-4.5; Nb .15-.45
+@ref ASTMA564 ASTMSS
+@ver std
+@ref ASTMA564 gsa564
+@ver web
 17-7PH|17-7PH (Type 631)|UNS S17700 · EN 1.4568||US|PH stainless, springs|C -.09; P -.040; Cr 16.0-18.0; Ni 6.5-7.75; Al .75-1.50
+@ref ASTMA564 ASTMSS
+@ver std
+@ref ASTMA564 gsa564
+@ver web
 13-8Mo|PH 13-8 Mo (XM-13)|UNS S13800 · AMS 5629||US|PH stainless, aerospace|C -.05; Mn -.20; Si -.10; P -.010; S -.008; Cr 12.25-13.25; Ni 7.5-8.5; Mo 2.00-2.50; Al .90-1.35; N -.01
+@ref ASTMA564 ASTMSS
+@ver std
+@ref ASTMA564 gsa564
+@ver web
 C450|Custom 450 (XM-25)|UNS S45000||US|PH stainless|C -.05; P -.030; Cr 14.0-16.0; Ni 5.0-7.0; Mo .50-1.00; Cu 1.25-1.75; Nb .40-
+@ref ASTMA564 ASTMSS
+@ver std
 C465|Custom 465|UNS S46500 · AMS 5936||US|PH stainless, aerospace|C -.02; Mn -.25; Si -.25; P -.015; S -.010; Cr 11.0-12.5; Ni 10.75-11.25; Mo .75-1.25; Ti 1.50-1.80
 A286|A-286|UNS S66286 · AMS 5732/5737||US|Fe-Ni superalloy fasteners|C -.08; Mn -2.00; P -.040; Cr 13.5-16.0; Ni 24.0-27.0; Mo 1.00-1.50; Ti 1.90-2.35; V .10-.50; Al -.35; B .001-.010
 # cast stainless (ASTM A743/A744/A351)

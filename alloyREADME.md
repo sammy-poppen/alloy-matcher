@@ -34,25 +34,32 @@ Cast irons and precious metals are not included.
 
 ## US-available alternatives
 
-The alternatives search scores every US-standard grade and condition in the property database: 166 records from 142 grades, including 18 tempering curves for quenched-and-tempered steels. It covers carbon, alloy and aerospace steels; stainless steels (annealed, hardened, H900–H1150 and similar); nickel and cobalt alloys; titanium; aluminum (wrought tempers and castings); magnesium; copper alloys; and zinc. Foreign-standard grades (e.g. 31CrMo12, 30NCD16) are used only as targets, never offered as alternatives.
+The search scores every US-standard grade and condition in the property database: 178 records from 146 grades, including 25 tempering curves, 14 of them web-verified. Foreign grades are used only as targets.
 
-- **Targets:** come from the identified grade's typical properties. For foreign grades with no data, a close US equivalent is used when one is listed (e.g. 42CrMo4 → 4140). Otherwise you enter the targets, or estimate them from a hardness reading (steel only: HRC → HB, UTS ≈ 3.45 × HB, yield ≈ 0.86 × UTS). Values you type are kept until the identified alloy changes.
-- **Heat-treatable steels:** for each tempering curve, the search scans tempering temperatures in 5 °C steps between the published points, interpolates the properties linearly, and keeps the temperature that gives the best match. The result shows that temperature (e.g. "4140, oil quenched & tempered ≈ 505 °C").
-- **Scope:** candidates have the same base metal as the part by default; you can switch to any base metal.
-- **Output:** the top three are shown as cards, followed by a table of every candidate at 90% or higher (or the top 10 if fewer than three reach 90%). Each has a **Calculations** button.
+**Total equivalence (0–100%)** is a weighted average of sub-scores, each between 0 and 1:
 
-| Criterion | Weight | Sub-score |
+| Criterion | Base weight | Sub-score |
 |---|---|---|
-| Ultimate tensile strength | 0.30 | 1 − \|Δ\| / target |
-| Yield strength | 0.25 | 1 − \|Δ\| / target |
-| Hardness (HB) | 0.15 | 1 − \|Δ\| / target |
-| Elongation | 0.10 | min(1, candidate / target) |
-| Hardenability (carbon/alloy steels only) | 0.10 | min(1, candidate index / target index) |
-| Cost | 0.10 | min(1, reference cost / candidate cost) |
+| UTS | 0.30 | see strength scoring below |
+| Yield | 0.25 | see strength scoring below |
+| Hardness (HB) | 0.15 | see strength scoring below |
+| Elongation | 0.10 | min(1, candidate / target), one-sided |
+| Hardenability, D<sub>I</sub> (carbon/alloy steels only) | 0.10 | min(1, D<sub>I</sub> candidate / D<sub>I</sub> target), one-sided |
+| Cost (optional) | 0.10 | min(1, reference cost / candidate cost), one-sided |
 
-When hardenability doesn't apply, the other weights are scaled up to sum to 1. The hardenability index is an approximate Grossmann product √C × (1+3.333Mn)(1+0.7Si)(1+2.16Cr)(1+0.363Ni)(1+3.0Mo), with Cr capped at 2%. The reference cost is the identified grade's own cost index, or 4140 = 1.00 for steels without one.
+Criteria that don't apply are removed, and the remaining weights are rescaled to sum to 1.
 
-Property data is in `db/props_src.txt`, one record per line (fixed condition or tempering curve), and is built into the page by `db/build.py`. Values are typical figures (ASM Handbook tempering data, Aluminum Association, AMS and producer typicals), not specification minimums, and were not individually re-verified.
+**Strength scoring** applies to UTS, yield and hardness, with r = candidate / target:
+- **Minimum (default):** r = 1.00–1.15 scores 1. Below target the score is 1 − 2(1 − r), and the candidate is flagged ▼ below target. Above 1.15 it is 1 − 0.5(r − 1.15).
+- **Closest match:** the score is 1 − |r − 1|.
+
+**Hardenability** is the ASTM A255 / Grossmann ideal critical diameter D<sub>I</sub> (inches, grain size 7), calculated from chemistry. It is the alloy's capacity for depth of hardening, not a measured hardening depth for the part. Elements above the A255 calculation range are capped and flagged.
+
+**Hardness conversions** use ASTM E140 Table 1 (non-austenitic steels) with linear interpolation. Each record stores its published hardness scale, and every converted value states the conversion it used.
+
+**Tempering curves:** the search scans 5 °C steps between published points and interpolates linearly.
+
+**Verification status:** every record carries reference numbers and one of three statuses: ✓ web-verified, ◇ standard (not re-checked), or ⚠ unverified. The option "Only web-verified property data" limits the search to verified records.
 
 ## Exporting a report (PDF / PNG)
 
@@ -80,6 +87,10 @@ No dependencies. Open `index.html` in a browser, or host it with GitHub Pages (S
 - Composition limits come from published summaries of the governing standards. 31CrMo12 and 30NCD16 were checked against several datasheets; the other grades were not individually re-verified, and standards get revised. Confirm the governing specification before making a final determination.
 - Some combined limits (e.g. Si+Fe in 1100 aluminum, Co+Ni in C17200, Ti ≥ 5×(C+N) in 321) are simplified to individual element limits.
 - Mechanical properties are typical quenched-and-tempered values, not specification minimums. The cost index is a rough relative estimate (4140 = 1.00), not a quote.
+
+## References
+
+The bibliography is in `db/refs.txt` (IEEE style, with a link wherever a free or official web page exists). It is shown at the bottom of the page and printed in every PDF report. Composition and property records cite it with `@ref KEY` and `@ver web|std|unverified` lines.
 
 ## Editing the database
 

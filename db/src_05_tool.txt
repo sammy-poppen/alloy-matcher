@@ -1,4 +1,6 @@
 # Tool steels — ASTM A681 / A600
+@ref ASTMTOOL
+@ver std
 @family Tool steel
 @base Fe
 @defaults P -.030; S -.030
