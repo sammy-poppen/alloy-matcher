@@ -326,7 +326,8 @@ function loadRows(obj, rem){
 }
 function buildInputs(){
   $('#elList').innerHTML = ELEMENTS.concat(PERIODIC.filter(s=>!ELEMENTS.includes(s))).map(s=>`<option value="${s}">`).join('');
-  loadRows(LAB, LAB_REM);
+  const blank={}; Object.keys(LAB).forEach(k=>blank[k]='');  // element list pre-filled, wt% left blank
+  loadRows(blank, LAB_REM);
 }
 function readInputs(){
   const m={}, warns=[], seen={};
@@ -451,8 +452,9 @@ function run(){
   const meas = readInputs();
   const opt = {resid:$('#optResid').checked, tol:$('#optTol').checked};
   const ranked = rankAll(meas,opt);
-  if(!ranked.some(r=>r.checked>0)){
-    $('#results').innerHTML = `<div class="card empty">${Object.keys(meas).length
+  const nMeasured = Object.values(meas).filter(m=>!m.rem).length;
+  if(!nMeasured || !ranked.some(r=>r.checked>0)){
+    $('#results').innerHTML = `<div class="card empty">${nMeasured
       ? 'None of the entered elements are specified (or residual-limited) by any grade in the database, so there is nothing to match on. Add the main alloying elements (C, Mn, Si, Cr, Ni, Mo, V…).'
       : 'Enter at least one element and its wt%, then press <b>Run match</b>.'}</div>`;
     $('#altSection').innerHTML=''; $('#rankAll').innerHTML=''; altState=null; return;
